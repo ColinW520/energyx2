@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 # # Load application ENV vars and merge with existing ENV vars. Loaded here so can use values in initializers.
 # ENV.update YAML.load_file('config/application.yml')[Rails.env] rescue {}
 
-module Hydra
+module Energyx2
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -33,7 +33,7 @@ module Hydra
       }
     }
 
-    config.action_mailer.default_url_options = { :host => Rails.env.development? ? "hydra.dev" : "aptexx-hydra.herokuapp.com" }
+    config.action_mailer.default_url_options = { :host => Rails.env.development? ? "energyx2.dev" : "energyx2.herokuapp.com" }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = false
@@ -41,7 +41,7 @@ module Hydra
     config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com",
       port: 587,
-      domain: Rails.env.development? ? "hydra.dev" : "aptexx-hydra.herokuapp.com",
+      domain: Rails.env.development? ? "energyx2.dev" : "energyx2.herokuapp.com",
       authentication: "plain",
       enable_starttls_auto: true,
       user_name: ENV["GMAIL_USERNAME"],

@@ -9,7 +9,7 @@ class Import < ApplicationRecord
 
   has_attached_file :datafile,
     dependent: :destroy,
-    path: '/hydra_imports/:hash-:id.:extension',
+    path: '/energyx2_imports/:hash-:id.:extension',
     hash_secret: 'a92342be23ad9827634654a5617646'
   validates_attachment :datafile, content_type: { content_type: 'text/csv' }
 
