@@ -1,0 +1,20 @@
+.row
+  .col-sm-12
+    .text-center
+      %h1.text-success $1/month
+      %p.lead Clicking 'Create Subscription' with charge your card $1 today, and monthly thereafter unless you cancel. By clicking this, you agree to our privacy poliy and terms of service.
+
+%br
+= simple_form_for [@organization, @subscription], authenticity_token: true, html: { id: 'SubscriptionForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
+  = f.input :stripe_customer_id, as: :hidden, input_html: { value: @organization.stripe_customer_id }
+  = f.input :organization_id, as: :hidden, input_html: { value: @organization.id }
+  .form-group
+    %label Have a Coupon?
+    = f.input :coupon_code
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-lg btn-success'

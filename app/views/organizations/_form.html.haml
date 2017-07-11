@@ -1,0 +1,24 @@
+= simple_form_for [@organization], authenticity_token: true, html: { id: 'OrganizationsForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
+  .form-group
+    = f.input :name, autofocus: true
+  .form-group
+    = f.input :email_domain, as: :email
+  .form-group
+    = f.input :city
+  .form-group
+    = f.input :state
+  .form-group
+    = f.input :zip
+  .form-group
+    = f.input :phone, as: :tel
+  .form-group
+    = f.input :preferred_area_code, as: :integer, placeholder: '210', max: 999
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-md btn-success', id: 'submit-button' do
+        %i.fa.fa-cc-stripe
+        Submit

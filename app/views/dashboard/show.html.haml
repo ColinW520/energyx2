@@ -1,0 +1,35 @@
+- provide(:title, 'Dashboard')
+- if current_user.setup?
+  .row
+    .col-sm-12.col-md-6
+      .card.card-primary
+        .card-title
+          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
+            Messages
+        = line_chart messages_dashboard_path, stacked: true, library: {position:  'bottom', pointSize: 0}
+    .col-sm-12.col-md-6
+      .card.card-primary
+        .card-title
+          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
+            Calls
+        = line_chart calls_dashboard_path, stacked: true, library: { position:  'bottom', pointSize: 0}
+
+  %br
+  .row
+    .col-sm-12.col-md-6
+      .card.card-primary
+        .card-title
+          %h4.text-white{style: 'padding-top: 5px; margin: 5px'}
+            List Growth
+        = line_chart list_growth_dashboard_path, library: { position:  'bottom', pointSize: 0}
+
+    .col-sm-12.col-md-6
+      #CostPanel
+        %br
+        %br
+        %br
+        .text-center
+          %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+          %h3 Loading...
+- else
+  = render 'dashboard/setup_instructions'
