@@ -3,20 +3,45 @@
     %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     .container
-      %a.navbar-brand{href: "#"} Hydra
+      %a.navbar-brand{href: "#"} EnergyX
       #navbarNavDropdown.navbar-collapse.collapse
         %ul.navbar-nav.ml-auto
-          - if current_user.present?
-            %li.nav-item
-              %a.nav-link{href: dashboard_path}
-                %i.fa.fa-dashboard
-                Dashboard
-            %li.nav-item
-              %a.nav-link{href: destroy_user_session_path, method: :delete}
-                %i.fa.fa-sign-out
-                Sign Out
-          - else
-            %li.nav-item
-              %a.nav-link{href: new_user_session_path}
-                %i.fa.fa-sign-in
-                Sign In
+          %li.nav-item
+            %a.nav-link{href: '#schedule'}
+              %i.fa.fa-calendar
+              Schedule
+          %li.nav-item
+            %a.nav-link{href: '#schedule'}
+              %i.fa.fa-users
+              Classes
+          %li.nav-item
+            %a.nav-link{href: '#schedule'}
+              %i.fa.fa-street-view
+              Trainers
+          %li.nav-item
+            %a.nav-link{href: '#schedule'}
+              %i.fa.fa-phone
+              Call
+          %li.nav-item
+            %a.nav-link{href: '#schedule'}
+              %i.fa.fa-mobile-phone
+              Text
+          %li.nav-item
+            %a.nav-link{href: '#schedule'}
+              %i.fa.fa-map
+              Nav
+
+          -# - if current_user.present?
+          -#   %li.nav-item
+          -#     %a.nav-link{href: dashboard_path}
+          -#       %i.fa.fa-dashboard
+          -#       Dashboard
+          -#   %li.nav-item
+          -#     %a.nav-link{href: destroy_user_session_path, method: :delete}
+          -#       %i.fa.fa-sign-out
+          -#       Sign Out
+          -# - else
+          -#   %li.nav-item
+          -#     %a.nav-link{href: new_user_session_path}
+          -#       %i.fa.fa-sign-in
+          -#       Sign In

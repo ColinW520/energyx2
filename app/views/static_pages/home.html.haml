@@ -1,16 +1,15 @@
-.row{style: 'padding-top: 15vh;'}
-  .col-sm-12
-    .jumbotron
-      .row
-        .col-sm-12
-          .text-center
-            %h1.display-1 HYDRA
-            %br
-            %p.lead
-              BYO
-              %a{href: 'https://twilio.com/'}
-                Twilio®
-              Texting Service
-            %p Hydra makes it easy to send text messages to anyone you'd like at a simple, predictable price.
-            %br
-            %a.btn.btn-success.btn-lg{:href => new_user_registration_path} Sign Up
+- provide(:title, "San Antonio Best Total Body Workout")
+.row{style: "margin-top: 10vh;"}
+  .col-sm-12.col-md-6.col-lg-4{style: 'padding-bottom: 20px;'}
+    %br
+    %h1 San Antonio's Best Total Body Workout
+    %p
+      It’s rowing – and so much more. Alternating intervals on and off of the row machine, combined with dynamic Kettlebell™ and TRX™ exercises deliver a triple threat workout: high-intensity sweat, low-impact burn, total body results.
+    %br
+    %a.btn.btn-outline-primary
+      Book A Class
+    %a.btn.btn-success
+      .text-white Buy A Pass
+  .col-sm-12.col-md-6.col-lg-8
+    .card.card-outline-primary
+      = video_tag "BGLoop_01.webm", autoplay: :autoplay, loop: :loop, mute: :mute, class: "video"

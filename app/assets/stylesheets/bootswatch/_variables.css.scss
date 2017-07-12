@@ -105,17 +105,17 @@ $purple: #613d7c !default;
 
 // Create grayscale
 $gray-dark:                 #222;
-$gray:                      #212121;
+$gray:                      #3C3C3C;
 $gray-light:                #666;
 $gray-lighter:              #bbb;
 $gray-lightest:             #eee;
 
 // Reassign color vars to semantic color scheme
-$brand-primary:             #2196F3;
+$brand-primary:             #347DBD;
 $brand-success:             #4CAF50;
-$brand-info:                #9C27B0;
-$brand-warning:             #ff9800;
-$brand-danger:              #e51c23;
+$brand-info:                #3B1C32;
+$brand-warning:             #F08080;
+$brand-danger:              #CA054D;
 $brand-inverse:             $gray-dark !default;
 
 
@@ -244,7 +244,7 @@ $grid-gutter-widths: (
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif: "Montesserat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-sans-serif: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
 $font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base:       $font-family-sans-serif !default;
