@@ -15,6 +15,9 @@ Rails.application.routes.draw do
       get :usage
     end
   end
+  resources :studio_session_types
+  resources :studio_sessions
+  resources :coaches
   resources :lines
   resources :messages, only: [:index, :show]
   resources :call_logs

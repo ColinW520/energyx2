@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711060335) do
+ActiveRecord::Schema.define(version: 20170726055008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,20 @@ ActiveRecord::Schema.define(version: 20170711060335) do
     t.string   "answered_by"
   end
 
+  create_table "coaches", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.string   "name"
+    t.string   "bio"
+    t.integer  "display_order"
+    t.string   "instagram_link"
+    t.string   "facebook_link"
+    t.string   "twitter_link"
+    t.string   "email"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["organization_id"], name: "index_coaches_on_organization_id", using: :btree
+  end
+
   create_table "contacts", force: :cascade do |t|
     t.integer  "organization_id"
     t.string   "first_name"
@@ -110,6 +124,18 @@ ActiveRecord::Schema.define(version: 20170711060335) do
     t.integer  "percent_off"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.string   "name"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.string   "description"
+    t.string   "link"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["organization_id"], name: "index_events_on_organization_id", using: :btree
   end
 
   create_table "imports", force: :cascade do |t|
@@ -230,6 +256,35 @@ ActiveRecord::Schema.define(version: 20170711060335) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
   end
 
+  create_table "studio_session_types", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.string   "name"
+    t.string   "description"
+    t.string   "promo_video_url"
+    t.boolean  "active"
+    t.string   "slug"
+    t.integer  "display_order"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["organization_id"], name: "index_studio_session_types_on_organization_id", using: :btree
+  end
+
+  create_table "studio_sessions", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.integer  "display_order"
+    t.integer  "coach_id"
+    t.integer  "studio_session_type_id"
+    t.string   "day_of_week"
+    t.string   "start_time"
+    t.string   "length"
+    t.string   "link"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["coach_id"], name: "index_studio_sessions_on_coach_id", using: :btree
+    t.index ["organization_id"], name: "index_studio_sessions_on_organization_id", using: :btree
+    t.index ["studio_session_type_id"], name: "index_studio_sessions_on_studio_session_type_id", using: :btree
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "organization_id"
     t.string   "stripe_plan_id"
@@ -307,7 +362,9 @@ ActiveRecord::Schema.define(version: 20170711060335) do
   end
 
   add_foreign_key "billing_methods", "organizations"
+  add_foreign_key "coaches", "organizations"
   add_foreign_key "contacts", "organizations"
+  add_foreign_key "events", "organizations"
   add_foreign_key "imports", "organizations"
   add_foreign_key "lines", "organizations"
   add_foreign_key "lines", "users"
@@ -315,6 +372,10 @@ ActiveRecord::Schema.define(version: 20170711060335) do
   add_foreign_key "message_requests", "organizations"
   add_foreign_key "message_requests", "users"
   add_foreign_key "messages", "contacts"
+  add_foreign_key "studio_session_types", "organizations"
+  add_foreign_key "studio_sessions", "coaches"
+  add_foreign_key "studio_sessions", "organizations"
+  add_foreign_key "studio_sessions", "studio_session_types"
   add_foreign_key "subscriptions", "organizations"
   add_foreign_key "users", "organizations"
 end

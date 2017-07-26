@@ -17,6 +17,9 @@ class Organization < ApplicationRecord
   has_many :message_requests
   has_many :lines
   has_many :call_logs
+  has_many :studio_session_types
+  has_many :studio_sessions
+  has_many :coaches
 
   validates :name, presence: true
 
