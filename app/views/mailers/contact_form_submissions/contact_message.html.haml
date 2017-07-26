@@ -1,0 +1,6 @@
+%p
+  New message received at EnergyXFitness.com:
+%p --------------
+%p= "From: #{@name} - #{@email}"
+%p Message --------------
+= sanitize(line_break(@message), tags: %w(br))

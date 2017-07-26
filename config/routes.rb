@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   match '/home' => "static_pages#home", via: [:get]
   match '/terms' => "static_pages#terms", via: [:get]
+  post '/contact', to: 'static_pages#contact', as: 'contact'
 
   # The User-facing App
   resource :dashboard, controller: 'dashboard' do

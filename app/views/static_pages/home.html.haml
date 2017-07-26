@@ -1,15 +1,30 @@
 - provide(:title, "San Antonio Best Total Body Workout")
-.row{style: "margin-top: 10vh;"}
-  .col-sm-12.col-md-6.col-lg-4{style: 'padding-bottom: 20px;'}
-    %br
-    %h1 San Antonio's Best Total Body Workout
-    %p
-      It’s rowing – and so much more. Alternating intervals on and off of the row machine, combined with dynamic Kettlebell™ and TRX™ exercises deliver a triple threat workout: high-intensity sweat, low-impact burn, total body results.
-    %br
-    %a.btn.btn-outline-primary
-      Book A Class
-    %a.btn.btn-success
-      .text-white Buy A Pass
-  .col-sm-12.col-md-6.col-lg-8
-    .card.card-outline-primary
-      = video_tag "BGLoop_01.webm", autoplay: :autoplay, loop: :loop, mute: :mute, class: "video"
+%section#LandingContainer
+  %video#video-background{:autoplay => "", :loop => "", :muted => "", "plays-inline" => ""}
+    %source{:src => asset_url("BGLoop_01.webm"), :type => "video/webm"}
+    %source{:src => asset_url("BGLoop_01.ogv"), :type => "video/ogg"}
+    %source{:src => asset_url("BGLoop_01.mp4")}
+
+  .row
+    .col-sm-12.col-md-8.col-lg-4
+      .jumbotron
+        %h1.text-white
+          San Antonio's
+          %em Best
+          Total Body Workout
+        %p.text-white
+          It’s rowing – and so much more. Alternating intervals on and off of the Water Rower GX™,
+          combined with dynamic Kettlebell™ and TRX™ exercises delivers a triple threat workout.
+          %em High-intensity sweat, low-impact burn, total body results.
+        %br
+        %a.btn.btn-success.btn-lg.btn-block{href: '#Schedule'} Book A Class
+        %br
+        %span.text-white
+          Your first class is free!
+          %i.fa.fa-info-circle
+
+= render 'static_pages/schedule'
+= render 'static_pages/leaderboard'
+= render 'static_pages/classes'
+= render 'static_pages/events'
+= render 'static_pages/contact'

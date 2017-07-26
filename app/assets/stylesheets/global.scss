@@ -22,20 +22,3 @@
 .radio input[type="radio"], .radio input[type="checkbox"], .radio-inline input[type="radio"], .radio-inline input[type="checkbox"], .checkbox input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="radio"], .checkbox-inline input[type="checkbox"] {
   margin-left: 0px;
 }
-
-#main {
-  min-height: 100vh;
-}
-
-@media (min-width: 767px) {
-  .nav-side-menu .menu-list .menu-content {
-    display: block;
-  }
-
-  #main {
-    margin-top: 15px;
-    width:calc(100% - 200px);
-    float: right;
-  }
-
-}

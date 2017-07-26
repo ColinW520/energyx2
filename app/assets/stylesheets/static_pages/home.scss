@@ -1,3 +1,44 @@
-.video {
- max-width: 100%;
+#static_pages_home {
+  #LandingContainer {
+    background-color: unset;
+    padding-top: unset;
+  }
+  /* The only rule that matters */
+  #video-background {
+  /*  making the video fullscreen  */
+    position: fixed;
+    right: 0;
+    bottom: -100px;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+  }
+
+  .jumbotron {
+    margin: 10%;
+    background-color: rgba(34, 205, 205, 0.6)
+  }
+
+  .leaderboard {
+    padding-top: 10%;
+    padding-bottom: 10%;
+  }
+}
+
+@media screen and (max-width : 768px) {
+  #static_pages_home {
+    video {
+      display: none;
+    }
+    #LandingContainer {
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      background: url('https://farm2.staticflickr.com/1451/25613960663_60c9f3ca95_o.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+  }
 }

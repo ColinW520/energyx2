@@ -6,8 +6,10 @@
 @import "select2-bootstrap";
 @import "tools/turbo_progress_bar";
 @import "tools/stripe_card_capture";
-@import "components/table";
 @import "global";
 @import "layout/sidebar";
+@import "layout/header";
 @import "layout/footer";
+@import "components/table";
+@import "components/sections";
 @import "static_pages/home";
