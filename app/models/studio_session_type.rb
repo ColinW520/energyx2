@@ -1,11 +1,11 @@
 class StudioSessionType < ApplicationRecord
-  belongs_to: :organization
+  belongs_to :organization
+  has_many :studio_sessions
   acts_as_taggable_on :tags
 
   def self.filter_by(params)
     params = params.with_indifferent_access
-    scope = self.includes(:organization, :studio_sessions)
-    scope = self.where(organization_id: params[:organization_id]) if params[:organization_id].present?
+    scope = self.includes(:studio_sessions)
     scope = scope.tagged_with(params[:tags]) if params[:tags].present?
     return scope
   end

@@ -1,0 +1,10 @@
+%tr{id: "studio_session_type_#{studio_session_type.id}"}
+  %td= studio_session_type.id
+  %td= studio_session_type.name
+  %td= local_time studio_session_type.updated_at, format: "%m/%d/%Y"
+  %td
+  %td.actions
+    .btn-group
+      = link_to edit_studio_session_type_path(studio_session_type), remote: true, class: 'btn btn-sm btn-default' do
+        %i.fa.fa-edit
+        Edit

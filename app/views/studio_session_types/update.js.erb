@@ -1,0 +1,3 @@
+$('#studio_session_type_dialog').modal('toggle');
+$('#studio_session_type_<%= @studio_session_type.id %>').replaceWith('<%= j render (@studio_session_type) %>');
+$("#studio_session_types").smart_listing().fadeLoaded();

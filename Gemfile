@@ -8,7 +8,6 @@ gem 'devise_invitable'
 gem 'puma', '~> 3.0'
 gem 'sidekiq'
 gem 'figaro'
-gem 'smarter_csv'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")

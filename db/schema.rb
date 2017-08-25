@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 20170726055008) do
     t.string   "user_type"
     t.string   "mailer"
     t.text     "subject"
+    t.text     "content"
+    t.string   "utm_source"
+    t.string   "utm_medium"
+    t.string   "utm_term"
+    t.string   "utm_content"
+    t.string   "utm_campaign"
     t.datetime "sent_at"
     t.datetime "opened_at"
     t.datetime "clicked_at"
@@ -326,18 +332,18 @@ ActiveRecord::Schema.define(version: 20170726055008) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
+    t.string   "email",                  default: "",                           null: false
     t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,                            null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
     t.boolean  "admin_role",             default: false
     t.boolean  "supervisor_role",        default: false
     t.integer  "organization_id"
@@ -353,7 +359,7 @@ ActiveRecord::Schema.define(version: 20170726055008) do
     t.string   "invited_by_type"
     t.datetime "deleted_at"
     t.string   "mobile_phone"
-    t.string   "timezone"
+    t.string   "timezone",               default: "Pacific Time (US & Canada)"
     t.boolean  "mobile_phone_validated"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree

@@ -1,0 +1,16 @@
+- provide(:title, 'Class Types')
+%br
+%br
+.row
+  .col-sm-12
+    %h3
+      Class Types
+      .pull-right
+        = link_to new_studio_session_type_path, class: 'btn btn-success btn-sm', remote: true do
+          %i.fa.fa-plus
+          New
+.row
+  .col-sm-12
+    = smart_listing_render :studio_session_types
+
+= render "studio_session_types/dialog"

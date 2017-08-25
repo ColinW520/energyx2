@@ -35,6 +35,16 @@
             %i.fa.fa-envelope.fa-lg
             Messages
 
+        %a{href: studio_session_types_path}
+          %li{class: @subnav == 'studio_session_types' ? 'active' : nil}
+            %i.fa.fa-star
+            Classes
+
+        %a{href: studio_sessions_path}
+          %li{class: @subnav == 'studio_sessions' ? 'active' : nil}
+            %i.fa.fa-calendar
+            Schedule
+
         %a{href: edit_user_registration_path}
           %li{class: @subnav == 'devise' ? 'active' : nil}
             %i.fa.fa-user.fa-lg

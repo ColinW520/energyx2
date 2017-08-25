@@ -1,0 +1,14 @@
+= simple_form_for [@studio_session_type], remote: true, authenticity_token: true, html: { id: 'StudioSessionTypeForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  .form-group
+    = f.input :name, label: 'Class name', autofocus: true, input_html: { maxlength: 140 }, required: true
+  .form-group
+    = f.input :description, label: 'Class Description', required: true
+  .form-group
+    = f.input :promo_video_url, as: :url, label: 'Vimeo Link'
+  .form-actions
+    .text-center
+      = f.hidden_field :organization_id, value: current_user.organization_id
+      = f.button :submit, 'Send Message', class: 'btn btn-md btn-success'

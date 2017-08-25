@@ -8,27 +8,13 @@ Rails.application.routes.draw do
 
   # The User-facing App
   resource :dashboard, controller: 'dashboard' do
-    collection do
-      get :list_growth
-      get :calls
-      get :messages
-      get :usage
-    end
   end
   resources :studio_session_types
   resources :studio_sessions
   resources :coaches
-  resources :lines
   resources :messages, only: [:index, :show]
-  resources :call_logs
-  resources :message_requests
   resources :contacts
-  resources :imports
-  resources :organizations do
-    resources :billing_methods
-    resources :subscriptions
-    resources :users
-  end
+  resources :organizations
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -37,14 +23,8 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
   }
 
-  # Twilio Endpoints
-  match '/twilio/authorize' => 'twilio/authorizations#authorize', via: [:get]
-  match '/twilio/deauthorize' => 'twilio/authorizations#deauthorize', via: [:get]
-  match '/twilio/callbacks/status' => 'twilio/callbacks#status', via: [:get]
-
   namespace :twilio do
     resources :messages, only: [:create]
-    resources :voice_calls, only: [:create]
   end
 
 
