@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   before_filter :find_user, except: [:index, :new, :create]
 
   def index
-    @organization = Organization.find_by_slug params[:organization_id]
-    users_scope = current_user.organization.users
+    users_scope = User.all
     smart_listing_create :users,
                          users_scope,
                          partial: "users/listing",
@@ -11,7 +10,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    gon.organization_id = current_user.organization_id
   end
 
   def edit

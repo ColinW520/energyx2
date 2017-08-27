@@ -12,9 +12,6 @@ Rails.application.routes.draw do
   resources :studio_session_types
   resources :studio_sessions
   resources :coaches
-  resources :messages, only: [:index, :show]
-  resources :contacts
-  resources :organizations
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -29,11 +26,6 @@ Rails.application.routes.draw do
 
 
   # Admin Space
-  namespace :admin do
-    resources :users
-    authenticate :user, -> (user) { user.admin_role? } do
-      require 'sidekiq/web'
-      mount Sidekiq::Web => '/sidekiq'
-    end
-  end
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end

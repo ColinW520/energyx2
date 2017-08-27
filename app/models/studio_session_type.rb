@@ -1,5 +1,4 @@
 class StudioSessionType < ApplicationRecord
-  belongs_to :organization
   has_many :studio_sessions
   acts_as_taggable_on :tags
 

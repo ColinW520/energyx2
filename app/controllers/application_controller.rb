@@ -22,9 +22,6 @@ class ApplicationController < ActionController::Base
   end
 
   def gon_setup
-    gon.organization_id = current_user.try(:organization_id)
-    gon.organization_slug = current_user.try(:organization).try(:slug)
-    gon.stripe_publishable_key = ENV['STRIPE_PUBLISHABLE_KEY']
   end
 
   def set_subnav

@@ -2,7 +2,7 @@ class StudioSessionTypesController < ApplicationController
   before_filter :find_studio_session_type, except: [:index, :new, :create]
 
   def index
-    studio_session_types_scope = current_user.organization.studio_session_types.filter_by(params)
+    studio_session_types_scope = StudioSessionType.all
 
     respond_to do |format|
       format.html {
