@@ -5,9 +5,9 @@
   .form-group
     = f.input :name, label: 'Class name', autofocus: true, input_html: { maxlength: 140 }, required: true
   .form-group
-    = f.input :description, label: 'Class Description', required: true
+    = f.input :description, as: :text, label: 'Class Description', required: true
   .form-group
     = f.input :promo_video_url, as: :url, label: 'Vimeo Link'
   .form-actions
     .text-center
-      = f.button :submit, 'Send Message', class: 'btn btn-md btn-success'
+      = f.button :submit, class: 'btn btn-md btn-success'

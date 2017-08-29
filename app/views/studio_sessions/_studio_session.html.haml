@@ -1,0 +1,15 @@
+%tr.item{id: "studio_session_#{studio_session.id}", "data-item-id"=> "#{studio_session.id}", "data-item-path"=>"studio_sessions"}
+  %td
+    %i.fa.fa-arrows-v
+  %td= studio_session.id
+  %td= studio_session.studio_session_type.name
+  %td= studio_session.coach.name
+  %td= studio_session.day_of_week
+  %td= studio_session.start_time
+  %td= studio_session.length
+  %td= local_time studio_session.updated_at, format: "%m/%d/%Y"
+  %td.actions
+    .btn-group.pull-right
+      = link_to edit_studio_session_path(studio_session), remote: true, class: 'btn btn-sm btn-default' do
+        %i.fa.fa-edit
+        Edit

@@ -2,16 +2,17 @@
   .col-sm-12
     .card.card-outline-primary.table-card
       .table-responsive
-        %table.table#sortable
+        %table.table.table-hover#sortable
           %thead.thead-inverse
+            %th
             %th ID
             %th= smart_listing.sortable 'Name', :name
             %th= smart_listing.sortable 'Updated', :updated_at
             %th Sessions
             %th
-          %tbody#studio_session_types
-            - smart_listing.collection.each do |studio_session_type|
-              = render studio_session_type
+          %tbody#coaches
+            - smart_listing.collection.each do |coach|
+              = render coach
         %br
 %br
 .row

@@ -9,9 +9,22 @@ Rails.application.routes.draw do
   # The User-facing App
   resource :dashboard, controller: 'dashboard' do
   end
-  resources :studio_session_types
-  resources :studio_sessions
-  resources :coaches
+
+  resources :studio_session_types do
+    post :update_row_order, on: :collection
+  end
+
+  resources :studio_sessions do
+    post :update_row_order, on: :collection
+  end
+
+  resources :coaches do
+    post :update_row_order, on: :collection
+  end
+
+  resources :events do
+    post :update_row_order, on: :collection
+  end
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

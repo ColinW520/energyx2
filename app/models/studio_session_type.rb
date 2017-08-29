@@ -1,5 +1,6 @@
 class StudioSessionType < ApplicationRecord
-  has_many :studio_sessions
+  has_many :studio_sessions, dependent: :destroy
+
   acts_as_taggable_on :tags
 
   def self.filter_by(params)

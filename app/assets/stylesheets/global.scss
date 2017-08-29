@@ -27,6 +27,10 @@
   min-height: 100vh;
 }
 
+.unobtrusive-flash-container {
+  z-index: 1000;
+}
+
 @media (min-width: 767px) {
   .nav-side-menu .menu-list .menu-content {
     display: block;

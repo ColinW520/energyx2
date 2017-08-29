@@ -1,0 +1,17 @@
+= simple_form_for [@studio_session], remote: true, authenticity_token: true, html: { id: 'StudioSessionForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  .form-group
+    = f.input :studio_session_type_id, label: 'Class Type', as: :select, collection: StudioSessionType.order(name: :asc), include_blank: false
+  .form-group
+    = f.input :coach_id, as: :select, collection: Coach.order(name: :asc), include_blank: false
+  .form-group
+    = f.input :day_of_week, label: 'Day of the Week', as: :select, collection: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], include_blank: false
+  .form-group
+    = f.input :start_time, label: 'Starting Time', hint: 'Example: 6:00PM'
+  .form-group
+    = f.input :length, as: :select, collection: [15, 30, 45, 60, 75, 90], include_blank: false, hint: 'in minutes'
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-md btn-success'

@@ -25,6 +25,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
+gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'jbuilder', '~> 2.5'
 gem 'chartkick'
 gem 'smart_listing', github: 'ColinW520/smart_listing'
@@ -48,10 +49,10 @@ gem 'aws-sdk'
 gem 'groupdate'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'phony_rails' # keeps phone numbers consistent.
+gem 'ranked-model'
 
 # Third Party Stuff
 gem 'twilio-ruby'
-gem 'stripe'
 gem 'instagram'
 
 group :development, :test do

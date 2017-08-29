@@ -1,0 +1,10 @@
+// Render the form
+$('.modal-body').html('<%= j render "studio_sessions/form" %>');
+
+// Show the dynamic dialog
+$('#studio_session_dialog').modal("show");
+
+// Set focus to the first element
+$('#studio_session_dialog').on('shown.bs.modal', function () {$('#InputName').focus()})
+
+$("#studio_sessions").smart_listing().fadeLoaded();

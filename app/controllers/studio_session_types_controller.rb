@@ -14,17 +14,17 @@ class StudioSessionTypesController < ApplicationController
   end
 
   def new
-    @studio_session_type = StudioSessionType.new(organization_id: current_user.organization_id)
+    @studio_session_type = StudioSessionType.new
   end
 
   def create
-    @studio_session_type = StudioSessionType.create(studio_session_type_params.except(:tag_list))
+    @studio_session_type = StudioSessionType.new(studio_session_type_params.except(:tag_list))
     @studio_session_type.tag_list = params[:studio_session_type][:tag_list]
 
     respond_to do |format|
       if @studio_session_type.save
         format.json { head :no_content }
-        format.js { flash[:success] = 'Class Type has been created.' }
+        format.js { flash[:success] = "#{@studio_session_type.name} has been created. You can now add classes with this type." }
         format.html {
           flash[:success] = 'Clas Type has been created.'
           redirect_to studio_session_types_path
@@ -64,7 +64,7 @@ class StudioSessionTypesController < ApplicationController
   def destroy
     @studio_session_type.destroy
     respond_to do |format|
-      format.js { flash[:success] = 'StudioSessionType removed.' }
+      format.js { flash[:success] = 'Class Type removed. All of its classes have also been removed.' }
       format.html { redirect_to studio_session_types_path, notice: 'Class Type removed.' }
       format.json { head :no_content }
     end

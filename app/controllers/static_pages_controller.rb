@@ -3,6 +3,7 @@ class StaticPagesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def home
+    @days = StudioSession.includes(:studio_session_type, :coach).rank(:display_order).group_by(&:day_of_week)
   end
 
   def contact

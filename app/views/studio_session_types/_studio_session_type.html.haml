@@ -2,9 +2,12 @@
   %td= studio_session_type.id
   %td= studio_session_type.name
   %td= local_time studio_session_type.updated_at, format: "%m/%d/%Y"
-  %td
+  %td= studio_session_type.studio_sessions.count
   %td.actions
-    .btn-group
-      = link_to edit_studio_session_type_path(studio_session_type), remote: true, class: 'btn btn-sm btn-default' do
+    .btn-group.pull-right
+      = link_to edit_studio_session_type_path(studio_session_type), remote: true, class: 'btn btn-sm btn-warning' do
         %i.fa.fa-edit
         Edit
+      = link_to studio_session_type_path(studio_session_type), remote: true, method: :delete, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash
+        Destroy

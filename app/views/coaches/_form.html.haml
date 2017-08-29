@@ -1,0 +1,17 @@
+= simple_form_for [@coach], remote: true, authenticity_token: true, html: { id: 'CoachForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  .form-group
+    = f.input :name, autofocus: true, required: true
+  .form-group
+    = f.input :bio, as: :text, required: true
+  .form-group
+    = f.input :instagram_link, as: :url
+  .form-group
+    = f.input :twitter_link, as: :url
+    .form-group
+      = f.input :facebook_link, as: :url
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-md btn-success'
