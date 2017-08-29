@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170726055008) do
+ActiveRecord::Schema.define(version: 20170829042142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ahoy_events", force: :cascade do |t|
+    t.integer  "visit_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.jsonb    "properties"
+    t.datetime "time"
+    t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time", using: :btree
+    t.index ["user_id", "name"], name: "index_ahoy_events_on_user_id_and_name", using: :btree
+    t.index ["visit_id", "name"], name: "index_ahoy_events_on_visit_id_and_name", using: :btree
+  end
 
   create_table "ahoy_messages", force: :cascade do |t|
     t.string   "token"
@@ -35,60 +46,7 @@ ActiveRecord::Schema.define(version: 20170726055008) do
     t.index ["user_id", "user_type"], name: "index_ahoy_messages_on_user_id_and_user_type", using: :btree
   end
 
-  create_table "billing_methods", force: :cascade do |t|
-    t.integer  "organization_id"
-    t.string   "nickname"
-    t.string   "stripe_token_id"
-    t.integer  "created_by"
-    t.datetime "removed_at"
-    t.datetime "last_succeeded_at"
-    t.datetime "last_failed_at"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "removed_by"
-    t.index ["organization_id"], name: "index_billing_methods_on_organization_id", using: :btree
-  end
-
-  create_table "call_logs", force: :cascade do |t|
-    t.string   "line_id"
-    t.string   "organization_id"
-    t.string   "contact_id"
-    t.boolean  "forwarded"
-    t.string   "forwarded_to"
-    t.string   "direction"
-    t.string   "account_sid"
-    t.string   "call_sid"
-    t.string   "call_status"
-    t.string   "called"
-    t.string   "called_state"
-    t.string   "called_zip"
-    t.string   "called_city"
-    t.string   "called_country"
-    t.string   "caller_country"
-    t.string   "caller_state"
-    t.string   "caller_zip"
-    t.string   "caller_city"
-    t.string   "caller"
-    t.string   "to"
-    t.string   "to_zip"
-    t.string   "to_state"
-    t.string   "to_city"
-    t.string   "to_country"
-    t.string   "from"
-    t.string   "from_country"
-    t.string   "from_city"
-    t.string   "from_zip"
-    t.string   "from_state"
-    t.string   "api_version"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.decimal  "price_in_cents",      precision: 8, scale: 5
-    t.integer  "duration_in_seconds"
-    t.string   "answered_by"
-  end
-
   create_table "coaches", force: :cascade do |t|
-    t.integer  "organization_id"
     t.string   "name"
     t.string   "bio"
     t.integer  "display_order"
@@ -96,13 +54,11 @@ ActiveRecord::Schema.define(version: 20170726055008) do
     t.string   "facebook_link"
     t.string   "twitter_link"
     t.string   "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["organization_id"], name: "index_coaches_on_organization_id", using: :btree
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.integer  "organization_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
@@ -121,91 +77,20 @@ ActiveRecord::Schema.define(version: 20170726055008) do
     t.datetime "updated_at",                            null: false
     t.boolean  "phone_is_valid_for_sms"
     t.boolean  "is_active",              default: true
-    t.index ["organization_id"], name: "index_contacts_on_organization_id", using: :btree
-  end
-
-  create_table "coupons", force: :cascade do |t|
-    t.string   "stripe_id"
-    t.string   "code"
-    t.integer  "percent_off"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer  "organization_id"
     t.string   "name"
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.string   "description"
     t.string   "link"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["organization_id"], name: "index_events_on_organization_id", using: :btree
-  end
-
-  create_table "imports", force: :cascade do |t|
-    t.integer  "organization_id"
-    t.string   "type"
-    t.string   "status"
-    t.string   "message"
-    t.integer  "created_by"
-    t.datetime "completed_at"
-    t.boolean  "is_enqueued"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.string   "datafile_file_name"
-    t.string   "datafile_content_type"
-    t.integer  "datafile_file_size"
-    t.datetime "datafile_updated_at"
-    t.index ["organization_id"], name: "index_imports_on_organization_id", using: :btree
-  end
-
-  create_table "lines", force: :cascade do |t|
-    t.integer  "organization_id"
-    t.integer  "user_id"
-    t.string   "twilio_id"
-    t.string   "number"
-    t.string   "name"
-    t.boolean  "forwarding_enabled"
-    t.string   "forwarding_number"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.datetime "released_at"
-    t.string   "released_by"
-    t.integer  "errors_count"
-    t.string   "latest_error_message"
-    t.string   "voice_url"
-    t.string   "sms_url"
-    t.boolean  "sms_forwarding_enabled"
-    t.string   "sms_alert_number"
-    t.boolean  "sms_alert"
-    t.boolean  "email_alert"
-    t.boolean  "email_alert_address"
-    t.index ["organization_id"], name: "index_lines_on_organization_id", using: :btree
-    t.index ["user_id"], name: "index_lines_on_user_id", using: :btree
-  end
-
-  create_table "message_requests", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "organization_id"
-    t.string   "body"
-    t.integer  "recipients_count"
-    t.datetime "processed_at"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "line_id"
-    t.text     "filter_query"
-    t.datetime "send_at"
-    t.index ["line_id"], name: "index_message_requests_on_line_id", using: :btree
-    t.index ["organization_id"], name: "index_message_requests_on_organization_id", using: :btree
-    t.index ["user_id"], name: "index_message_requests_on_user_id", using: :btree
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "messages", force: :cascade do |t|
     t.string   "twilio_sid"
-    t.string   "message_request_id"
-    t.string   "line_id"
     t.string   "status"
     t.string   "direction"
     t.datetime "sent_at"
@@ -213,11 +98,11 @@ ActiveRecord::Schema.define(version: 20170726055008) do
     t.string   "from"
     t.string   "body"
     t.string   "error_message"
-    t.decimal  "price_in_cents",     precision: 8, scale: 5
+    t.decimal  "price_in_cents",  precision: 8, scale: 5
     t.string   "account_sid"
     t.string   "organization_id"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "in_response_to"
     t.integer  "contact_id"
     t.string   "from_zip"
@@ -253,6 +138,14 @@ ActiveRecord::Schema.define(version: 20170726055008) do
     t.index ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.integer  "display_order"
+    t.string   "text"
+    t.text     "answer"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
     t.text     "data"
@@ -263,7 +156,6 @@ ActiveRecord::Schema.define(version: 20170726055008) do
   end
 
   create_table "studio_session_types", force: :cascade do |t|
-    t.integer  "organization_id"
     t.string   "name"
     t.string   "description"
     t.string   "promo_video_url"
@@ -272,11 +164,9 @@ ActiveRecord::Schema.define(version: 20170726055008) do
     t.integer  "display_order"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["organization_id"], name: "index_studio_session_types_on_organization_id", using: :btree
   end
 
   create_table "studio_sessions", force: :cascade do |t|
-    t.integer  "organization_id"
     t.integer  "display_order"
     t.integer  "coach_id"
     t.integer  "studio_session_type_id"
@@ -287,23 +177,7 @@ ActiveRecord::Schema.define(version: 20170726055008) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["coach_id"], name: "index_studio_sessions_on_coach_id", using: :btree
-    t.index ["organization_id"], name: "index_studio_sessions_on_organization_id", using: :btree
     t.index ["studio_session_type_id"], name: "index_studio_sessions_on_studio_session_type_id", using: :btree
-  end
-
-  create_table "subscriptions", force: :cascade do |t|
-    t.integer  "organization_id"
-    t.string   "stripe_plan_id"
-    t.string   "stripe_customer_id"
-    t.integer  "created_by"
-    t.integer  "canceled_by"
-    t.string   "coupon_code"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.datetime "ends_at"
-    t.string   "stripe_id"
-    t.datetime "canceled_at"
-    t.index ["organization_id"], name: "index_subscriptions_on_organization_id", using: :btree
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -367,21 +241,39 @@ ActiveRecord::Schema.define(version: 20170726055008) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "billing_methods", "organizations"
-  add_foreign_key "coaches", "organizations"
-  add_foreign_key "contacts", "organizations"
-  add_foreign_key "events", "organizations"
-  add_foreign_key "imports", "organizations"
-  add_foreign_key "lines", "organizations"
-  add_foreign_key "lines", "users"
-  add_foreign_key "message_requests", "lines"
-  add_foreign_key "message_requests", "organizations"
-  add_foreign_key "message_requests", "users"
+  create_table "visits", force: :cascade do |t|
+    t.string   "visit_token"
+    t.string   "visitor_token"
+    t.string   "ip"
+    t.text     "user_agent"
+    t.text     "referrer"
+    t.text     "landing_page"
+    t.integer  "user_id"
+    t.string   "referring_domain"
+    t.string   "search_keyword"
+    t.string   "browser"
+    t.string   "os"
+    t.string   "device_type"
+    t.integer  "screen_height"
+    t.integer  "screen_width"
+    t.string   "country"
+    t.string   "region"
+    t.string   "city"
+    t.string   "postal_code"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
+    t.string   "utm_source"
+    t.string   "utm_medium"
+    t.string   "utm_term"
+    t.string   "utm_content"
+    t.string   "utm_campaign"
+    t.datetime "started_at"
+    t.index ["user_id"], name: "index_visits_on_user_id", using: :btree
+    t.index ["visit_token"], name: "index_visits_on_visit_token", unique: true, using: :btree
+  end
+
   add_foreign_key "messages", "contacts"
-  add_foreign_key "studio_session_types", "organizations"
   add_foreign_key "studio_sessions", "coaches"
-  add_foreign_key "studio_sessions", "organizations"
   add_foreign_key "studio_sessions", "studio_session_types"
-  add_foreign_key "subscriptions", "organizations"
   add_foreign_key "users", "organizations"
 end

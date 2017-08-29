@@ -2,7 +2,7 @@ class CoachesController < ApplicationController
   before_filter :find_coach, except: [:index, :new, :create]
 
   def index
-    coachs_scope = Coach.all
+    coachs_scope = Coach.rank(:display_order)
 
     respond_to do |format|
       format.html {

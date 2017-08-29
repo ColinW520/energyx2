@@ -1,6 +1,9 @@
 class StudioSessionType < ApplicationRecord
   has_many :studio_sessions, dependent: :destroy
 
+  include RankedModel
+  ranks :display_order
+
   acts_as_taggable_on :tags
 
   def self.filter_by(params)

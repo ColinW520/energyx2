@@ -44,6 +44,7 @@ gem 'pg', '~> 0.18'
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'friendly_id'
 gem 'ahoy_email'
+gem 'ahoy_matey'
 gem "paperclip", "~> 5.0.0" # stores images & files to AWS
 gem 'aws-sdk'
 gem 'groupdate'

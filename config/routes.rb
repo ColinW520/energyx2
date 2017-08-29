@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   resource :dashboard, controller: 'dashboard' do
   end
 
+  resources :questions do
+    post :update_row_order, on: :collection
+  end
+
   resources :studio_session_types do
     post :update_row_order, on: :collection
   end

@@ -24,6 +24,11 @@
             %i.fa.fa-calendar
             Classes
 
+        %a{href: questions_path}
+          %li{class: @subnav == 'questions' ? 'active' : nil}
+            %i.fa.fa-question
+            FAQs
+
         %a{href: root_path}
           %li{class: @subnav == 'static_pages' ? 'active' : nil}
             %i.fa.fa-home
