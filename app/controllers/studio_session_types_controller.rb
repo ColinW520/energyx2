@@ -1,6 +1,7 @@
 class StudioSessionTypesController < ApplicationController
-  before_filter :find_studio_session_type, except: [:index, :new, :create]
-
+  before_filter :find_studio_session_type, except: [:index, :new, :create, :list]
+  layout :resolve_layout
+  
   def index
     studio_session_types_scope = StudioSessionType.rank(:display_order)
 
@@ -11,6 +12,10 @@ class StudioSessionTypesController < ApplicationController
       format.js { smart_listing_create :studio_session_types, studio_session_types_scope, partial: 'studio_session_types/listing', default_sort: { display_order: :asc } }
       format.csv { send_data studio_session_types_scope.to_csv, filename: "studio_session_types_as_of-#{Time.now}.csv" }
     end
+  end
+
+  def list
+    @types = StudioSessionType.rank(:display_order)
   end
 
   def new
@@ -71,6 +76,14 @@ class StudioSessionTypesController < ApplicationController
   end
 
   private
+
+  def resolve_layout
+    if action_name == "list"
+      nil
+    else
+      "application"
+    end
+  end
 
   def find_studio_session_type
     @studio_session_type = StudioSessionType.find(params[:id])

@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  before_filter :find_question, except: [:index, :new, :create]
+  before_filter :find_question, except: [:index, :new, :create, :list]
+  layout :resolve_layout
 
   def index
     questions_scope = Question.rank(:display_order).all
@@ -11,6 +12,10 @@ class QuestionsController < ApplicationController
       format.js { smart_listing_create :questions, questions_scope, partial: 'questions/listing', default_sort: { display_order: :asc } }
       format.csv { send_data questions_scope.to_csv, filename: "questions_as_of-#{Time.now}.csv" }
     end
+  end
+
+  def list
+    @questions = Question.rank(:display_order).all
   end
 
   def new
@@ -74,6 +79,14 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  def resolve_layout
+    if action_name == "list"
+      nil
+    else
+      "application"
+    end
+  end
 
   def find_question
     @question = Question.find(params[:id])

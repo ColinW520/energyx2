@@ -1,7 +1,7 @@
 $ ->
   if $("#schedule_placeholder").length > 0
     $.get
-      url: "/studio_sessions"
+      url: "/studio_sessions/list/"
       cache: false
       success: (html) ->
         $('#schedule_placeholder').replaceWith html

@@ -11,22 +11,27 @@ Rails.application.routes.draw do
   end
 
   resources :questions do
+    get :list, on: :collection
     post :update_row_order, on: :collection
   end
 
   resources :studio_session_types do
+    get :list, on: :collection
     post :update_row_order, on: :collection
   end
 
   resources :studio_sessions do
+    get :list, on: :collection
     post :update_row_order, on: :collection
   end
 
   resources :coaches do
+    get :list, on: :collection
     post :update_row_order, on: :collection
   end
 
   resources :events do
+    get :list, on: :collection
     post :update_row_order, on: :collection
   end
 

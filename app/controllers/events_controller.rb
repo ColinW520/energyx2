@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_filter :find_event, except: [:index, :new, :create]
+  before_filter :find_event, except: [:index, :new, :create, :list]
+  layout :resolve_layout
 
   def index
     events_scope = Event.order(starts_at: :desc)
@@ -11,6 +12,10 @@ class EventsController < ApplicationController
       format.js { smart_listing_create :events, events_scope, partial: 'events/listing', default_sort: { starts_at: :desc } }
       format.csv { send_data events_scope.to_csv, filename: "events_as_of-#{Time.now}.csv" }
     end
+  end
+
+  def list
+    @events = Event.order(starts_at: :asc)
   end
 
   def new
@@ -67,6 +72,14 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def resolve_layout
+    if action_name == "list"
+      nil
+    else
+      "application"
+    end
+  end
 
   def find_event
     @event = Event.find(params[:id])

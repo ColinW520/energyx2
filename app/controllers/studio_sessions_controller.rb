@@ -1,5 +1,6 @@
 class StudioSessionsController < ApplicationController
-  before_filter :find_studio_session, except: [:index, :new, :create]
+  before_filter :find_studio_session, except: [:index, :new, :create, :list]
+  layout :resolve_layout
 
   def index
     studio_sessions_scope = StudioSession.includes(:studio_session_type, :coach).rank(:display_order)
@@ -10,6 +11,10 @@ class StudioSessionsController < ApplicationController
       format.js { smart_listing_create :studio_sessions, studio_sessions_scope, partial: 'studio_sessions/listing', default_sort: { display_order: :asc } }
       format.csv { send_data studio_sessions_scope.to_csv, filename: "studio_sessions_as_of-#{Time.now}.csv" }
     end
+  end
+
+  def list
+    @days = StudioSession.includes(:studio_session_type, :coach).rank(:display_order).group_by(&:day_of_week)
   end
 
   def new
@@ -73,6 +78,14 @@ class StudioSessionsController < ApplicationController
   end
 
   private
+
+  def resolve_layout
+    if action_name == "list"
+      nil
+    else
+      "application"
+    end
+  end
 
   def find_studio_session
     @studio_session = StudioSession.find(params[:id])
