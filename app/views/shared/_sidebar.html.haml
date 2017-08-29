@@ -9,6 +9,11 @@
             %i.fa.fa-dashboard.fa-lg
             Dashboard
 
+        %a{href: events_path}
+          %li{class: @subnav == 'events' ? 'active' : nil}
+            %i.fa.fa-glass
+            Events
+
         %a{href: studio_session_types_path}
           %li{class: @subnav == 'studio_session_types' ? 'active' : nil}
             %i.fa.fa-star

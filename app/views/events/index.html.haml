@@ -1,0 +1,16 @@
+- provide(:title, 'Events')
+%br
+%br
+.row
+  .col-sm-12
+    %h3
+      Events
+      .pull-right
+        = link_to new_coach_path, class: 'btn btn-success btn-sm', remote: true do
+          %i.fa.fa-plus
+          New
+.row
+  .col-sm-12
+    = smart_listing_render :events
+
+= render "events/dialog"

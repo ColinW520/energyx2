@@ -1,0 +1,3 @@
+$('#event_dialog').modal('toggle');
+$('tbody#events').prepend('<%= j render (@event) %>');
+$("#events").smart_listing().fadeLoaded();

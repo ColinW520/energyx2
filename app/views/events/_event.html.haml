@@ -1,0 +1,12 @@
+%tr.item{id: "event_#{event.id}", "data-item-id"=> "#{event.id}", "data-item-path"=>"eventes"}
+  %td= event.name
+  %td= local_time event.starts_at, format: "%m/%d/%Y"
+  %td= local_time event.updated_at, format: "%m/%d/%Y"
+  %td.actions
+    .btn-group.pull-right
+      = link_to edit_event_path(event), remote: true, class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-edit
+        Edit
+      = link_to event_path(event), remote: true, method: :delete, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash
+        Destroy

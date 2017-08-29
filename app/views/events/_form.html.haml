@@ -1,0 +1,11 @@
+= simple_form_for [@event], remote: true, authenticity_token: true, html: { id: 'CoachForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  .form-group
+    = f.input :name, autofocus: true, required: true
+  .form-group
+    = f.input :starts_at, as: :datetime, required: true
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-md btn-success'
