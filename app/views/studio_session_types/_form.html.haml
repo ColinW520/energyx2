@@ -1,4 +1,4 @@
-= simple_form_for [@studio_session_type], remote: true, authenticity_token: true, html: { id: 'StudioSessionTypeForm' } do |f|
+= simple_form_for [@studio_session_type], remote: true, authenticity_token: true, html: { id: 'StudioSessionTypeForm', multipart: true } do |f|
   #error_holder
     %ul#errors
   = f.error_notification
@@ -7,7 +7,11 @@
   .form-group
     = f.input :description, as: :text, label: 'Class Description', required: true
   .form-group
+    = f.input :link, as: :url, label: 'Registration Link'
+  .form-group
     = f.input :promo_video_url, as: :url, label: 'Vimeo Link'
+  .form-group
+    = f.input :promo_image, label: 'Promo Image', as: :file
   .form-actions
     .text-center
       = f.button :submit, class: 'btn btn-md btn-success'

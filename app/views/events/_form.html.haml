@@ -1,4 +1,4 @@
-= simple_form_for [@event], remote: true, authenticity_token: true, html: { id: 'CoachForm' } do |f|
+= simple_form_for [@event], remote: true, authenticity_token: true, html: { id: 'EventForm', multipart: true } do |f|
   #error_holder
     %ul#errors
   = f.error_notification
@@ -6,6 +6,14 @@
     = f.input :name, autofocus: true, required: true
   .form-group
     = f.input :starts_at, as: :datetime, required: true
+  .form-group
+    = f.input :link, as: :url
+  .form-group
+    = f.input :description, as: :text, required: true
+  .form-group
+    = f.input :promo_image, label: 'Promo Image', as: :file
+  .form-group
+    = f.input :address, label: 'Where is it?', as: :text
   .form-actions
     .text-center
       = f.button :submit, class: 'btn btn-md btn-success'

@@ -4,6 +4,16 @@ class Coach < ApplicationRecord
 
   has_many :studio_sessions
 
+  has_attached_file :profile_image,
+    styles: {
+      thumb: '200x250#',
+    },
+    dependent: :destroy,
+    default_url: "http://joappdeals.com/in/wp-content/themes/joapp/images/happyuser/default_user.png"
+  validates_attachment_content_type :profile_image, content_type: /\Aimage\/.*\Z/
+  validates_attachment :profile_image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
+
+
   include RankedModel
   ranks :display_order
 

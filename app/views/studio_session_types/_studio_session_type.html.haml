@@ -1,8 +1,16 @@
 %tr{id: "studio_session_type_#{studio_session_type.id}"}
-  %td= studio_session_type.id
+  %td
+    %img.img-fluid.img-thumbnail{src: studio_session_type.promo_image.url}
   %td= studio_session_type.name
+  %td= studio_session_type.description.truncate(100)
   %td= local_time studio_session_type.updated_at, format: "%m/%d/%Y"
   %td= studio_session_type.studio_sessions.count
+  %td.text-center
+    - if studio_session_type.link.present?
+      = link_to studio_session_type.link do
+        %i.fa.fa-external-link
+    - else
+      %i.fa.fa-times.text-danger
   %td.actions
     .btn-group.pull-right
       = link_to edit_studio_session_type_path(studio_session_type), remote: true, class: 'btn btn-sm btn-warning' do

@@ -12,8 +12,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag "//www.google.com/jsapi", "chartkick"
     %title
-      = full_title('HYDRA', yield(:title))
-  %body{id: "#{controller_name}_#{action_name}", class: "hydra-body #{controller_name}", style: "background-color: #F3F3F3;"}
+      = full_title('EnergyX', yield(:title))
+  %body{id: "#{controller_name}_#{action_name}", class: "energyx-body #{controller_name}", style: "background-color: #F3F3F3;"}
     = include_gon(:init => true)
     = render 'shared/sidebar'
     #main.container

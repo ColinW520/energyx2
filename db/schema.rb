@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829042142) do
+ActiveRecord::Schema.define(version: 20170830175548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,8 +54,18 @@ ActiveRecord::Schema.define(version: 20170829042142) do
     t.string   "facebook_link"
     t.string   "twitter_link"
     t.string   "email"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "background_image_file_name"
+    t.string   "background_image_content_type"
+    t.integer  "background_image_file_size"
+    t.datetime "background_image_updated_at"
+    t.string   "link"
+    t.string   "short_description"
+    t.string   "profile_image_file_name"
+    t.string   "profile_image_content_type"
+    t.integer  "profile_image_file_size"
+    t.datetime "profile_image_updated_at"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -85,8 +95,13 @@ ActiveRecord::Schema.define(version: 20170829042142) do
     t.datetime "ends_at"
     t.string   "description"
     t.string   "link"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "promo_image_file_name"
+    t.string   "promo_image_content_type"
+    t.integer  "promo_image_file_size"
+    t.datetime "promo_image_updated_at"
+    t.string   "address"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -162,8 +177,13 @@ ActiveRecord::Schema.define(version: 20170829042142) do
     t.boolean  "active"
     t.string   "slug"
     t.integer  "display_order"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "promo_image_file_name"
+    t.string   "promo_image_content_type"
+    t.integer  "promo_image_file_size"
+    t.datetime "promo_image_updated_at"
+    t.string   "link"
   end
 
   create_table "studio_sessions", force: :cascade do |t|

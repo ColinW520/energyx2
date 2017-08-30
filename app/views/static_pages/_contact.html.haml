@@ -8,8 +8,8 @@
           %p.text-center Questions? Get in touch with us.
   .section-content
     .row
-      .col-sm-12.col-md-8.col-lg-6.col-centered
-        .card.card-outline-primary
+      .col-xs-10.col-sm-10.col-md-8.col-lg-6.col-centered
+        .card.card-outline-success{style: "margin: 0% 10% 0% 10%"}
           .card-block
             = form_tag contact_path, method: 'post', html: { role: "form" } do
               .row
@@ -28,4 +28,4 @@
               .form-group
                 = hidden_field_tag 'spam_check', value: 'gotcha.'
               .text-center
-                = submit_tag 'Submit', class: 'btn btn-block btn-success btn-lg'
+                = submit_tag 'Submit', class: 'btn btn-block btn-success btn-md'

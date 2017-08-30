@@ -6,6 +6,15 @@ class StudioSessionType < ApplicationRecord
 
   acts_as_taggable_on :tags
 
+  has_attached_file :promo_image,
+    styles: {
+      thumb: '200x250#',
+    },
+    dependent: :destroy,
+    default_url: "http://joappdeals.com/in/wp-content/themes/joapp/images/happyuser/default_user.png"
+  validates_attachment_content_type :promo_image, content_type: /\Aimage\/.*\Z/
+  validates_attachment :promo_image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
+
   def self.filter_by(params)
     params = params.with_indifferent_access
     scope = self.includes(:studio_sessions)

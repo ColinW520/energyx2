@@ -1,8 +1,10 @@
 %tr.item{id: "coach_#{coach.id}", "data-item-id"=> "#{coach.id}", "data-item-path"=>"coaches"}
   %td
     %i.fa.fa-arrows-v
-  %td= coach.id
+  %td
+    %img.img-fluid.img-thumbnail{src: coach.profile_image.url(:thumb)}
   %td= coach.name
+  %td= coach.bio.truncate(100)
   %td= local_time coach.updated_at, format: "%m/%d/%Y"
   %td= coach.studio_sessions.count
   %td.actions

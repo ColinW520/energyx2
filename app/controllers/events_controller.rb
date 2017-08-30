@@ -3,19 +3,19 @@ class EventsController < ApplicationController
   layout :resolve_layout
 
   def index
-    events_scope = Event.order(starts_at: :desc)
+    events_scope = Event.upcoming
 
     respond_to do |format|
       format.html {
-        smart_listing_create :events, events_scope, partial: 'events/listing', default_sort: { starts_at: :desc }
+        smart_listing_create :events, events_scope, partial: 'events/listing', default_sort: { starts_at: :asc }
       }
-      format.js { smart_listing_create :events, events_scope, partial: 'events/listing', default_sort: { starts_at: :desc } }
+      format.js { smart_listing_create :events, events_scope, partial: 'events/listing', default_sort: { starts_at: :asc } }
       format.csv { send_data events_scope.to_csv, filename: "events_as_of-#{Time.now}.csv" }
     end
   end
 
   def list
-    @events = Event.order(starts_at: :asc)
+    @events = Event.upcoming
   end
 
   def new

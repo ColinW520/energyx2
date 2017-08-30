@@ -1,5 +1,8 @@
-%tr.item{id: "event_#{event.id}", "data-item-id"=> "#{event.id}", "data-item-path"=>"eventes"}
+%tr.item{id: "event_#{event.id}", "data-item-id"=> "#{event.id}", "data-item-path"=>"events"}
+  %td
+    %img.img-fluid.img-thumbnail{src: event.promo_image.url(:thumb)}
   %td= event.name
+  %td= event.description.truncate(100)
   %td= local_time event.starts_at, format: "%m/%d/%Y"
   %td= local_time event.updated_at, format: "%m/%d/%Y"
   %td.actions
