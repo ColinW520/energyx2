@@ -1,4 +1,4 @@
-.row.row-fluid
+.row.equal-height
   - if @events.empty?
     .col-sm-12.col-md-6.col-centered
       .card.card-inverse.card-warning.text-center
@@ -8,10 +8,11 @@
   - else
     - @events.each do |event|
       .col-sm-12.col-md-6.col-lg-4
-        .card.card-outline-primary.mb-5
-          %img.card-img-top{:alt => "Card image cap", :src => "http://via.placeholder.com/200x250"}/
+        .card.mb-3
+          %img.card-img-top.img-fluid{alt: event.name, src: event.promo_image.url(:thumb)}
           .card-block{style: "background-color: #fff;"}
             %h4.card-title= event.name
+            %span.badge.badge-primary.mb-1= local_time event.starts_at
             %p.card-text= event.description
           .card-footer
             %small.text-muted.pull-left

@@ -1,0 +1,3 @@
+$('#submission_dialog').modal('toggle');
+$('#submission_<%= @submission.id %>').replaceWith('<%= j render (@submission) %>');
+$("#submissions").smart_listing().fadeLoaded();

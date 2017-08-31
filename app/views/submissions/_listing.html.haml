@@ -1,0 +1,24 @@
+.row
+  .col-sm-12
+    .card.card-outline-primary.table-card
+      .table-responsive
+        %table.table.table-striped
+          %thead.thead-inverse
+            %th= smart_listing.sortable 'Participant', :participant_id
+            %th= smart_listing.sortable 'From', :from_number
+            %th= smart_listing.sortable 'Meters', :parsed_meters
+            %th= smart_listing.sortable 'Name', :parsed_name
+            %th= smart_listing.sortable 'Valid?', :is_valid
+            %th= smart_listing.sortable 'Rejected?', :is_rejected
+            %th= smart_listing.sortable 'Submitted', :created_at
+            %th
+          %tbody#submissions
+            - smart_listing.collection.each do |submission|
+              = render submission
+        %br
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

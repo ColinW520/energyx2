@@ -14,15 +14,15 @@
             %i.fa.fa-glass
             Events
 
+        %a{href: coaches_path}
+          %li{class: @subnav == 'coaches' ? 'active' : nil}
+            %i.fa.fa-user-secret
+            Coaches
+
         %a{href: studio_session_types_path}
           %li{class: @subnav == 'studio_session_types' ? 'active' : nil}
             %i.fa.fa-star
             Class Types
-
-        %a{href: coaches_path}
-          %li{class: @subnav == 'coaches' ? 'active' : nil}
-            %i.fa.fa-street-view
-            Coaches
 
         %a{href: studio_sessions_path}
           %li{class: @subnav == 'studio_sessions' ? 'active' : nil}
@@ -33,6 +33,16 @@
           %li{class: @subnav == 'questions' ? 'active' : nil}
             %i.fa.fa-question
             FAQs
+
+        %a{href: participants_path}
+          %li{class: @subnav == 'participants' ? 'active' : nil}
+            %i.fa.fa-street-view
+            Participants
+
+        %a{href: submissions_path}
+          %li{class: @subnav == 'submissions' ? 'active' : nil}
+            %i.fa.fa-stack-overflow
+            Submissions
 
         %a{href: root_path}
           %li{class: @subnav == 'static_pages' ? 'active' : nil}

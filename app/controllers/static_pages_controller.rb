@@ -1,8 +1,13 @@
 class StaticPagesController < ApplicationController
-  layout 'static_views'
+  layout :resolve_layout
   skip_before_action :authenticate_user!
 
   def home
+  end
+
+  def instagram
+    client = Instagram.client(access_token: ENV['INSTAGRAM_TOKEN'])
+    @posts = client.user_recent_media.first(4)
   end
 
   def contact
@@ -43,5 +48,15 @@ class StaticPagesController < ApplicationController
   end
 
   def terms
+  end
+
+  private
+
+  def resolve_layout
+    if action_name == "instagram"
+      nil
+    else
+      "static_views"
+    end
   end
 end

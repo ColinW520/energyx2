@@ -1,0 +1,9 @@
+= simple_form_for [@submission], remote: true, authenticity_token: true, html: { id: 'SubmissionForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  .form-group
+    = f.input :is_rejected, as: :boolean, label: 'Rejected?', hint: 'Check this box to reject this submission.'
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-md btn-success'

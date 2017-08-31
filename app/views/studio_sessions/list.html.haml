@@ -1,10 +1,10 @@
 .row
   .col-sm-12.col-md-12.col-lg-10.col-centered
-    .card.card-outline-primary.table-card
+    .card.card-outline-primary
       .table-responsive
         %table.table.table-hover
           %thead.thead-inverse
-            %th Starts At
+            %th Starts
             %th Class
             %th Instructor
             %th Duration
@@ -24,3 +24,8 @@
                     = link_to "https://clients.mindbodyonline.com/classic/ws?studioid=226360&stype=-7&sTG=22&sVT=7&sView=day", target: '_blank', class: 'pull-right text-success' do
                       %i.fa.fa-plus
                       SIGNUP
+            %tr.table-warning
+              %td{colspan: 5}
+                %small.text-muted
+                  Last Updated
+                  = local_time_ago StudioSession.limit(1).order(updated_at: :desc).first.updated_at

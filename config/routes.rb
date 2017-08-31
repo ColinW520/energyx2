@@ -4,10 +4,19 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   match '/home' => "static_pages#home", via: [:get]
   match '/terms' => "static_pages#terms", via: [:get]
+  match '/instagram' => "static_pages#instagram", via: [:get]
   post '/contact', to: 'static_pages#contact', as: 'contact'
 
   # The User-facing App
   resource :dashboard, controller: 'dashboard' do
+  end
+
+  resources :participants do
+    get :leaderboard, on: :collection
+  end
+
+  resources :submissions do
+    get :list, on: :collection
   end
 
   resources :questions do

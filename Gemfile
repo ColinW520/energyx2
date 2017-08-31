@@ -38,6 +38,7 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'select2-rails'
 gem 'meta-tags'
+gem 'httparty'
 
 # Database Stuff
 gem 'pg', '~> 0.18'
@@ -54,7 +55,8 @@ gem 'ranked-model'
 
 # Third Party Stuff
 gem 'twilio-ruby'
-gem 'instagram'
+gem 'instagram',  :git => 'git://github.com/facebookarchive/instagram-ruby-gem.git'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

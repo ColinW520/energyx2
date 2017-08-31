@@ -1,0 +1,17 @@
+- provide(:title, 'Submissions')
+%br
+%br
+.row
+  .col-sm-12
+    %h3
+      %i.fa.fa-stack-overflow
+      Submissions
+      .pull-right
+        = link_to new_submission_path, class: 'btn btn-success btn-sm', remote: true do
+          %i.fa.fa-plus
+          New
+.row
+  .col-sm-12
+    = smart_listing_render :submissions
+
+= render "submissions/dialog"

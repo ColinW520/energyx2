@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  participant: one
+  from_number: MyString
+  message_body: MyString
+  parsed_meters: 1
+  parsed_name: MyString
+  is_valid: MyString
+  is_rejected: false
+
+two:
+  participant: two
+  from_number: MyString
+  message_body: MyString
+  parsed_meters: 1
+  parsed_name: MyString
+  is_valid: MyString
+  is_rejected: false

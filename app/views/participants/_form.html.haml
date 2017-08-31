@@ -1,0 +1,11 @@
+= simple_form_for [@participant], remote: true, authenticity_token: true, html: { id: 'PartiForm' } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  .form-group
+    = f.input :name, autofocus: true
+  .form-group
+    = f.input :is_active, as: :boolean, label: 'Active?', hint: 'Unchecking this box will remove this person from the leaderboard.'
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-md btn-success'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830175548) do
+ActiveRecord::Schema.define(version: 20170831024351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,15 @@ ActiveRecord::Schema.define(version: 20170830175548) do
     t.index ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
   end
 
+  create_table "participants", force: :cascade do |t|
+    t.string   "name"
+    t.string   "mobile_phone"
+    t.integer  "submissions_count"
+    t.boolean  "is_active"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.integer  "display_order"
     t.string   "text"
@@ -198,6 +207,19 @@ ActiveRecord::Schema.define(version: 20170830175548) do
     t.datetime "updated_at",             null: false
     t.index ["coach_id"], name: "index_studio_sessions_on_coach_id", using: :btree
     t.index ["studio_session_type_id"], name: "index_studio_sessions_on_studio_session_type_id", using: :btree
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.integer  "participant_id"
+    t.string   "from_number"
+    t.string   "message_body"
+    t.integer  "parsed_meters"
+    t.string   "parsed_name"
+    t.string   "is_valid"
+    t.boolean  "is_rejected"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -295,5 +317,6 @@ ActiveRecord::Schema.define(version: 20170830175548) do
   add_foreign_key "messages", "contacts"
   add_foreign_key "studio_sessions", "coaches"
   add_foreign_key "studio_sessions", "studio_session_types"
+  add_foreign_key "submissions", "participants"
   add_foreign_key "users", "organizations"
 end

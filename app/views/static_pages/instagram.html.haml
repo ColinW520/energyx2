@@ -1,0 +1,15 @@
+.row.equal-height
+  - @posts.each do |post|
+    .col-sm-12.col-md-6.col-lg-3
+      .card.mb-3
+        %img.card-img-top.img-fluid{alt: post.caption.text, src: post.images.standard_resolution.url}
+        .card-block{style: "background-color: #fff;"}
+          %p.card-text= post.caption.text
+          - post.tags.each do |tag|
+            %span.badge.badge-info= tag
+        .card-footer
+          .text-muted.pull-left
+            Posted
+            = local_time_ago Time.at post.created_time.to_i
+          .text-muted.pull-right
+            %a.fa.fa.fa-instagram{href: post.link, style: 'text-decoation: none;'}

@@ -9,6 +9,7 @@ class StudioSessionType < ApplicationRecord
   has_attached_file :promo_image,
     styles: {
       thumb: '200x250#',
+      display: '480x640#'
     },
     dependent: :destroy,
     default_url: "http://joappdeals.com/in/wp-content/themes/joapp/images/happyuser/default_user.png"

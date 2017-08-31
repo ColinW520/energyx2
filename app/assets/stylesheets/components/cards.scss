@@ -1,0 +1,20 @@
+.row.equal-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.equal-height > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  flex: 1;
+}
+
+.card-img-left {
+  border-bottom-left-radius: calc(.25rem - 1px);
+  border-top-left-radius: calc(.25rem - 1px);
+  float: left;
+  padding-right: 1em;
+  margin-bottom: -1.25em;
+}

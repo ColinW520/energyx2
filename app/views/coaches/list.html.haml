@@ -1,28 +1,12 @@
 .row
-  - @coaches.each do |coach|
-    .col-sm-12.col-md-6
-      .card.mb-4
-        .card-header
-          .card-title
-            %h3.text-center= coach.name.upcase
-        .card-block{style: "padding: 10px;"}
+  .col-sm-12.col-md-10.col-centered
+    - @coaches.each do |coach|
+      .card.mb-3{id: "coach_#{coach.id}"}
+        .card-block
           .row
             .col-sm-12.col-md-4
-              %img.rounded.img-fluid{alt: coach.name, src: "https://farm2.staticflickr.com/1475/25613733053_af82c54e04.jpg"}
+              %img.img-fluid.rounded{alt: coach.name, src: coach.profile_image.url}
             .col-sm-12.col-md-8
+              %h3.my-3= coach.name
+              %hr{align: 'left'}
               %p= coach.bio
-              %br
-                .text-center
-                  .btn-group
-                    - if coach.link.present?
-                      %a{href: coach.link, class: 'btn btn-success btn-sm', style: 'color: #fff'}
-                        %i.fa.fa-calendar
-                        Schedule
-                    - if coach.instagram_link.present?
-                      %a{href: coach.instagram_link, class: 'btn btn-primary btn-sm'}
-                        %i.fa.fa-instagram
-                        Instagram
-                    - if coach.twitter_link.present?
-                      %a{href: coach.instagram_link, class: 'btn btn-info btn-sm'}
-                        %i.fa.fa-twitter
-                        Twitter

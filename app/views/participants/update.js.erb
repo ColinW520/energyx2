@@ -1,0 +1,3 @@
+$('#participant_dialog').modal('toggle');
+$('#participant_<%= @participant.id %>').replaceWith('<%= j render (@participant) %>');
+$("#participants").smart_listing().fadeLoaded();

@@ -1,14 +1,14 @@
-.row
+.row.equal-height
   - @types.each do |type|
-    .col-sm-12.col-md-6.col-lg-3
-      .card.mb-4
-        %img.card-img-top{:alt => "Card image cap", :src => "http://via.placeholder.com/250x200"}
+    .col-sm-12.col-md-4
+      .card.my-3
+        %img.card-img-top.img-fluid{alt: type.name, src: type.promo_image.url, style: "max-height: 225px;"}
         .card-block
           %h4.card-title= type.name
           %p.card-text= type.description
         .card-footer
-          %small
+          %small.pull-right
             - if type.link
-              = link_to type.link, class: 'btn btn-primary btn-sm pull-right' do
+              = link_to type.link, class: 'text-success' do
                 %i.fa.fa-calendar
                 SCHEDULE

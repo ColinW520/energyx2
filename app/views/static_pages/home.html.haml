@@ -22,6 +22,25 @@
           Your first class is free!
           %i.fa.fa-info-circle
 
+- if Participant.count > 5
+  %section#Leaderboard
+    %hr
+    .container
+      .section-header
+        .section-title
+          .row
+            .col-sm-12.col-md-8.col-lg-6.col-centered
+              .text-center
+                %h1
+                  %i.fa.fa-trophy
+                  LEADERBOARD
+                %p The more you row, the higher you go!
+      .section-content
+        #leaderboard_placeholder.text-center
+          %p.lead
+            %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+
+
 %section#Schedule
   %hr
   .container
@@ -32,13 +51,15 @@
             .text-center
               %h1 SCHEDULE
               %p
-                If you experience difficulties booking, try our
+                This is our general, weekly schedule. For the the most up-to-date info, check out our
                 %a{href: '#'} direct booking site.
                 Powered by MindBody™.
     .section-content
       #schedule_placeholder.text-center
         %p.lead
           %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+
+%section#BgDiv1
 
 %section#Events
   %hr
@@ -54,6 +75,24 @@
       #events_placeholder
         %p.lead.text-center
           %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+
+%section#Instagram
+  %hr
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-8.col-lg-6.col-centered
+            .text-center
+              %h1 THE LATEST
+              %p Follow us on Insta and stay up to date with what we've got going on!
+
+    .section-content
+      #instagram_placeholder
+        %p.lead.text-center
+          %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+
+%section#BgDiv2
 
 %section#Classes
   %hr
@@ -76,6 +115,8 @@
         %p.lead
           %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
 
+%section#BgDiv3
+
 %section#Coaches
   %hr
   .container
@@ -85,12 +126,13 @@
           .col-sm-12.col-md-8.col-lg-6.col-centered
             .text-center
               %h1 COACHES
-              %p
-                Our coaches are integral to everything we do.
+              %p Our coaches not only have the technical certifications to make them experts, but also the experience to back up the science.
     .section-content
       #coaches_placeholder
         %p.lead.text-center
           %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+
+%section#BgDiv4
 
 %section#Coaches
   %hr
@@ -106,5 +148,7 @@
       #questions_placeholder
         %p.lead.text-center
           %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+
+%section#BgDiv4
 
 = render 'static_pages/contact'
