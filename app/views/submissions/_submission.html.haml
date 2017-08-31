@@ -1,11 +1,14 @@
 %tr.item{id: "submission_#{submission.id}", "data-item-id"=> "#{submission.id}"}
-  %th= submission.participant.name
-  %th= submission.from_number
-  %th= submission.parsed_meters
-  %th= submission.parsed_name
-  %th= submission.is_valid?
-  %th= submission.is_rejected?
-  %th= local_time_ago submission.created_at
+  %td
+    = link_to submission.participant.name, participant_path(submission.participant_id)
+  %td= submission.from_number
+  %td= submission.parsed_meters
+  %td= submission.parsed_name
+  %td= submission.is_valid?
+  %td= submission.is_rejected?
+  %td= submission.rejection_reason
+  %td= submission.response_text
+  %td= local_time_ago submission.created_at
   %td.actions
     .btn-group.pull-right
       = link_to edit_submission_path(submission), remote: true, class: 'btn btn-sm btn-warning' do

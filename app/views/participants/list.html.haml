@@ -1,3 +1,26 @@
-%ul
-  - @participants.each do |participant|
-    %li= participant.name
+.row
+  .col-sm-12.col-md-6.col-centered
+    .row
+      .col-sm-12.col-md-6
+        .card
+          %table.table.table-hover
+            %thead.bg-info{style: "color: #fff"}
+              %th.text-center{colspan: 3} ALL TIME
+            %tbody
+              - @participants.each_with_index do |participant, index|
+                %tr
+                  %td.pull-left= index + 1
+                  %td.text-center= participant.name
+                  %td.pull-right= participant.total_meters
+
+      .col-sm-12.col-md-6
+        .card
+          %table.table.table-hover
+            %thead.bg-info{style: "color: #fff"}
+              %th.text-center{colspan: 3} THIS WEEK
+            %tbody
+              - @participants.each_with_index do |participant, index|
+                %tr
+                  %td.pull-left= index + 1
+                  %td.text-center= participant.name
+                  %td.pull-right= participant.total_meters

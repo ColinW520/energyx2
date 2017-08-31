@@ -18,7 +18,7 @@ module Energyx2
     config.autoload_paths << Rails.root.join('lib', 'inputs')
 
     config.time_zone = 'Central Time (US & Canada)'
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :utc
 
     # ActsAsTaggableOn.force_binary_collation = true
     ActsAsTaggableOn.remove_unused_tags = true

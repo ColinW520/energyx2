@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :participants do
-    get :leaderboard, on: :collection
+    get :list, on: :collection
   end
 
   resources :submissions do
@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   }
 
   namespace :twilio do
-    resources :messages, only: [:create]
+    resources :submissions, only: [:create]
   end
 
 

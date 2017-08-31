@@ -1,5 +1,6 @@
 class ParticipantsController < ApplicationController
   before_filter :find_participant, except: [:index, :new, :create, :list]
+  skip_before_action :authenticate_user!, :only => [:list, :show]
   layout :resolve_layout
 
   def index
@@ -39,6 +40,7 @@ class ParticipantsController < ApplicationController
   end
 
   def show
+    @submissions = @participant.submissions.valid.with_meters.accepted
   end
 
   def edit
@@ -72,10 +74,13 @@ class ParticipantsController < ApplicationController
   private
 
   def resolve_layout
-    if action_name == "list"
-      nil
-    else
-      "application"
+    case action_name
+      when "list"
+        nil
+      when "show"
+        "static_views"
+      else
+        "application"
     end
   end
 

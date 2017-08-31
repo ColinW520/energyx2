@@ -5,6 +5,9 @@
   %td= participant.submissions.count
   %td.actions
     .btn-group.pull-right
+      = link_to participant_path(participant), class: 'btn btn-sm btn-info' do
+        %i.fa.fa-eye
+        Profile
       = link_to edit_participant_path(participant), remote: true, class: 'btn btn-sm btn-warning' do
         %i.fa.fa-edit
         Edit

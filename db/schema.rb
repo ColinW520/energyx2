@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831024351) do
+ActiveRecord::Schema.define(version: 20170831165341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -215,10 +215,13 @@ ActiveRecord::Schema.define(version: 20170831024351) do
     t.string   "message_body"
     t.integer  "parsed_meters"
     t.string   "parsed_name"
-    t.string   "is_valid"
+    t.boolean  "is_valid"
     t.boolean  "is_rejected"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "twilio_sid"
+    t.string   "response_text"
+    t.string   "rejection_reason"
     t.index ["participant_id"], name: "index_submissions_on_participant_id", using: :btree
   end
 

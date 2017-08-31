@@ -1,5 +1,6 @@
 class StudioSessionsController < ApplicationController
   before_filter :find_studio_session, except: [:index, :new, :create, :list]
+  skip_before_action :authenticate_user!, :only => [:list, :show]
   layout :resolve_layout
 
   def index

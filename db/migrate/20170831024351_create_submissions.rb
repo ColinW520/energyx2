@@ -6,8 +6,8 @@ class CreateSubmissions < ActiveRecord::Migration[5.0]
       t.string :message_body
       t.integer :parsed_meters
       t.string :parsed_name
-      t.string :is_valid
-      t.boolean :is_rejected
+      t.boolean :is_valid, default: true
+      t.boolean :is_rejected, default: false
 
       t.timestamps
     end

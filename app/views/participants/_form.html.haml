@@ -3,7 +3,9 @@
     %ul#errors
   = f.error_notification
   .form-group
-    = f.input :name, autofocus: true
+    = f.input :name, required: true, autofocus: true
+  .form-group
+    = f.input :mobile_phone, required: true, hint: "This should look like this: +13162588774", disabled: @participant.persisted?
   .form-group
     = f.input :is_active, as: :boolean, label: 'Active?', hint: 'Unchecking this box will remove this person from the leaderboard.'
   .form-actions

@@ -2,7 +2,7 @@
   .col-sm-12
     .card.card-outline-primary.table-card
       .table-responsive
-        %table.table.table-striped
+        %table.table
           %thead.thead-inverse
             %th= smart_listing.sortable 'Participant', :participant_id
             %th= smart_listing.sortable 'From', :from_number
@@ -10,6 +10,8 @@
             %th= smart_listing.sortable 'Name', :parsed_name
             %th= smart_listing.sortable 'Valid?', :is_valid
             %th= smart_listing.sortable 'Rejected?', :is_rejected
+            %th= smart_listing.sortable 'Reason', :rejection_reason
+            %th= smart_listing.sortable 'Response', :response_text
             %th= smart_listing.sortable 'Submitted', :created_at
             %th
           %tbody#submissions
