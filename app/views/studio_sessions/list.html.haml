@@ -1,31 +1,64 @@
+-# .row
+-#   .col-sm-12.col-md-12.col-lg-10.col-centered
+-#     .card{style: "border: 1px black"}
+-#       .table-responsive
+-#         %table.table.table-hover
+-#           %thead{style: "background-color: #FFE500; color: #000000"}
+-#             %th Starts
+-#             %th Class
+-#             %th Instructor
+-#             %th Duration
+-#             %th
+-#           %tbody
+-#             - @days.keys.each do |day|
+-#               %tr{style: "background-color: #347DBD"}
+-#                 %td{colspan: 5, style: "color: white; font-weight: 700"}
+-#                   %strong=day
+-#               - @days[day].each do |sesh|
+-#                 %tr
+-#                   %td= sesh.start_time
+-#                   %td= sesh.studio_session_type.name
+-#                   %td= sesh.coach.name
+-#                   %td= sesh.length
+-#                   %td
+-#                     = link_to "https://clients.mindbodyonline.com/classic/ws?studioid=226360&stype=-7&sTG=22&sVT=7&sView=day", target: '_blank', class: 'pull-right btn btn-primary btn-sm' do
+-#                       %i.fa.fa-plus
+-#                       SIGNUP
+
 .row
-  .col-sm-12.col-md-12.col-lg-10.col-centered
-    .card.card-outline-primary
-      .table-responsive
-        %table.table.table-hover
-          %thead.thead-inverse
-            %th Starts
-            %th Class
-            %th Instructor
-            %th Duration
-            %th
-          %tbody
+  .col-sm-12
+    .table-responsive
+      %table.table
+        %thead{style: "background-color: #FFE500; color: #000000"}
+          - @days.keys.each do |day|
+            %th{style: "color: #000000; font-weight: 700"}=day
+        %tbody
+          %tr
             - @days.keys.each do |day|
-              %tr.table-info
-                %td{colspan: 5}
-                  %strong=day
-              - @days[day].each do |sesh|
-                %tr
-                  %td= sesh.start_time
-                  %td= sesh.studio_session_type.name
-                  %td= sesh.coach.name
-                  %td= sesh.length
-                  %td
-                    = link_to "https://clients.mindbodyonline.com/classic/ws?studioid=226360&stype=-7&sTG=22&sVT=7&sView=day", target: '_blank', class: 'pull-right text-success' do
-                      %i.fa.fa-plus
-                      SIGNUP
-            %tr.table-warning
-              %td{colspan: 5}
-                %small.text-muted
-                  Last Updated
-                  = local_time_ago StudioSession.limit(1).order(updated_at: :desc).first.updated_at
+              %td
+                %ul.list-group
+                  - @days[day].each do |sesh|
+                    %li.list-group-item
+                      %a{href: sesh.studio_session_type.link}
+                        %strong{style: "size: 18px;"}= sesh.studio_session_type.name
+                      %br
+                      = '@ ' + sesh.start_time
+                      %p= sesh.coach.name
+                      %small= sesh.length.to_s + 'min'
+
+
+
+
+
+
+
+
+                      -# %tr
+                      -#   %td= sesh.start_time
+                      -#   %td= sesh.studio_session_type.name
+                      -#   %td= sesh.coach.name
+                      -#   %td= sesh.length
+                      -#   %td
+                      -#     = link_to "https://clients.mindbodyonline.com/classic/ws?studioid=226360&stype=-7&sTG=22&sVT=7&sView=day", target: '_blank', class: 'pull-right btn btn-primary btn-sm' do
+                      -#       %i.fa.fa-plus
+                      -#       SIGNUP

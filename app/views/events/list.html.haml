@@ -20,4 +20,4 @@
               = local_time_ago event.updated_at
             - if event.link.present?
               .pull-right
-                %a.btn.btn-success.btn-sm{href: event.link, target: "_blank"} Details
+                %a.btn.btn-success.btn-sm{href: event.link, target: "_blank"}= event.button_text ||= 'Sign Up!'

@@ -23,4 +23,4 @@
                 %tr
                   %td= index + 1
                   %td= participant.name
-                  %td= number_with_delimiter participant.total_meters
+                  %td= number_with_delimiter participant.meters_from(Time.now.beginning_of_week, Time.now)

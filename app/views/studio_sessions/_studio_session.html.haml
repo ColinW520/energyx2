@@ -10,6 +10,9 @@
   %td= local_time studio_session.updated_at, format: "%m/%d/%Y"
   %td.actions
     .btn-group.pull-right
-      = link_to edit_studio_session_path(studio_session), remote: true, class: 'btn btn-sm btn-default' do
+      = link_to edit_studio_session_path(studio_session), remote: true, class: 'btn btn-sm btn-warning' do
         %i.fa.fa-edit
-        Edit
+        EDIT
+      = link_to studio_session_path(studio_session), remote: true, method: :delete, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash
+        DESTROY

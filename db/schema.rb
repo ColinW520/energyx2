@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831165341) do
+ActiveRecord::Schema.define(version: 20170905220153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20170831165341) do
     t.string   "profile_image_content_type"
     t.integer  "profile_image_file_size"
     t.datetime "profile_image_updated_at"
+    t.string   "first_name"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -102,6 +103,7 @@ ActiveRecord::Schema.define(version: 20170831165341) do
     t.integer  "promo_image_file_size"
     t.datetime "promo_image_updated_at"
     t.string   "address"
+    t.string   "button_text"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -203,8 +205,9 @@ ActiveRecord::Schema.define(version: 20170831165341) do
     t.string   "start_time"
     t.string   "length"
     t.string   "link"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.boolean  "is_cancelled",           default: false
     t.index ["coach_id"], name: "index_studio_sessions_on_coach_id", using: :btree
     t.index ["studio_session_type_id"], name: "index_studio_sessions_on_studio_session_type_id", using: :btree
   end

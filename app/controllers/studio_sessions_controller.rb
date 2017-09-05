@@ -7,7 +7,7 @@ class StudioSessionsController < ApplicationController
     studio_sessions_scope = StudioSession.includes(:studio_session_type, :coach).rank(:display_order)
     respond_to do |format|
       format.html {
-        smart_listing_create :studio_sessions, studio_sessions_scope, partial: 'studio_sessions/listing', default_sort: { display_order: :asc }
+        smart_listing_create :studio_sessions, studio_sessions_scope, partial: 'studio_sessions/listing', default_sort: { display_order: :asc }, page_sizes: [50, 100, 150]
       }
       format.js { smart_listing_create :studio_sessions, studio_sessions_scope, partial: 'studio_sessions/listing', default_sort: { display_order: :asc } }
       format.csv { send_data studio_sessions_scope.to_csv, filename: "studio_sessions_as_of-#{Time.now}.csv" }

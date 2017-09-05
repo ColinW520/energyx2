@@ -5,6 +5,8 @@
   .form-group
     = f.input :name, autofocus: true, required: true
   .form-group
+    = f.input :first_name, required: true
+  .form-group
     = f.input :bio, as: :text, required: true
   .form-group
     = f.input :instagram_link, as: :url
