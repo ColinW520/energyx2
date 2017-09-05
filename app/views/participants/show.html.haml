@@ -9,42 +9,50 @@
           .col-sm-12.col-md-8.col-lg-6.col-centered
             .text-center
               %h1= @participant.name
-
+              %p
+                Participating since:
+                = local_time_ago @participant.created_at
     .section-content
       .row
         .col-sm-12.col-md-6
-          .text-center
-            %span.text-info{style: "font-size: 96px"}= number_with_delimiter @participant.total_meters
-            %p.text-muted All Time
-        .col-sm-12.col-md-6
-          .text-center
-            %span.text-info{style: "font-size: 96px"}= number_with_delimiter @participant.meters_from(DateTime.now.in_time_zone(Time.zone).beginning_of_year, Time.now)
-            %p.text-muted This Year
-      .row
-        .col-sm-12.col-md-6
-          .card.card-inverse.card-primary.p-2
-            .text-center
-              %span{style: "font-size: 96px"}= number_with_delimiter @participant.meters_from(DateTime.now.in_time_zone(Time.zone).beginning_of_month, Time.now)
-              %p.text-muted This Month
-        .col-sm-12.col-md-6
-          .text-center
-            %span.text-info{style: "font-size: 96px"}= number_with_delimiter @participant.meters_from(DateTime.now.in_time_zone(Time.zone).beginning_of_week, Time.now)
-            %p.text-muted This Week
-
-%section#History
-  %hr
-  .container
-    .section-header
-      .section-title
-        .row
-          .col-sm-12.col-md-8.col-lg-6.col-centered
-            .text-center
-              %h2 Activity
-
-    .section-content
-      .row
-        .col-sm-12.col-md-8
-          - if @submissions.present?
-            .card
-              .card-block
-                = column_chart @submissions.group_by_day(:created_at, time_zone: Time.zone).sum(:parsed_meters)
+          .row
+            .col-sm-12.col-md-6
+              .card.card-inverse.card-primary.m-2
+                .card-block
+                  %h1{style: 'color: #fff'}= number_with_delimiter @participant.total_meters
+                  %p All Time
+            .col-sm-12.col-md-6
+              .card.card-inverse.card-primary.m-2
+                .card-block
+                  %h1{style: 'color: #fff'}= number_with_delimiter @participant.meters_from(DateTime.now.in_time_zone(Time.zone).beginning_of_year, Time.now)
+                  %p This Year
+            .col-sm-12.col-md-6
+              .card.card-inverse.card-primary.m-2
+                .card-block
+                  %h1{style: 'color: #fff'}= number_with_delimiter @participant.meters_from(DateTime.now.in_time_zone(Time.zone).beginning_of_month, Time.now)
+                  %p This Month
+            .col-sm-12.col-md-6
+              .card.card-inverse.card-primary.m-2
+                .card-block
+                  %h1{style: 'color: #fff'}= number_with_delimiter @participant.meters_from(DateTime.now.in_time_zone(Time.zone).beginning_of_week, Time.now)
+                  %p This Week
+        .col-sm-12.col-md-8.col-lg-6.col-centered
+          .row
+            .col-sm-12.col-md-12
+              - if @submissions.present?
+                .card
+                  .card-header
+                    %h4.card-title.text-center Meters Submitted
+                  .card-block
+                    = column_chart @submissions.group_by_day(:created_at, time_zone: Time.zone).sum(:parsed_meters)
+                  %table.table.table-hover
+                    %thead
+                      %th Submitted
+                      %th Message
+                      %th Meters
+                    %tbody
+                      - @participant.submissions.last(30).each do |submission, index|
+                        %tr
+                          %td= local_time_ago submission.created_at
+                          %td= submission.message_body
+                          %td= submission.parsed_meters

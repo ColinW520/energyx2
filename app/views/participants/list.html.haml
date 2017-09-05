@@ -11,7 +11,7 @@
                 %tr
                   %td.pull-left= index + 1
                   %td.text-center= participant.name
-                  %td.pull-right= participant.total_meters
+                  %td.pull-right= number_with_delimiter participant.total_meters
 
       .col-sm-12.col-md-6
         .card
@@ -23,4 +23,4 @@
                 %tr
                   %td.pull-left= index + 1
                   %td.text-center= participant.name
-                  %td.pull-right= participant.total_meters
+                  %td.pull-right= number_with_delimiter participant.total_meters

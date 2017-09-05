@@ -1,12 +1,12 @@
-.row
-  .col-sm-12.col-md-10.col-centered
-    - @coaches.each do |coach|
-      .card.mb-3{id: "coach_#{coach.id}"}
-        .card-block
-          .row
-            .col-sm-12.col-md-4
-              %img.img-fluid.rounded{alt: coach.name, src: coach.profile_image.url}
-            .col-sm-12.col-md-8
-              %h3.my-3= coach.name
-              %hr{align: 'left'}
-              %p= coach.bio
+.row.py-3.flex-items-sm-center
+  - @coaches.each do |coach|
+    .col-xs-12.col-sm-3.py-2.clearfix
+      .card.profile-card
+        %figure
+          %input#fab.fab{:type => "checkbox"}/
+          %label.toggle{:for => "fab"} +
+          %img.img-fluid.img-profile{alt: coach.name, src: coach.profile_image.url}
+        .card-block.text-xs-center
+          %p.card-title.font-weight-bold= coach.name
+          %p.card-subtitle.text-muted= coach.bio
+          %br/
