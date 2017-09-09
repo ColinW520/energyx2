@@ -1,7 +1,7 @@
 .row
   - @coaches.each do |coach|
     .col-xs-12.col-sm-3
-      %figure.figure
+      %figure.figure.m-2
         %img.figure-img.img-fluid.rounded-circle{alt: coach.name, src: coach.profile_image.url}
         %figcaption.figure-caption
           %h4.lead= coach.name

@@ -16,4 +16,8 @@ class Participant < ApplicationRecord
   def meters_from(the_start, the_end)
     self.submissions.valid.accepted.where(created_at: the_start..the_end).sum(:parsed_meters)
   end
+
+  def to_param
+    [name.parameterize, id].join("-")
+  end
 end
