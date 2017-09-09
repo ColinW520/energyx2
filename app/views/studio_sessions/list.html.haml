@@ -11,7 +11,7 @@
               %td
                 %ul.list-group
                   - @days[day].each do |sesh|
-                    %li.list-group-item
+                    %li.list-group-item{style: sesh.is_cancelled? ? "text-decoration: line-through;" : ''}
                       %a{href: sesh.studio_session_type.link}
                         %strong{style: "size: 18px;"}= sesh.studio_session_type.name
                       = '@ ' + sesh.start_time

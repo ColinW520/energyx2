@@ -11,7 +11,7 @@
   .form-group
     = f.input :start_time, label: 'Starting Time', hint: 'Example: 6:00PM'
   .form-group
-    = f.input :length, as: :select, collection: [15, 30, 45, 60, 75, 90], include_blank: false, hint: 'in minutes'
+    = f.input :length, as: :select, collection: [45, 60, 75, 90, 15, 30], include_blank: false, hint: 'in minutes'
   .form-group
     = f.input :is_cancelled, as: :boolean, hint: 'If checked, this will show as striked out on the schedule. Useful for temporary basis...'
   .form-actions
