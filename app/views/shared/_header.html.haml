@@ -3,42 +3,42 @@
     %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarCollapse", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarCollapse", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     %a.navbar-brand{href: root_path}
-      = image_tag 'energyx_logo_white.png', class: 'img img-responsive', style: "max-height: 30px; display: inline-block; margin-top: -5px; margin-left: 20px;"
+      = image_tag "energyx_logo_white.png", class: "img img-responsive", style: "max-height: 30px; display: inline-block; margin-top: -5px; margin-left: 20px;"
     #navbarCollapse.collapse.navbar-collapse
       %ul.navbar-nav.ml-auto
         %li.nav-item.text-center
-          %a.nav-link{href: '#Schedule'}
+          %a.nav-link{href: "#{ENV['BASE_URL']}#Schedule"}
             %i.fa.fa-calendar
             Schedule
         %li.nav-item.text-center
-          %a.nav-link{href: '#Events'}
+          %a.nav-link{href: "#{ENV['BASE_URL']}#Events"}
             %i.fa.fa-glass
             Events
         %li.nav-item.text-center
-          %a.nav-link{href: '#Classes'}
+          %a.nav-link{href: "#{ENV['BASE_URL']}#Classes"}
             %i.fa.fa-bolt
             Classes
         %li.nav-item.text-center
-          %a.nav-link{href: '#Coaches'}
+          %a.nav-link{href: "#{ENV['BASE_URL']}#Coaches"}
             %i.fa.fa-street-view
             Coaches
         - if Participant.count > 10
           %li.nav-item.text-center
-            %a.nav-link{href: '#Leaderboard'}
+            %a.nav-link{href: "#{ENV['BASE_URL']}#Leaderboard"}
               %i.fa.fa-trophy
               Leaderboard
         %li.nav-item.text-center
-          %a.nav-link{href: 'tel:+12106084241'}
+          %a.nav-link{href: "tel:+12106084241"}
             %i.fa.fa-phone
             Call
         %li.nav-item.text-center
-          %a.nav-link{href: 'tel:+12106084241'}
+          %a.nav-link{href: "tel:+12106084241"}
             %i.fa.fa-mobile-phone
             Text
         %li.nav-item.text-center
-          %a.nav-link{href: "https://www.google.com/maps/place/EnergyX+Fitness/@29.47474,-98.4647583,17z/data=!4m7!1m4!3m3!1s0x865cf57535c2e3ad:0x51ff463e06dd0672!2s5162+Broadway+St,+Alamo+Heights,+TX+78209!3b1!3m1!1s0x865cf57535c6460d:0x664a0a07536afd98", target: '_blank'}
+          %a.nav-link{href: "https://www.google.com/maps/place/EnergyX+Fitness/@29.47474,-98.4647583,17z/data=!4m7!1m4!3m3!1s0x865cf57535c2e3ad:0x51ff463e06dd0672!2s5162+Broadway+St,+Alamo+Heights,+TX+78209!3b1!3m1!1s0x865cf57535c6460d:0x664a0a07536afd98", target: "_blank"}
             %i.fa.fa-map
             Nav
         %li.nav-item.text-center
-          = link_to "https://clients.mindbody.com", target: '_blank', class: 'btn btn-sm btn-success', style: 'margin-top: 10px; color: #000' do
+          = link_to "https://clients.mindbody.com", target: "_blank", class: "btn btn-sm btn-success", style: "margin-top: 10px; color: #000" do
             Book Now

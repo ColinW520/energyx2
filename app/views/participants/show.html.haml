@@ -36,6 +36,16 @@
                 .card-block
                   %h1{style: 'color: #fff'}= number_with_delimiter @participant.meters_from(DateTime.now.in_time_zone(Time.zone).beginning_of_week, Time.now)
                   %p This Week
+            .col-sm-12.col-md-6
+              .card.card-inverse.card-primary.m-2
+                .card-block
+                  %h1{style: 'color: #fff'}= number_with_delimiter @participant.submissions.valid.accepted.average(:parsed_meters).to_i
+                  %p Average
+            .col-sm-12.col-md-6
+              .card.card-inverse.card-primary.m-2
+                .card-block
+                  %h1{style: 'color: #fff'}= number_with_delimiter @participant.submissions.valid.accepted.pluck(:parsed_meters).max
+                  %p MAX
         .col-sm-12.col-md-8.col-lg-6.col-centered
           .row
             .col-sm-12.col-md-12
