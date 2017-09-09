@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
     @message = params[:message]
     @spam_check = params[:spam_check]
 
-    unless @spam_check = 'gotcha.'
+    unless @spam_check == 'gotcha.'
       flash[:alert] = 'We think this might be spam... Call us if you disagree!'
       redirect_to root_path and return
     end
