@@ -4,6 +4,10 @@
   = f.error_notification
   .form-group
     = f.input :is_rejected, as: :boolean, label: 'Rejected?', hint: 'Check this box to reject this submission.'
+  .form-group
+    = f.input :rejection_reason, as: :text, label: 'Why?', hint: 'Tell the participant why you rejected it.'
+  .form-group
+    = f.input :parsed_meters, label: 'Meters', hint: 'Use this to modify the participants meters. Careful here...'
   .form-actions
     .text-center
       = f.button :submit, class: 'btn btn-md btn-success'

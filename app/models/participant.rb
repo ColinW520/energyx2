@@ -22,6 +22,6 @@ class Participant < ApplicationRecord
   end
 
   def to_param
-    [mobile_phone.last(4).parameterize, id].join("-")
+    [id, mobile_phone.last(4)].join("-")
   end
 end
