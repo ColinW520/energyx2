@@ -39,12 +39,12 @@
             .col-sm-12.col-md-6
               .card.card-inverse.card-primary.m-2
                 .card-block
-                  %h1{style: 'color: #fff'}= number_with_delimiter @participant.submissions.valid.accepted.average(:parsed_meters).to_i
+                  %h1{style: 'color: #fff'}= number_with_delimiter @participant.submissions.valid.accepted.with_meters.average(:parsed_meters).to_i
                   %p Average
             .col-sm-12.col-md-6
               .card.card-inverse.card-primary.m-2
                 .card-block
-                  %h1{style: 'color: #fff'}= number_with_delimiter @participant.submissions.valid.accepted.pluck(:parsed_meters).max
+                  %h1{style: 'color: #fff'}= number_with_delimiter @participant.submissions.valid.accepted.with_meters.pluck(:parsed_meters).max
                   %p MAX
         .col-sm-12.col-md-8.col-lg-6.col-centered
           .row
