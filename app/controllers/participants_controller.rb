@@ -15,7 +15,8 @@ class ParticipantsController < ApplicationController
   end
 
   def list
-    @participants = Participant.includes(:submissions).order(name: :asc)
+    @all_time_leaders = Participant.all_time_leaders.limit(10)
+    @week_leaders = Participant.time_frame_leaders(Time.now.beginning_of_week, Time.now).limit(10)
   end
 
   def new

@@ -6,7 +6,7 @@
         .card-block{style: "background-color: #fff;"}
           %p.card-text= post.caption.text
           - post.tags.each do |tag|
-            %span.badge.badge-info= tag
+            %span.badge.badge-warning= tag
         .card-footer
           .text-muted.pull-left
             Posted

@@ -16,11 +16,11 @@
           combined with dynamic Kettlebell™ and TRX™ exercises delivers a triple threat workout.
           %em High-intensity sweat, low-impact burn, total body results.
         %br
-        %a.btn.btn-success.btn-lg.btn-block{href: '#Schedule'} Book A Class*
+        %a.btn.btn-success.btn-lg.btn-block{href: '#Schedule', style: 'color: #000'} Book A Class*
         %br
         %span.text-white
           *Your first class is free!
-          
+
 - if Participant.count > 10
   %section#Leaderboard
     %hr
@@ -41,19 +41,21 @@
       %br
       .row
         .col-sm-12.col-md-4.col-centered
-          .alert.alert-success
-            .text-center
-              %p
-                Start
-                %em today
-                by texting
-                %code Name: [Your Name]
-                to
-                %a{href: "SMS://#{ENV['TWILIO_NUMBER']}"}= ENV['TWILIO_NUMBER']
-              %p
-                To add meters, simply send
-                %code Meters: [Your Meters]
-                to the same number and we'll do the math for you ;)
+          .card
+            .card-block
+              .text-center
+                %p.lead Join the #XCrew
+                %p
+                  Start
+                  %em today
+                  by texting
+                  %code Name: [Your Name]
+                  to
+                  %a{href: "SMS://#{ENV['TWILIO_NUMBER']}"}= ENV['TWILIO_NUMBER']
+                %p
+                  To add meters, simply send
+                  %code Meters: [Your Meters]
+                  to the same number and we'll do the math for you ;)
 
 %section#Schedule
   %hr

@@ -96,9 +96,9 @@ $white:  #fff !default;
 $black:  #000 !default;
 $red:    #d9534f !default;
 $orange: #f0ad4e !default;
-$yellow: #ffd500 !default;
+$yellow: #ffe500 !default;
 $green:  #5cb85c !default;
-$blue:   #0275d8 !default;
+$blue:   #347DBD !default;
 $teal:   #5bc0de !default;
 $pink:   #ff5b77 !default;
 $purple: #613d7c !default;
@@ -111,8 +111,8 @@ $gray-lighter:              #bbb;
 $gray-lightest:             #eee;
 
 // Reassign color vars to semantic color scheme
-$brand-primary:             #347DBD;
-$brand-success:             #4CAF50;
+$brand-primary:             $blue;
+$brand-success:             $yellow;
 $brand-info:                #3B1C32;
 $brand-warning:             #F08080;
 $brand-danger:              #CA054D;

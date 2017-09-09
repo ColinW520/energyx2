@@ -1,12 +1,16 @@
-.row.py-3.flex-items-sm-center
+.row
   - @coaches.each do |coach|
-    .col-xs-12.col-sm-3.py-2.clearfix
-      .card.profile-card
-        %figure
-          %input#fab.fab{:type => "checkbox"}/
-          %label.toggle{:for => "fab"} +
-          %img.img-fluid.img-profile{alt: coach.name, src: coach.profile_image.url}
-        .card-block.text-xs-center
-          %p.card-title.font-weight-bold= coach.name
-          %p.card-subtitle.text-muted= coach.bio
-          %br/
+    .col-xs-12.col-sm-3
+      %figure.figure
+        %img.figure-img.img-fluid.rounded-circle{alt: coach.name, src: coach.profile_image.url}
+        %figcaption.figure-caption
+          %h4.lead= coach.name
+          %p= coach.bio
+
+:javascript
+  $('figcaption').readmore({
+    collapsedHeight: '200px',
+    speed: 600,
+    moreLink: '<a class="text-center" style="margin: 10px;" href="#">More <i class="fa fa-chevron-circle-down"></i></a>',
+    lessLink: '<a class="text-center" style="margin: 10px;" href="#">Less <i class="fa fa-chevron-circle-up"></a>',
+  });

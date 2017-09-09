@@ -23,10 +23,11 @@
           %a.nav-link{href: '#Coaches'}
             %i.fa.fa-street-view
             Coaches
-        -# %li.nav-item
-        -#   %a.nav-link{href: '#Leaderboard'}
-        -#     %i.fa.fa-trophy
-        -#     Leaderboard
+        - if Participant.count > 10
+          %li.nav-item
+            %a.nav-link{href: '#Leaderboard'}
+              %i.fa.fa-trophy
+              Leaderboard
         %li.nav-item
           %a.nav-link{href: 'tel:+12106084241'}
             %i.fa.fa-phone
@@ -40,5 +41,5 @@
             %i.fa.fa-map
             Nav
         %li.nav-item
-          = link_to "https://clients.mindbody.com", target: '_blank', class: 'btn btn-sm btn-success', style: 'margin-top: 10px;' do
+          = link_to "https://clients.mindbody.com", target: '_blank', class: 'btn btn-sm btn-success', style: 'margin-top: 10px; color: #000' do
             Book Now
