@@ -16,7 +16,7 @@
                         %strong{style: "size: 18px;"}= sesh.studio_session_type.name
                       = '@ ' + sesh.start_time
                       %p
-                        = 'w/' + sesh.coach.name
+                        = 'w/' + sesh.coach.try(:first_name).to_s
                         = ' for ' + sesh.length.to_s + 'min'
 
 .row.hidden-lg-up
