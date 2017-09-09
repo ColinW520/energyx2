@@ -33,7 +33,8 @@ module Energyx2
         bucket: ENV['S3_BUCKET_NAME'],
         access_key_id: ENV['AWS_ACCESS_KEY_ID'],
         secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-      }
+      },
+      s3_host_name: "s3-#{ENV['AWS_REGION']}.amazonaws.com",
     }
 
     config.action_mailer.default_url_options = { :host => Rails.env.development? ? "energyx2.dev" : "energyx2.herokuapp.com" }
