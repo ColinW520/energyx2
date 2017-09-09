@@ -144,14 +144,9 @@
               %h1 COACHES
               %p Our coaches not only have the technical certifications to make them experts, but also the experience to back up the science.
     .section-content
-      .row
-        - Coach.rank(:display_order).each do |coach|
-          .col-xs-12.col-sm-3
-            %figure.figure
-              %img.figure-img.img-fluid.rounded-circle{alt: coach.name, src: coach.profile_image.url}
-              %figcaption.figure-caption
-                %h4.lead= coach.name
-                %p= coach.bio
+      #coaches_placeholder.text-center
+        %p.lead
+          %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
 
 %section#BgDiv4
 
@@ -173,10 +168,3 @@
 %section#BgDiv4
 
 = render 'static_pages/contact'
-
-:javascript
-  $('figcaption').readmore({
-    speed: 600,
-    moreLink: '<a class="text-center" href="#">More <i class="fa fa-chevron-circle-down"></i></a>',
-    lessLink: '<a class="text-center" href="#">Less <i class="fa fa-chevron-circle-up"></a>'
-  });
