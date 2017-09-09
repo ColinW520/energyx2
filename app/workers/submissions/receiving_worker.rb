@@ -32,9 +32,15 @@ class Submissions::ReceivingWorker
             @submission.is_rejected = false
             @submission.response_text = "Got it! "
           end
+        when 'link'
+
+        when 'stats'
+
+        else
+          @submission.response_text += "Hi! We don't know what to do with that input."
       end
 
-      @submission.response_text += "See your stats here: http://e3c1a584.ngrok.io/participants/#{@participant.id}"
+      @submission.response_text += "See your stats here: http://energyxfitness.com/participants/#{@participant.mobile_phone.last(4)}-#{@participant.id}"
     end
 
     @submission.save!

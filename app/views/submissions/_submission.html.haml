@@ -1,6 +1,6 @@
 %tr.item{id: "submission_#{submission.id}", "data-item-id"=> "#{submission.id}"}
   %td
-    = link_to submission.participant.name, participant_path(submission.participant_id)
+    = link_to submission.participant.friendly_name, participant_path(submission.participant_id)
   %td= submission.from_number
   %td= submission.parsed_meters
   %td= submission.parsed_name

@@ -8,7 +8,7 @@
         .row
           .col-sm-12.col-md-8.col-lg-6.col-centered
             .text-center
-              %h1= @participant.name
+              %h1= @participant.friendly_name
               %p
                 Participating since:
                 = local_time_ago @participant.created_at

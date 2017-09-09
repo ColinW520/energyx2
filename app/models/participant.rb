@@ -9,6 +9,10 @@ class Participant < ApplicationRecord
             presence: true,
             phony_plausible: true
 
+  def friendly_name
+    name.present? ? name : 'Unknown'
+  end
+
   def total_meters
     self.submissions.valid.accepted.sum(:parsed_meters)
   end
@@ -18,6 +22,6 @@ class Participant < ApplicationRecord
   end
 
   def to_param
-    [name.parameterize, id].join("-")
+    [mobile_phone.last(4).parameterize, id].join("-")
   end
 end
