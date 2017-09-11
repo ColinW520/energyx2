@@ -1,0 +1,70 @@
+%section#Help
+  %hr
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12
+            .text-center
+              %h1 JOIN
+              %p.lead This page is for people who want to participate in the #XCrew challenges by texting in their meters. Participation is 100% <em>voluntary</em>. Please feel free to bring any unanswered questions straight to us!
+    .section-content
+      .row
+        .col-sm-12
+          %h3.text-info What is this all this about?
+          %p The #XCrew Leaderboard is a friendly competition amongst our members to see who can row the most in given time frames. Members interact with the leaderboard using their phones. There are no usernames or passwords to remember. All you need to be able to participate is a phone number, and of course, ya gotta go to class!
+          %hr.pull-left{style: 'margin-bottom: 5%'}
+      .row
+        .col-sm-12
+          %h3.text-info How do I get started?
+          %p
+            ="Getting started is easy! Just pull out your phone and text your name to #{ENV['TWILIO_NUMBER']} like this:"
+            = succeed '.' do
+              %code="Name: Alison Smith"
+            This will store your name and phone number together. Your name will be set to whatever comes after the ':'. You can always change your name by texting in something else using the same 'Name' keyword, like this:
+            = succeed '.' do
+              %code="Name: Alison Galvan"
+            Ultimately, you control what name is used on your profile and on the leaderboards. Whenever we need to determine potential contest winners, we will use your phone number to identify & notify you.
+          %hr.pull-left{style: 'margin-bottom: 5%'}
+      .row
+        .col-sm-12
+          %h3.text-info How do I add meters?
+          %p
+            The keyword for adding meters is simply: 'Meters:', here's an example of how to use it:
+            = succeed '.' do
+              %code="Meters: 5675"
+            Avoid using any commas in the number. We will then take that number and make sure it is a valid submission. If it is a valid submission, you will see a response like this:
+            = succeed '.' do
+              %code="Got it! Here is a link to your profile: http://energyxfitness.com/participants/1-1111"
+            If it is an invalid submission, potentially because you accidentally submitted your meters more than once for that class, we will let you know with a message like this:
+            = succeed '.' do
+              %code="Sorry, you can only submit meters a 2x/day MAX. Please try again tomorrow!"
+          %hr.pull-left{style: 'margin-bottom: 5%'}
+      .row
+        .col-sm-12
+          %h3.text-info How do I see my stats?
+          %p
+            ="To see your stats, send a text message to #{ENV['TWILIO_NUMBER']} the with the word 'Stats', like this:"
+            = succeed '.' do
+              %code="Stats"
+            We will then reply with a collection of your stats!
+          %hr.pull-left{style: 'margin-bottom: 5%'}
+      .row
+        .col-sm-12
+          %h3.text-info How do I see my profile?
+          %p
+            ="To get a link to your profile, send a text message to #{ENV['TWILIO_NUMBER']} with the word 'Link', like this:"
+            = succeed '.' do
+              %code="Link"
+            We will then reply with a link to your profile, like this:
+            = succeed '.' do
+              %code="Here is a link to your profile! http://energyxfitness.com/participants/1-111"
+          %hr.pull-left{style: 'margin-bottom: 5%'}
+      .row
+        .col-sm-12
+          %h3.text-info Can I submit meters I rowed at the gym or at home?
+          %p
+            To keep it fair for all of our participants,
+            we do ask that you kindly refrain from texting in any meters not rowed in a group class at the studio.
+            If we don't have this rule, it becomes a hard to verify free-for-all. We greatly appreciate your cooperation.
+            If we feel like someone isn't cooperating, we will take steps to remove their submissions, or ban them entirely from the competition.
