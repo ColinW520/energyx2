@@ -12,6 +12,6 @@ class Challenge < ApplicationRecord
   validates_attachment :promo_image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
 
   def participants
-    Participant.joins(:submissions).where(submissions: { created_at: self.starts_at..self.ends_at }).group('participants.name').sum("submissions.parsed_meters")
+    Participant.joins(:submissions).where(submissions: { created_at: self.starts_at..self.ends_at }).group('participants.name').sum("submissions.parsed_meters").first(10)
   end
 end

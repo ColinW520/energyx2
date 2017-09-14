@@ -22,7 +22,7 @@
           %a.nav-link{href: action_name == 'home' ? "#Coaches" : "http://energyx2.dev/#Coaches"}
             %i.fa.fa-street-view
             Coaches
-        - if Participant.count > 10
+        - if Challenge.active.count > 0
           %li.nav-item.text-center
             %a.nav-link{href: action_name == 'home' ? "#Leaderboard" : "http://energyx2.dev/#Leaderboard"}
               %i.fa.fa-trophy
