@@ -20,32 +20,32 @@
         %span.text-white
           *Your first class is free!
 
-- if Participant.count > 1
-  %section#Leaderboard
-    %hr
-    .container
-      .section-header
-        .section-title
-          .row
-            .col-sm-12.col-md-8.col-lg-6.col-centered
-              .text-center
-                %h1 #XCrew LEADERBOARD
-                %p.lead The more you row, the higher you go!
-    .section-content
-      .row
-        .col-sm-12
-          #leaderboard_placeholder.text-center
-            %p.lead
-              %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
-      %br
-      .row
-        .col-sm-12.col-md-10.col-centered
-          .text-center
-            %p.lead Join the #XCrew Leaderboard Today!
-            %p The #XCrew Leaderboard is a completely voluntary challenge amongst our members to see who rows the most. Members participate by sending in text messages via their mobile phones. Click the button below to learn more!
-            = link_to help_path, class: 'btn btn-success btn-md', style: "color: #000" do
-              %i.fa.fa-trophy
-              JOIN
+
+%section#Leaderboard
+  %hr
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-8.col-lg-6.col-centered
+            .text-center
+              %h1 #XCrew LEADERBOARD
+              %p.lead The more you row, the higher you go!
+  .section-content
+    .row
+      .col-sm-12
+        #leaderboard_placeholder.text-center
+          %p.lead
+            %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw
+    %br
+    .row
+      .col-sm-12.col-md-10.col-centered
+        .text-center
+          %p.lead Join the #XCrew Leaderboard Today!
+          %p The #XCrew Leaderboard is a completely voluntary challenge amongst our members to see who rows the most. Members participate by sending in text messages via their mobile phones. Click the button below to learn more!
+          = link_to join_path, class: 'btn btn-success btn-md', style: "color: #000" do
+            %i.fa.fa-trophy
+            JOIN
 
 %section#Schedule
   %hr

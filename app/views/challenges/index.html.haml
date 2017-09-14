@@ -1,0 +1,16 @@
+- provide(:title, 'Challenges')
+%br
+%br
+.row
+  .col-sm-12
+    %h3
+      Events
+      .pull-right
+        = link_to new_challenge_path, class: 'btn btn-success btn-sm', remote: true do
+          %i.fa.fa-plus
+          New
+.row
+  .col-sm-12
+    = smart_listing_render :challenges
+
+= render "challenges/dialog"

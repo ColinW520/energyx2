@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905220153) do
+ActiveRecord::Schema.define(version: 20170913194627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,20 @@ ActiveRecord::Schema.define(version: 20170905220153) do
     t.datetime "clicked_at"
     t.index ["token"], name: "index_ahoy_messages_on_token", using: :btree
     t.index ["user_id", "user_type"], name: "index_ahoy_messages_on_user_id_and_user_type", using: :btree
+  end
+
+  create_table "challenges", force: :cascade do |t|
+    t.string   "category"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "promo_image_file_name"
+    t.string   "promo_image_content_type"
+    t.integer  "promo_image_file_size"
+    t.datetime "promo_image_updated_at"
   end
 
   create_table "coaches", force: :cascade do |t|

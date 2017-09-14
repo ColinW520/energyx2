@@ -1,0 +1,3 @@
+$('#challenge_dialog').modal('toggle');
+$('#challenge_<%= @challenge.id %>').replaceWith('<%= j render (@challenge) %>');
+$("#challenges").smart_listing().fadeLoaded();

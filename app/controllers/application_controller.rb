@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
   after_action :track_action
 
   def track_action
-    ahoy.track "Viewed #{controller_name}##{action_name}"
+    # track anything that isn't purely asynchronous
+    ahoy.track "Viewed #{controller_name}##{action_name}" unless @xhr
   end
 
   def after_sign_in_path_for(resource)

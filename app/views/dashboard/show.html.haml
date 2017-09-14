@@ -1,3 +1,43 @@
 - provide(:title, 'Dashboard')
 %h1 Dashboard
-%code Visits, MeterMessages, Events
+%br
+.row
+  .col-sm-12
+    = column_chart Submission.valid.accepted.group_by_day(:created_at, range: 1.month.ago..Time.now).count, {title: "Submissions", library: { position:  'bottom'} }
+    %table.table
+      %thead.thead-inverse
+        %th Participant
+        %th Submissions
+      %tbody
+        - @p_data.each do |p|
+          %tr
+            %td= p[0]
+            %td= p[1]
+
+%hr
+.row
+  .col-sm-12
+    = column_chart Ahoy::Event.not_user.group_by_day(:time, time_zone: Time.zone).count, { title: "Page Views", library: { position:  'bottom'}, width: "100%" }
+    %table.table
+      %thead.thead-inverse
+        %th Page
+        %th Views
+      %tbody
+        - @page_data.each do |page|
+          %tr
+            %td= page[0]
+            %td= page[1]
+
+%hr
+.row
+  .col-sm-12
+    = column_chart Visit.not_user.group_by_day(:started_at, time_zone: Time.zone).count, { title: "Visitors", library: { position:  'bottom'}, width: "100%" }
+    %table.table
+      %thead.thead-inverse
+        %th City
+        %th Visits
+      %tbody
+        - @city_data.each do |city|
+          %tr
+            %td= city[0]
+            %td= city[1]

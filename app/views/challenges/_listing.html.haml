@@ -1,0 +1,22 @@
+.row
+  .col-sm-12
+    .card.card-outline-primary.table-card
+      .table-responsive
+        %table.table.table-hover
+          %thead.thead-inverse
+            %th Promo Image
+            %th= smart_listing.sortable 'Name', :name
+            %th= smart_listing.sortable 'Category', :category
+            %th= smart_listing.sortable 'Starts', :starts_at
+            %th= smart_listing.sortable 'Ends', :ends_at
+            %th
+          %tbody#challenges
+            - smart_listing.collection.each do |challenge|
+              = render challenge
+        %br
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

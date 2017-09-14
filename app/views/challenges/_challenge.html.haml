@@ -1,0 +1,15 @@
+%tr.item{id: "challenge_#{challenge.id}", "data-item-id"=> "#{challenge.id}", "data-item-path"=>"challenges"}
+  %td
+    %img.img-fluid.img-thumbnail{src: challenge.promo_image.url}
+  %td= challenge.name
+  %td= challenge.description.truncate(100)
+  %td= local_time challenge.starts_at
+  %td= local_time challenge.updated_at
+  %td.actions
+    .btn-group.pull-right
+      = link_to edit_challenge_path(challenge), remote: true, class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-edit
+        Edit
+      = link_to challenge_path(challenge), remote: true, method: :delete, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash
+        Destroy

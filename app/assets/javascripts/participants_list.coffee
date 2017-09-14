@@ -1,7 +1,7 @@
 $ ->
   if $("#leaderboard_placeholder").length > 0
     $.get
-      url: "/participants/list/"
+      url: "/challenges/list/"
       cache: false
       success: (html) ->
         $('#leaderboard_placeholder').replaceWith html

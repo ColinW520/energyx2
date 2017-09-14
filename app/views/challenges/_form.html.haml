@@ -1,0 +1,19 @@
+= simple_form_for [@challenge], remote: true, authenticity_token: true, html: { id: 'ChallengeForm', multipart: true } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  .form-group
+    = f.input :name, autofocus: true, required: true
+  .form-group
+    = f.input :description, as: :text, required: true
+  .form-group
+    = f.input :category, as: :select, collection: ['total', 'max'], include_blank: false, hint: 'how will we calculate the winner'
+  .form-group
+    = f.input :starts_at, as: :datetime, required: true
+  .form-group
+    = f.input :ends_at, as: :datetime, required: true
+  .form-group
+    = f.input :promo_image, label: 'Promo Image', as: :file
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-md btn-success'

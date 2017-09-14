@@ -45,6 +45,10 @@ Rails.application.routes.draw do
     post :update_row_order, on: :collection
   end
 
+  resources :challenges do
+    get :list, on: :collection
+  end
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',

@@ -34,6 +34,11 @@
             %i.fa.fa-question
             FAQs
 
+        %a{href: challenges_path}
+          %li{class: @subnav == 'challenges' ? 'active' : nil}
+            %i.fa.fa-flash
+            Challenges
+
         %a{href: participants_path}
           %li{class: @subnav == 'participants' ? 'active' : nil}
             %i.fa.fa-street-view
