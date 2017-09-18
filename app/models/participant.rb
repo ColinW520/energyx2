@@ -1,7 +1,7 @@
 class Participant < ApplicationRecord
   has_many :submissions, dependent: :destroy
   scope :visible, -> { where.not(name: nil) }
-  scopt :active, -> { where(is_active: true) }
+  scope :active, -> { where(is_active: true) }
   scope :all_time_leaders, -> { joins(:submissions).select('participants.*, sum(submissions.parsed_meters) as the_meters').group('participants.id').order('the_meters DESC') }
   scope :time_frame_leaders, ->(start, finish) { joins(:submissions).where(submissions: { created_at: start..finish }).select('participants.*, sum(submissions.parsed_meters) as the_meters').group('participants.id').order('the_meters DESC') }
 
