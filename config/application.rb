@@ -37,19 +37,18 @@ module Energyx2
       s3_host_name: "s3-#{ENV['AWS_REGION']}.amazonaws.com",
     }
 
-    config.action_mailer.default_url_options = { :host => Rails.env.development? ? "energyx2.dev" : "energyx2.herokuapp.com" }
+    config.action_mailer.default_url_options = { :host => Rails.env.development? ? "energyx2.dev" : "https://energyxfitness.com" }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
-    config.action_mailer.raise_delivery_errors = false
-    config.action_mailer.default :charset => "utf-8"
+    config.action_mailer.raise_delivery_errors = true
     config.action_mailer.smtp_settings = {
-      address: "smtp.gmail.com",
-      port: 587,
-      domain: Rails.env.development? ? "energyx2.dev" : "energyx2.herokuapp.com",
-      authentication: "plain",
-      enable_starttls_auto: true,
-      user_name: ENV["GMAIL_USERNAME"],
-      password: ENV["GMAIL_PASSWORD"]
+      :user_name => ENV['SENDGRID_USERNAME'],
+      :password => ENV['SENDGRID_PASSWORD'],
+      :domain => "energyxfitness.com",
+      :address => 'smtp.sendgrid.net',
+      :port => 587,
+      :authentication => :plain,
+      :enable_starttls_auto => true
     }
   end
 end
