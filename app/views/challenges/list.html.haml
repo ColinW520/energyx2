@@ -19,7 +19,10 @@
             - else
               %tr
                 %td{colspan: 3}
-                  No entries, yet!
+                  - if challenge.starts_at > Time.now
+                    Get ready! The challenge begins soon.
+                  - else
+                    No entries, yet!
                   = link_to 'Join today.', join_path
             %tr.table-danger
               %td{colspan: 3}

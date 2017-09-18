@@ -1,5 +1,5 @@
 class Challenge < ApplicationRecord
-  scope :upcoming, -> { where("starts_at > NOW() - INTERVAL '1 DAY' ").order(starts_at: :asc) }
+  scope :upcoming, -> { where("starts_at > NOW() - INTERVAL '7 DAYS' ").order(starts_at: :asc) }
   scope :active, -> { where("starts_at < NOW() AND ends_at > NOW()").order(starts_at: :asc) }
 
   has_attached_file :promo_image,
