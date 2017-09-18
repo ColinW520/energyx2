@@ -12,6 +12,13 @@ class Challenge < ApplicationRecord
   validates_attachment :promo_image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
 
   def participants
-    Participant.joins(:submissions).where(submissions: { created_at: self.starts_at..self.ends_at }).group('participants.name').sum("submissions.parsed_meters").first(10)
+    Participant.joins(:submissions).
+                where(submissions: { created_at: self.starts_at..self.ends_at }).
+                where("submissions.parsed_meters IS NOT NULL").
+                where("submissions.parsed_meters > 0").
+                group('participants.name').
+                sum("submissions.parsed_meters").
+                first(10)
+      # this needs to return an array.
   end
 end
