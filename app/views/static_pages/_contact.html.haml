@@ -26,6 +26,6 @@
                     %label.control-label Message
                     = text_area_tag :message, @message, placeholder: "Enter your message...", rows: 2, class: "form-control", style: "min-height: 100px;"
               .form-group
-                = hidden_field_tag 'spam_check', value: 'gotcha.'
+                = hidden_field_tag 'spam_check', 'gotcha.'
               .text-center
                 = submit_tag 'Submit', class: 'btn btn-block btn-success btn-md', style: "color: #000"
