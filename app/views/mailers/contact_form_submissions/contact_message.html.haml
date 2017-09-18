@@ -3,4 +3,4 @@
 %p --------------
 %p= "From: #{@name} - #{@email}"
 %p Message --------------
-= sanitize(line_break(@message), tags: %w(br))
+= @message
