@@ -1,23 +1,36 @@
 - provide(:title, 'Dashboard')
-%h1 Dashboard
-%br
 .row
   .col-sm-12.col-md-6
-    = column_chart Submission.valid.accepted.group_by_day(:created_at, range: 1.month.ago..Time.now).count, {title: "Submissions", library: { position:  'bottom'} }
+    %h2 Submissions
+    = column_chart Submission.valid.accepted.group_by_day(:created_at, range: 1.month.ago..Time.now).count, library: { position:  'bottom'}
     %table.table
       %thead.thead-inverse
         %th Participant
         %th Submissions
       %tbody
-        - @p_data.each do |p|
+        - @s_data.each do |p|
           %tr
             %td= p[0]
             %td= p[1]
 
+  .col-sm-12.col-md-6
+    %h2 Participants
+    = column_chart Participant.group_by_day(:created_at, range: 1.month.ago..Time.now).count, library: { position:  'bottom'}
+    %table.table
+      %thead.thead-inverse
+        %th Participant
+        %th Phone #
+      %tbody
+        - @p_data.each do |p|
+          %tr
+            %td= p.name
+            %td= p.mobile_phone
+
 %hr
 .row
   .col-sm-12.col-md-6
-    = column_chart Ahoy::Event.not_user.group_by_day(:time, time_zone: Time.zone).count, { title: "Page Views", library: { position:  'bottom'}, width: "100%" }
+    %h2 Page Views
+    = column_chart Ahoy::Event.not_user.group_by_day(:time, time_zone: Time.zone).count, library: { position:  'bottom'}
     %table.table
       %thead.thead-inverse
         %th Page
@@ -28,10 +41,10 @@
             %td= page[0]
             %td= page[1]
 
-%hr
-.row
+
   .col-sm-12.col-md-6
-    = column_chart Visit.not_user.group_by_day(:started_at, time_zone: Time.zone).count, { title: "Visitors", library: { position:  'bottom'}, width: "100%" }
+    %h2 Visits
+    = column_chart Visit.not_user.group_by_day(:started_at, time_zone: Time.zone).count, library: { position:  'bottom'}
     %table.table
       %thead.thead-inverse
         %th City
