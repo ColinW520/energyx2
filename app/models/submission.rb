@@ -14,7 +14,7 @@ class Submission < ApplicationRecord
       self.response_text = "Hi! We love the enthusiam, but we can only handle one thing at a time. Please try either 'Name: Your Name' OR 'Meters: Your Meters'."
     end
 
-    unless ['name:', 'meters:', 'link', 'stats'].include? self.body.partition(":").first.squish.downcase
+    unless ['name:', 'meters:', 'link', 'stats'].include? self.message_body.partition(":").first.squish.downcase
       self.is_valid = false
       self.response_text = "Hi! We don't know what to do with that input. Check out the guide here: http://energyxfitness.com/help"
     end
