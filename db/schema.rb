@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170913194627) do
+ActiveRecord::Schema.define(version: 20170918203950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,9 +173,9 @@ ActiveRecord::Schema.define(version: 20170913194627) do
     t.string   "name"
     t.string   "mobile_phone"
     t.integer  "submissions_count"
-    t.boolean  "is_active"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.boolean  "is_active",         default: true
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   create_table "questions", force: :cascade do |t|

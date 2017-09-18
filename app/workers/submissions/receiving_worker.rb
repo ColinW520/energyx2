@@ -22,16 +22,17 @@ class Submissions::ReceivingWorker
           @participant.update_attribute(:name, @submission.parse_name)
           @submission.response_text = "Name updated to: #{@participant.name}! "
         when 'meters'
-          # FREQUENCY CHECK RULE
           @submission.parse_meters
+          # FREQUENCY CHECK RULE
           if @participant.submissions.valid.accepted.with_meters.where(created_at: DateTime.now.in_time_zone(Time.zone).beginning_of_day..Time.now).count > 1
             @submission.is_rejected = true
             @submission.rejection_reason = "Daily Frequency check failed."
             @submission.response_text = "Sorry, you can only submit meters a 2x/day MAX. Please try again tomorrow!"
+          # VOLUME CHECK RULE
           elsif @submission.parsed_meters >= 12500
             @submission.is_rejected = true
             @submission.rejection_reason = "Meters exceed class maximum."
-            @submission.response_text = "Wow! That's a big number. The maximum for a single is 12,500. If this isn't a typo, email us: contact@energyxfitness.com"
+            @submission.response_text = "Wow! That's a big number. The maximum for a single submission is 12,500. If this isn't a typo, email us: contact@energyxfitness.com"
           else
             @submission.is_rejected = false
             @submission.response_text = "Got it! "
@@ -41,13 +42,14 @@ class Submissions::ReceivingWorker
         when 'stats'
           @submission.response_text += "All-Time: #{@participant.total_meters}. This Year: #{@participant.meters_from(Time.now.beginning_of_year, Time.now)}. This Month: #{@participant.meters_from(Time.now.beginning_of_month, Time.now)}. This Week: #{@participant.meters_from(Time.now.beginning_of_week, Time.now)}"
         else
-          @submission.response_text += "Hi! We don't know what to do with that input. Check out http://energyxfitess.com/help"
+          @submission.response_text += "Hi! We don't know what to do with that input. Check out http://energyxfitess.com/join"
       end
 
       @submission.response_text += "See your stats here: http://energyxfitness.com/participants/#{@participant.id}-#{@participant.mobile_phone.last(4)}"
     end
 
     @submission.save!
+    @participant.save!
 
     # now reply to the participant
     recipient_hash = { from: ENV['TWILIO_NUMBER'], body: @submission.response_text }
