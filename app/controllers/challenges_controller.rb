@@ -16,7 +16,7 @@ class ChallengesController < ApplicationController
   end
 
   def list
-    @challenges = Challenge.active
+    @challenges = Challenge.all
   end
 
   def new
