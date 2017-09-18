@@ -28,6 +28,10 @@ class Submissions::ReceivingWorker
             @submission.is_rejected = true
             @submission.rejection_reason = "Daily Frequency check failed."
             @submission.response_text = "Sorry, you can only submit meters a 2x/day MAX. Please try again tomorrow!"
+          elsif @submission.parsed_meters >= 12500
+            @submission.is_rejected = true
+            @submission.rejection_reason = "Meters exceed class maximum."
+            @submission.response_text = "Wow! That's a big number. The maximum for a single is 12,500. If this isn't a typo, email us: contact@energyxfitness.com"
           else
             @submission.is_rejected = false
             @submission.response_text = "Got it! "

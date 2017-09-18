@@ -2,7 +2,7 @@
 %h1 Dashboard
 %br
 .row
-  .col-sm-12
+  .col-sm-12.col-md-6
     = column_chart Submission.valid.accepted.group_by_day(:created_at, range: 1.month.ago..Time.now).count, {title: "Submissions", library: { position:  'bottom'} }
     %table.table
       %thead.thead-inverse
@@ -16,7 +16,7 @@
 
 %hr
 .row
-  .col-sm-12
+  .col-sm-12.col-md-6
     = column_chart Ahoy::Event.not_user.group_by_day(:time, time_zone: Time.zone).count, { title: "Page Views", library: { position:  'bottom'}, width: "100%" }
     %table.table
       %thead.thead-inverse
@@ -30,7 +30,7 @@
 
 %hr
 .row
-  .col-sm-12
+  .col-sm-12.col-md-6
     = column_chart Visit.not_user.group_by_day(:started_at, time_zone: Time.zone).count, { title: "Visitors", library: { position:  'bottom'}, width: "100%" }
     %table.table
       %thead.thead-inverse
