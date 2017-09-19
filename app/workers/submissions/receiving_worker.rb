@@ -38,14 +38,14 @@ class Submissions::ReceivingWorker
             @submission.response_text = "Got it! "
           end
         when 'link'
-          @submission.response_text += "Here is a link to your profile! http://energyxfitness.com/participants/#{@participant.id}-#{@participant.mobile_phone.last(4)}"
+          @submission.response_text = "Here is a link to your profile! http://energyxfitness.com/participants/#{@participant.id}-#{@participant.mobile_phone.last(4)}"
         when 'stats'
-          @submission.response_text += "All-Time: #{@participant.total_meters}. This Year: #{@participant.meters_from(Time.now.beginning_of_year, Time.now)}. This Month: #{@participant.meters_from(Time.now.beginning_of_month, Time.now)}. This Week: #{@participant.meters_from(Time.now.beginning_of_week, Time.now)}"
+          @submission.response_text = "All-Time: #{@participant.total_meters}. This Year: #{@participant.meters_from(Time.now.beginning_of_year, Time.now)}. This Month: #{@participant.meters_from(Time.now.beginning_of_month, Time.now)}. This Week: #{@participant.meters_from(Time.now.beginning_of_week, Time.now)}"
         else
-          @submission.response_text += "Hi! We don't know what to do with that input. Check out http://energyxfitess.com/join"
+          @submission.response_text = "Hi! We don't know what to do with that input. Check out http://energyxfitess.com/join"
       end
 
-      @submission.response_text += "See your stats here: http://energyxfitness.com/participants/#{@participant.id}-#{@participant.mobile_phone.last(4)}"
+      # @submission.response_text = "See your stats here: http://energyxfitness.com/participants/#{@participant.id}-#{@participant.mobile_phone.last(4)}"
     end
 
     @submission.save!
