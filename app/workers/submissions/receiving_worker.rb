@@ -51,9 +51,6 @@ class Submissions::ReceivingWorker
     @submission.save!
     @participant.save!
 
-    # now reply to the participant
-    recipient_hash = { from: ENV['TWILIO_NUMBER'], body: @submission.response_text }
-    recipient_hash[:to] = @message.from
-    @twilio_client.messages.create(recipient_hash)
+    Submissions::RespondingWorker.perform_async(@submission.id, @message.from)
   end
 end
