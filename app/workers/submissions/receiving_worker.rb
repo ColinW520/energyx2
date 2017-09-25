@@ -35,7 +35,7 @@ class Submissions::ReceivingWorker
             @submission.response_text = "Wow! That's a big number. The maximum for a single submission is 12,500. If this isn't a typo, email us: contact@energyxfitness.com"
           else
             @submission.is_rejected = false
-            @submission.response_text = "Got it! "
+            @submission.response_text = "Got it. Check out your profile! http://energyxfitness.com/participants/#{@participant.id}-#{@participant.mobile_phone.last(4)}"
           end
         when 'link'
           @submission.response_text = "Here is a link to your profile! http://energyxfitness.com/participants/#{@participant.id}-#{@participant.mobile_phone.last(4)}"

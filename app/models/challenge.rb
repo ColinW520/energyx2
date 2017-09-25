@@ -12,13 +12,14 @@ class Challenge < ApplicationRecord
   validates_attachment :promo_image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
 
   def participants
+    # this needs to return an array.
     Participant.visible.active.joins(:submissions).
-                where(submissions: { created_at: self.starts_at..self.ends_at }).
+                where(submissions: { created_at: 1.year.ago..1.year.from_now }).
                 where("submissions.parsed_meters IS NOT NULL").
                 where("submissions.parsed_meters > 0").
                 group('participants.name').
                 sum("submissions.parsed_meters").
+                sort_by(&:last).reverse.
                 first(10)
-      # this needs to return an array.
   end
 end
