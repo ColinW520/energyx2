@@ -14,7 +14,7 @@ class Challenge < ApplicationRecord
   def participants
     # this needs to return an array.
     Participant.visible.active.joins(:submissions).
-                where(submissions: { created_at: 1.year.ago..1.year.from_now }).
+                where(submissions: { created_at: self.starts_at..self.ends_at }).
                 where("submissions.parsed_meters IS NOT NULL").
                 where("submissions.parsed_meters > 0").
                 group('participants.name').
