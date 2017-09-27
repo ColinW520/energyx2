@@ -42,7 +42,7 @@ class Submissions::ReceivingWorker
         when 'stats'
           @submission.response_text = "All-Time: #{@participant.total_meters}. This Year: #{@participant.meters_from(Time.now.beginning_of_year, Time.now)}. This Month: #{@participant.meters_from(Time.now.beginning_of_month, Time.now)}. This Week: #{@participant.meters_from(Time.now.beginning_of_week, Time.now)}"
         else
-          @submission.response_text = "Hi! We don't know what to do with that input. Check out https://energyxfitess.com/join"
+          @submission.response_text = "Hi! We don't know what to do with that input. Try 'Meters:' or 'Name: '. Check out https://energyxfitess.com/join"
       end
 
       # @submission.response_text = "See your stats here: http://energyxfitness.com/participants/#{@participant.id}-#{@participant.mobile_phone.last(4)}"

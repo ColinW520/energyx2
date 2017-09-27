@@ -6,8 +6,8 @@ class ParticipantsController < ApplicationController
   def index
     participants_scope = Participant.includes(:submissions).order(name: :asc)
     respond_to do |format|
-      format.html { smart_listing_create :participants, participants_scope, partial: 'participants/listing', default_sort: { name: :asc }, page_sizes: [100, 200, 300] }
-      format.js { smart_listing_create :participants, participants_scope, partial: 'participants/listing', default_sort: { name: :asc } }
+      format.html { smart_listing_create :participants, participants_scope, partial: 'participants/listing', default_sort: { created_at: :desc }, page_sizes: [100, 200, 300] }
+      format.js { smart_listing_create :participants, participants_scope, partial: 'participants/listing', default_sort: { created_at: :desc }, page_sizes: [100, 200, 300] }
       format.csv { send_data participants_scope.to_csv, filename: "participants_as_of-#{Time.now}.csv" }
     end
   end
