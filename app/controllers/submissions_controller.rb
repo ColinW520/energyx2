@@ -5,9 +5,7 @@ class SubmissionsController < ApplicationController
   def index
     submissions_scope = Submission.includes(:participant).order(created_at: :desc)
     respond_to do |format|
-      format.html {
-        smart_listing_create :submissions, submissions_scope, partial: 'submissions/listing', default_sort: { created_at: :desc }
-      }
+      format.html { smart_listing_create :submissions, submissions_scope, partial: 'submissions/listing', default_sort: { created_at: :desc }, page_sizes: [100, 200, 300] }
       format.js { smart_listing_create :submissions, submissions_scope, partial: 'submissions/listing', default_sort: { created_at: :desc } }
       format.csv { send_data submissions_scope.to_csv, filename: "submissions_as_of-#{Time.now}.csv" }
     end
