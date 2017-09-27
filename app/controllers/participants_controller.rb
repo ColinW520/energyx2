@@ -4,7 +4,7 @@ class ParticipantsController < ApplicationController
   layout :resolve_layout
 
   def index
-    participants_scope = Participant.includes(:submissions).order(name: :asc)
+    participants_scope = Participant.includes(:submissions)
     respond_to do |format|
       format.html { smart_listing_create :participants, participants_scope, partial: 'participants/listing', default_sort: { created_at: :desc }, page_sizes: [100, 200, 300] }
       format.js { smart_listing_create :participants, participants_scope, partial: 'participants/listing', default_sort: { created_at: :desc }, page_sizes: [100, 200, 300] }
