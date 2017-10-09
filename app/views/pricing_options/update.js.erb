@@ -1,0 +1,3 @@
+$('#pricing_option_dialog').modal('toggle');
+$('#pricing_option_<%= @pricing_option.id %>').replaceWith('<%= j render (@pricing_option) %>');
+$("#pricing_options").smart_listing().fadeLoaded();

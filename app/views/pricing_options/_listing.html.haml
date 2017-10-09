@@ -1,0 +1,23 @@
+.row
+  .col-sm-12
+    .card.card-outline-primary.table-card
+      .table-responsive
+        %table.table#sortable
+          %thead.thead-inverse
+            %th
+            %th= smart_listing.sortable 'Name', :name
+            %th= smart_listing.sortable 'Type', :subtype
+            %th= smart_listing.sortable 'Description', :description
+            %th= smart_listing.sortable 'Price', :amount_in_cents
+            %th= smart_listing.sortable 'Updated', :updated_at
+            %th
+          %tbody#pricing_options
+            - smart_listing.collection.each do |pricing_option|
+              = render pricing_option
+        %br
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

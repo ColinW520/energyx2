@@ -1,0 +1,16 @@
+%tr.item{id: "pricing_option_#{pricing_option.id}", "data-item-id"=> "#{pricing_option.id}", "data-item-path"=>"pricing_options"}
+  %td
+    %i.fa.fa-arrows-v
+  %td= pricing_option.name
+  %td= pricing_option.subtype
+  %td= pricing_option.description.truncate(100)
+  %td= number_to_currency pricing_option.amount_in_cents / 100, precision: 2
+  %td= local_time pricing_option.updated_at, format: "%m/%d/%Y"
+  %td.actions
+    .btn-group.pull-right
+      = link_to edit_pricing_option_path(pricing_option), remote: true, class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-edit
+        Edit
+      = link_to pricing_option_path(pricing_option), remote: true, method: :delete, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash
+        Destroy

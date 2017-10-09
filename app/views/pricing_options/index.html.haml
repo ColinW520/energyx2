@@ -1,0 +1,16 @@
+- provide(:title, 'Pricing Options')
+%br
+%br
+.row
+  .col-sm-12
+    %h3
+      Pricing Options
+      .pull-right
+        = link_to new_pricing_option_path, class: 'btn btn-success btn-sm', remote: true do
+          %i.fa.fa-plus
+          New
+.row
+  .col-sm-12
+    = smart_listing_render :pricing_options
+
+= render "pricing_options/dialog"

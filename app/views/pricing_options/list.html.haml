@@ -1,0 +1,22 @@
+.row
+  .col-sm-12.col-md-4.col-centered
+    .card.card-info
+      .card-header
+        %h4.text-white.card-title Pass Pricing
+      %table.table
+        %tbody
+          - @pass_options.each do |option|
+            %tr
+              %td= option.name
+              %td= number_to_currency option.amount_in_cents / 100, precision: 2
+
+  .col-sm-12.col-md-4.col-centered
+    .card.card-info
+      .card-header
+        %h4.text-white.card-title Pass Pricing
+      %table.table
+        %tbody
+          - @plan_options.each do |option|
+            %tr
+              %td= option.name
+              %td= number_to_currency option.amount_in_cents / 100, precision: 2

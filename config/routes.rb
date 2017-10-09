@@ -30,6 +30,11 @@ Rails.application.routes.draw do
     post :update_row_order, on: :collection
   end
 
+  resources :pricing_options do
+    get :list, on: :collection
+    post :update_row_order, on: :collection
+  end
+
   resources :studio_sessions do
     get :list, on: :collection
     post :update_row_order, on: :collection

@@ -1,0 +1,10 @@
+// Render the form
+$('.modal-body').html('<%= j render "pricing_options/form" %>');
+
+// Show the dynamic dialog
+$('#pricing_option_dialog').modal("show");
+
+// Set focus to the first element
+$('#pricing_option_dialog').on('shown.bs.modal', function () {$('#InputName').focus()})
+
+$("#pricing_options").smart_listing().fadeLoaded();

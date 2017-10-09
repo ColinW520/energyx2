@@ -1,0 +1,3 @@
+$('#pricing_option_dialog').modal('toggle');
+$('tbody#pricing_options').prepend('<%= j render (@pricing_option) %>');
+$("#pricing_options").smart_listing().fadeLoaded();
