@@ -5,7 +5,7 @@
   .form-group
     = f.input :name, label: 'Name', autofocus: true, required: true
   .form-group
-    = f.input :description, as: :text, label: 'Description', required: true
+    = f.input :description, as: :text, label: 'Description'
   .form-group
     = f.input :amount_in_cents, as: :integer, label: 'Price in Cents', hint: "$10 = 1000", required: true
   .form-group
