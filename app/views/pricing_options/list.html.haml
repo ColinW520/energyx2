@@ -8,7 +8,7 @@
           - @pass_options.each do |option|
             %tr
               %td= option.name
-              %td= number_to_currency option.amount_in_cents / 100, precision: 2
+              %td= number_to_currency option.amount_in_cents / 100, precision: 0
 
   .col-sm-12.col-md-4.col-centered
     .card.card-info
@@ -19,4 +19,4 @@
           - @plan_options.each do |option|
             %tr
               %td= option.name
-              %td= number_to_currency option.amount_in_cents / 100, precision: 2
+              %td= number_to_currency option.amount_in_cents / 100, precision: 0
