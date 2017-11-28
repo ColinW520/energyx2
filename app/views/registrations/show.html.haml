@@ -9,6 +9,8 @@
             .unobtrusive-flash-container{style: "z-index: 100000"}
             .text-center
               %img.img-fluid{src: "http://g.recordit.co/gDusHx99Ei.gif"}
+              %br
+              %br
               %h1.text-success SUCCESS
               %p.lead= "Your registration for #{@event.name} is complete! The details you submitted are below. If you need to make any changes, click the 'EDIT' button!"
 
@@ -39,7 +41,7 @@
                     - if @registration.is_paid?
                       %i.fa.fa-check.text-success
                       = number_to_currency @charge.amount / 100
-                      on
+                      with
                       -case @charge.source.brand
                         -when 'Visa'
                           %i.fa.fa-cc-visa
@@ -56,6 +58,10 @@
                       %i.fa.fa-alert-circle.text-danger
                       = mail_to 'contact@energyxfitness.com'
 
+                %tr
+                  %td
+                    %strong Charged On
+                  %td= local_time @registration.created_at, format: "%m/%d/%y"
                 %tr
                   %td
                     %strong Members

@@ -8,6 +8,8 @@ class Registration < ApplicationRecord
 
 
   def create_charge(params)
+    raise 'Not Allowed -- Card has already been charged for this registration.' if self.is_paid?
+
     params = params.with_indifferent_access
 
     customer = Stripe::Customer.create(
