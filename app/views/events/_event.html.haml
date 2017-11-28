@@ -7,6 +7,9 @@
   %td= local_time event.updated_at, format: "%m/%d/%Y"
   %td.actions
     .btn-group.pull-right
+      = link_to event_registrations_path(event), class: 'btn btn-sm btn-info' do
+        %i.fa.fa-group
+        Regs
       = link_to edit_event_path(event), remote: true, class: 'btn btn-sm btn-warning' do
         %i.fa.fa-edit
         Edit

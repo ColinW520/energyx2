@@ -1,0 +1,53 @@
+- provide(:title, "#{@event.name} Registration Confirmation")
+%section#Confirmation
+  %hr
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-8.col-lg-6.col-centered
+            .unobtrusive-flash-container{style: "z-index: 100000"}
+            .text-center
+              %img.img-fluid{src: "http://g.recordit.co/gDusHx99Ei.gif"}
+              %h1.text-success SUCCESS
+              %p.lead= "Your registration for #{@event.name} is complete! The details you submitted are below. If you need to make any changes, click the 'EDIT' button!"
+
+  .section-content
+    .container
+      .row
+        .col-sm-10.col-md-8.col-lg-4.col-centered
+          .card
+            .card-block
+              %h4 Details
+            %table.table.table-bordered
+              %thead
+              %tbody
+                %tr
+                  %td
+                    %strong Type
+                  %td
+                    = @registration.subtype.upcase
+                %tr
+                  %td
+                    %strong Team Name
+                  %td
+                    = @registration.try :name
+                %tr
+                  %td
+                    %strong Paid?
+                  %td
+                    - if @registration.is_paid?
+                      %i.fa.fa-check.text-success
+                      $80.00
+                    - else
+                      %i.fa.fa-times.text-danger
+                      ($80.00)
+                %tr
+                  %td
+                    %strong Members
+                  %td
+                    %ul
+                      - @registration.members.each do |m|
+                        %li= m.name + " - " + m.shirt_size
+
+%section{style: "height: 300px;"}

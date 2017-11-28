@@ -1,0 +1,22 @@
+- provide(:title, "#{@event.name} Registration")
+%section
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-6.col-lg-6
+            .text-center
+              %hr
+              %h1= @event.name
+              %p= @event.registration_instructions
+          .col-sm-12.col-md-6.col-lg-6
+            .card
+              .card-header Registration Form
+              .card-block
+                .unobtrusive-flash-container{style: "z-index: 100000"}
+                = render 'form'
+            %br
+            %p.text-muted.text-center
+              %i.fa.fa-info-circle
+              All transactions are securely processed through STRIPE. More information can be found here:
+              %a{href: 'https://stripe.com/docs/security/stripe'} Secure Transactions with Stripe

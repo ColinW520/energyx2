@@ -1,0 +1,12 @@
+- provide(:title, 'Registrations')
+%br
+%br
+.row
+  .col-sm-12
+    %h3
+      %i.fa.fa-money
+      = "Registrations for #{@event.name}"
+
+.row
+  .col-sm-12
+    = smart_listing_render :registrations

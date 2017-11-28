@@ -1,0 +1,24 @@
+.row
+  .col-sm-12
+    .card.card-outline-primary.table-card
+      .table-responsive
+        %table.table.table-condensed
+          %thead.thead-inverse
+            %th= smart_listing.sortable 'Type', :subtype
+            %th= smart_listing.sortable 'Name', :name
+            %th= smart_listing.sortable 'Email', :email
+            %th= smart_listing.sortable 'Phone', :phone
+            %th= smart_listing.sortable 'Created', :created_at
+            %th Charge ID
+            %th Members
+            %th
+          %tbody#questions
+            - smart_listing.collection.each do |question|
+              = render question
+        %br
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

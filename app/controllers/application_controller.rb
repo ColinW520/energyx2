@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def gon_setup
+    gon.stripe_publishable_key = ENV['STRIPE_PUBLISHABLE_KEY']
   end
 
   def set_subnav

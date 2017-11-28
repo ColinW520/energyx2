@@ -21,3 +21,6 @@
             - if event.link.present?
               .pull-right
                 %a.btn.btn-success.btn-sm{href: event.link, target: "_blank", style: "color: #000"}= event.button_text || 'Sign Up'
+            - if event.registerable?
+              .pull-right
+                %a.btn.btn-success.btn-sm.text-info{href: new_event_registration_path(event), target: "_blank"} Register

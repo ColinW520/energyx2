@@ -1,0 +1,122 @@
+= simple_form_for [@event, @registration], authenticity_token: true, html: { id: 'RegistrationForm' } do |f|
+  - if @registration.errors.any?
+    .row
+      .col-sm-12
+        #error_explanation
+          %h2.text-danger
+            = pluralize(@registration.errors.count, "error")
+            prohibited this registration from being saved:
+          %ul
+            - @registration.errors.full_messages.each do |message|
+              %li= message
+          %strong If you are seeing this message, your card has NOT been charged yet.
+  .row
+    .col-sm-12
+      .fieldset
+        %legend
+          Type
+          %strong.text-danger{style: "font-size: 10px;"} Once paid, you cannot change this!
+        %br
+        - if @registration.persisted?
+          %strong.text-danger= "Type Selected: #{@registration.subtype.titleize}"
+        - else
+          .form-group
+            .form-check
+              %label.form-check-label
+                %input#TeamRadio.form-check-input{:checked => "checked", :name => "registration[subtype]", :type => "radio", :value => "team"}
+                Team: I want to register myself, and at least one other person.
+                %strong $80
+            .form-group#TeamNameHolder
+              = f.input :name, label: 'Team Name', placeholder: 'What will your team name be?'
+            %br
+            .form-check
+              %label.form-check-label
+                %input#SoloRadio.form-check-input{:name => "registration[subtype]", :type => "radio", :value => "solo"}
+                Solo: I want to register just myself.
+                %strong $50
+  %br
+  .row
+    .col-sm-12
+      .fieldset
+        %legend
+          Communication
+          %small.text-danger{style: "font-size: 10px;"}
+        .row
+          .col-sm-12.col-md-6
+            = f.input :email, as: :email, hint: '(for confirmations)', required: true
+          .col-sm-12.col-md-6
+            = f.input :phone, as: :tel, label: 'Mobile Phone', hint: '(for alerts)', required: true
+  %br
+  .row
+    .col-sm-12
+      .fieldset
+        %legend
+          People
+          %small.text-success.pull-right#AddMembers
+            = link_to_add_association '+ add', f, :registration_members, "data-association-insertion-node" => "tbody#members", :"data-association-insertion-method" => "append", class: 'btn btn-sm btn-success text-info'
+        %table.table.table-bordered
+          %thead
+            %th Name
+            %th Email
+            %th Shirt
+            %th
+          %tbody#members
+            = f.fields_for :registration_members do |member|
+              = render 'registration_member_fields', f: member
+  %br
+  %br
+  %br
+  .row
+    .col-sm-12
+      .form-group
+        .actions
+          .pull-right
+            = f.hidden_field :event_id, value: @event.id
+            - unless @registration.persisted?
+              = hidden_field_tag :stripe_token
+              = hidden_field_tag :stripe_email
+            - if @registration.persisted?
+              = f.button :submit, 'Update', class: 'btn btn-md btn-outline-success text-info'
+            - else
+              = f.button :submit, 'Register & Pay', id: 'stripe_button', class: 'btn btn-success btn-md text-info'
+          = link_to event_path(@event), class: 'btn btn-sm btn-warning' do
+            %i.fa.fa-arrow-left
+            Cancel
+%script{:src => "https://checkout.stripe.com/checkout.js"}
+:coffeescript
+  $('.form-check-input').change ->
+    console.log 'seeing change'
+    if $('#SoloRadio').is(':checked')
+      $('#TeamNameHolder').hide()
+    else
+      $('#TeamNameHolder').show()
+
+
+  handler = StripeCheckout.configure(
+    key: gon.stripe_publishable_key
+    locale: 'auto'
+    name: "EnergyX Fitness"
+    description: "Registration for #{@event.name} with EnergyX Fitness"
+    token: (token) ->
+      $('input#stripe_token').val token.id
+      $('input#stripe_email').val token.email
+      $('form').submit()
+      return
+  )
+
+  $('#stripe_button').on 'click', (e) ->
+    $(this).prop 'disabled', true
+    if $('#SoloRadio').is(':checked')
+      $('#TeamNameHolder').hide()
+      amount = 5000
+    else
+      $('#TeamNameHolder').show()
+      amount = 8000
+    e.preventDefault()
+    # Needs to be an integer!
+    handler.open
+      amount: Math.round(amount)
+      email: $('input#registration_email').val()
+
+  window.addEventListener 'popstate', ->
+    handler.close()

@@ -28,4 +28,5 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require chartkick
+//= require cocoon
 //= require_tree .

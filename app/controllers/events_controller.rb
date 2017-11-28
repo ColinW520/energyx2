@@ -75,15 +75,18 @@ class EventsController < ApplicationController
   private
 
   def resolve_layout
-    if action_name == "list"
+    case action_name
+    when "list"
       nil
+    when 'show'
+      'static_views'
     else
       "application"
     end
   end
 
   def find_event
-    @event = Event.find(params[:id])
+    @event = Event.friendly.find(params[:id])
   end
 
   def event_params

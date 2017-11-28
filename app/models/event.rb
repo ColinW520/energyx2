@@ -1,5 +1,8 @@
 class Event < ApplicationRecord
   scope :upcoming, -> { where("starts_at > NOW() - INTERVAL '1 DAY' ").order(starts_at: :asc) }
+  has_many :registrations, dependent: :destroy
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 
   has_attached_file :promo_image,
     styles: {

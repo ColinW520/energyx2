@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009162315) do
+ActiveRecord::Schema.define(version: 20171127184653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,14 +110,18 @@ ActiveRecord::Schema.define(version: 20171009162315) do
     t.datetime "ends_at"
     t.string   "description"
     t.string   "link"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "promo_image_file_name"
     t.string   "promo_image_content_type"
     t.integer  "promo_image_file_size"
     t.datetime "promo_image_updated_at"
     t.string   "address"
     t.string   "button_text"
+    t.boolean  "registerable",              default: false
+    t.datetime "registration_ends_at"
+    t.string   "slug"
+    t.text     "registration_instructions"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -194,6 +198,31 @@ ActiveRecord::Schema.define(version: 20171009162315) do
     t.text     "answer"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "registration_members", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "shirt_size"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["registration_id"], name: "index_registration_members_on_registration_id", using: :btree
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer  "event_id"
+    t.string   "name"
+    t.boolean  "is_paid"
+    t.string   "subtype"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "stripe_customer_id"
+    t.string   "stripe_charge_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["event_id"], name: "index_registrations_on_event_id", using: :btree
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -345,6 +374,8 @@ ActiveRecord::Schema.define(version: 20171009162315) do
   end
 
   add_foreign_key "messages", "contacts"
+  add_foreign_key "registration_members", "registrations"
+  add_foreign_key "registrations", "events"
   add_foreign_key "studio_sessions", "coaches"
   add_foreign_key "studio_sessions", "studio_session_types"
   add_foreign_key "submissions", "participants"

@@ -1,0 +1,16 @@
+%tr.item{id: "registration_#{registration.id}", "data-item-id"=> "#{registration.id}"}
+  %td= registration.subtype.upcase
+  %td= registration.name
+  %td= mail_to registration.email
+  %td= number_to_phone registration.phone.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+  %td= local_time registration.created_at, format: "%m/%d/%Y"
+  %td= registration.stripe_charge_id
+  %td
+    %ul
+      - registration.members.each do |member|
+        %li= member.name + " - " + member.shirt_size
+  %td.actions
+    .btn-group.pull-right
+      = link_to edit_event_registration_path(@event, registration), class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-edit
+        Edit

@@ -16,6 +16,12 @@
     = f.input :address, label: 'Where is it?', as: :text
   .form-group
     = f.input :button_text, label: 'Call to Action', input_html: {value: f.object.button_text || 'SIGN UP'}
+  .form-group
+    = f.input :registerable, label: 'Accept Registrations?'
+  .form-group
+    = f.input :registration_ends_at
+  .form-group
+    = f.input :registration_instructions
   .form-actions
     .text-center
       = f.button :submit, class: 'btn btn-md btn-success'

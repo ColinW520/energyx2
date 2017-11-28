@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   resources :events do
     get :list, on: :collection
     post :update_row_order, on: :collection
+    resources :registrations
   end
 
   resources :challenges do

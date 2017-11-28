@@ -43,3 +43,7 @@
   }
 
 }
+
+input[type="radio"]:before, .radio input[type="radio"]:before, .radio-inline input[type="radio"]:before {
+  top: -2px;
+}
