@@ -24,16 +24,19 @@
             .form-check
               %label.form-check-label
                 %input#TeamRadio.form-check-input{:checked => "checked", :name => "registration[subtype]", :type => "radio", :value => "team"}
-                Team: I want to register myself, and at least one other person.
-                %strong $80
+                %strong{style: "font-size: 15px;"} Team:
+                I want to register at least two people for
+                %strong{style: "font-size: 15px;"} $80
+            %br
             .form-group#TeamNameHolder
-              = f.input :name, label: 'Team Name', placeholder: 'What will your team name be?'
+              = f.input :name, label: 'Team Name*', placeholder: 'What will your team name be?'
             %br
             .form-check
               %label.form-check-label
                 %input#SoloRadio.form-check-input{:name => "registration[subtype]", :type => "radio", :value => "solo"}
-                Solo: I want to register just myself.
-                %strong $40
+                %strong{style: "font-size: 15px;"} Solo:
+                I want to register just myself for
+                %strong{style: "font-size: 15px;"} $40
   %br
   .row
     .col-sm-12
@@ -65,7 +68,21 @@
           %tbody#members
             = f.fields_for :registration_members do |member|
               = render 'registration_member_fields', f: member
-  %br
+
+  - unless @registration.persisted?
+    %br
+    .row
+      .col-sm-12
+        .fieldset
+          %legend
+            Payment
+          .card
+            .card-block
+              .form-group
+                %label{:for => "card-element"}
+                  Input Your Card Details
+                #card-element
+                #card-errors
   %br
   %br
   .row
@@ -74,9 +91,6 @@
         .actions
           .pull-right
             = f.hidden_field :event_id, value: @event.id
-            - unless @registration.persisted?
-              = hidden_field_tag :stripe_token
-              = hidden_field_tag :stripe_email
             - if @registration.persisted?
               = f.button :submit, 'Update', class: 'btn btn-md btn-outline-success text-info'
             - else
@@ -84,7 +98,8 @@
           = link_to event_path(@event), class: 'btn btn-sm btn-warning' do
             %i.fa.fa-arrow-left
             Cancel
-%script{:src => "https://checkout.stripe.com/checkout.js"}
+
+%script{:src => "https://js.stripe.com/v3/"}
 :coffeescript
   check_to_hide_or_show_add_link = ->
     if $('#members .nested-fields').length == 4
@@ -105,34 +120,63 @@
   $('.form-check-input').change ->
     if $('#SoloRadio').is(':checked')
       $('#TeamNameHolder').hide()
+      $('input#registration_name').prop 'required', false
     else
       $('#TeamNameHolder').show()
+      $('input#registration_name').prop 'required', true
 
-  stripe_handler = StripeCheckout.configure(
-    key: gon.stripe_publishable_key
-    locale: 'auto'
-    name: "EnergyX Fitness"
-    description: "Registration for #{@event.name} with EnergyX Fitness"
-    token: (token) ->
-      $('input#stripe_token').val token.id
-      $('input#stripe_email').val token.email
-      $('form').submit()
+  stripeTokenHandler = (token) ->
+    # Insert the token ID into the form so it gets submitted to the server
+    form = document.getElementById('RegistrationForm')
+    tokenHiddenInput = document.createElement('input')
+    tokenHiddenInput.setAttribute 'type', 'hidden'
+    tokenHiddenInput.setAttribute 'name', 'stripe_token'
+    tokenHiddenInput.setAttribute 'value', token.id
+    form.appendChild tokenHiddenInput
+    # Submit the form. This is the one that will have the token on it.
+    form.submit()
+    return
+  # Create a Stripe client
+  stripe = Stripe(gon.stripe_publishable_key)
+  # Create an instance of Elements
+  elements = stripe.elements()
+  # Custom styling can be passed to options when creating an Element.
+  # (Note that this demo uses a wider set of styles than the guide below.)
+  style =
+    base:
+      color: '#32325d'
+      lineHeight: '24px'
+      fontFamily: 'Muli, Helvetica, sans-serif'
+      fontSmoothing: 'antialiased'
+      fontSize: '16px'
+      '::placeholder': color: '#aab7c4'
+    invalid:
+      color: '#fa755a'
+      iconColor: '#fa755a'
+  # Create an instance of the card Element
+  card = elements.create('card', style: style)
+  # Add an instance of the card Element into the `card-element` <div>
+  card.mount '#card-element'
+  # Handle real-time validation errors from the card Element.
+  card.addEventListener 'change', (event) ->
+    displayError = document.getElementById('card-errors')
+    if event.error
+      displayError.textContent = event.error.message
+    else
+      displayError.textContent = ''
+    return
+  # Handle form submission
+  form = document.getElementById('RegistrationForm')
+  form.addEventListener 'submit', (event) ->
+    event.preventDefault()
+    # PREVENT DOUBLE CLICKING
+    stripe.createToken(card).then (result) ->
+      if result.error
+        # Inform the user if there was an error
+        errorElement = document.getElementById('card-errors')
+        errorElement.textContent = result.error.message
+      else
+        # Send the token to your server
+        stripeTokenHandler result.token
       return
-  )
-
-  $('#stripe_button').on 'click', (e) ->
-    $(this).prop 'disabled', true
-    if $('#SoloRadio').is(':checked')
-      $('#TeamNameHolder').hide()
-      amount = 4000
-    else
-      $('#TeamNameHolder').show()
-      amount = 8000
-    e.preventDefault()
-    # Needs to be an integer!
-    stripe_handler.open
-      amount: Math.round(amount)
-      email: $('input#registration_email').val()
-
-  window.addEventListener 'popstate', ->
-    stripe_handler.close()
+    return

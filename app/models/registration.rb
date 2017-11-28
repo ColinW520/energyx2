@@ -11,7 +11,7 @@ class Registration < ApplicationRecord
     params = params.with_indifferent_access
 
     customer = Stripe::Customer.create(
-      :email => params[:stripe_email],
+      :email => self.email,
       :source  => params[:stripe_token]
     )
 

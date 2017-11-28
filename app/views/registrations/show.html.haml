@@ -38,10 +38,24 @@
                   %td
                     - if @registration.is_paid?
                       %i.fa.fa-check.text-success
-                      $80.00
+                      = number_to_currency @charge.amount / 100
+                      on
+                      -case @charge.source.brand
+                        -when 'Visa'
+                          %i.fa.fa-cc-visa
+                        -when 'American Express'
+                          %i.fa.fa-cc-amex
+                        -when 'MasterCard'
+                          %i.fa.fa-cc-mastercard
+                        -when 'Discover'
+                          %i.fa.fa-cc-discover
+                        -else
+                          %i.fa.fa-cc-alt
+                      = @charge.source.last4
                     - else
-                      %i.fa.fa-times.text-danger
-                      ($80.00)
+                      %i.fa.fa-alert-circle.text-danger
+                      = mail_to 'contact@energyxfitness.com'
+
                 %tr
                   %td
                     %strong Members

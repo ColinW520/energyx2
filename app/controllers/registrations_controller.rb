@@ -19,7 +19,7 @@ class RegistrationsController < ApplicationController
   def new
     @event = Event.friendly.find params[:event_id]
     @registration = Registration.new(event_id: @event.id)
-    @registration.registration_members.build
+    2.times { @registration.registration_members.build }
     gon.stripe_description = "Registration for #{@event.name}"
   end
 
@@ -46,6 +46,7 @@ class RegistrationsController < ApplicationController
   end
 
   def show
+    @charge = Stripe::Charge.retrieve(@registration.stripe_charge_id)
   end
 
   def edit

@@ -1,7 +1,7 @@
 %tr.nested-fields
   %td
     = f.hidden_field :registration_id
-    = f.input :name, label: false, required: true
-  %td= f.input :email, as: :email, label: false, required: true
+    = f.input :name, label: false, required: true, placedholder: 'First Last'
+  %td= f.input :email, as: :email, label: false, required: true, placeholder: 'email'
   %td= f.input :shirt_size, as: :select, collection: ['x-small', 'small', 'medium', 'large', 'xl', 'xxl'], include_blank: false, label: false
   %td= link_to_remove_association "x", f, class: 'btn btn-sm btn-danger'
