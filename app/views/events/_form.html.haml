@@ -17,9 +17,9 @@
   .form-group
     = f.input :button_text, label: 'Call to Action', input_html: {value: f.object.button_text || 'SIGN UP'}
   .form-group
-    = f.input :registerable, label: 'Accept Registrations?'
+    = f.input :registerable, as: :boolean, label: 'Accept Registrations?'
   .form-group
-    = f.input :registration_ends_at
+    = f.input :registration_ends_at, as: :datetime
   .form-group
     = f.input :registration_instructions
   .form-actions
