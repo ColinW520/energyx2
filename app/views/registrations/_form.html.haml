@@ -33,14 +33,14 @@
               %label.form-check-label
                 %input#SoloRadio.form-check-input{:name => "registration[subtype]", :type => "radio", :value => "solo"}
                 Solo: I want to register just myself.
-                %strong $50
+                %strong $40
   %br
   .row
     .col-sm-12
       .fieldset
         %legend
           Communication
-          %small.text-danger{style: "font-size: 10px;"}
+          %span.text-danger{style: "font-size: 10px;"}
         .row
           .col-sm-12.col-md-6
             = f.input :email, as: :email, hint: '(for confirmations)', required: true
@@ -52,6 +52,8 @@
       .fieldset
         %legend
           People
+          %span.text-danger{style: "font-size: 10px;"}
+            (Max of 4)
           %small.text-success.pull-right#AddMembers
             = link_to_add_association '+ add', f, :registration_members, "data-association-insertion-node" => "tbody#members", :"data-association-insertion-method" => "append", class: 'btn btn-sm btn-success text-info'
         %table.table.table-bordered
@@ -84,15 +86,29 @@
             Cancel
 %script{:src => "https://checkout.stripe.com/checkout.js"}
 :coffeescript
+  check_to_hide_or_show_add_link = ->
+    if $('#members .nested-fields').length == 4
+      $('#AddMembers a').hide()
+    else
+      $('#AddMembers a').show()
+    return
+
+  $ ->
+    check_to_hide_or_show_add_link()
+
+  $('#members').on 'cocoon:after-insert', ->
+    check_to_hide_or_show_add_link()
+
+  $('#members').on 'cocoon:after-remove', ->
+    check_to_hide_or_show_add_link()
+
   $('.form-check-input').change ->
-    console.log 'seeing change'
     if $('#SoloRadio').is(':checked')
       $('#TeamNameHolder').hide()
     else
       $('#TeamNameHolder').show()
 
-
-  handler = StripeCheckout.configure(
+  stripe_handler = StripeCheckout.configure(
     key: gon.stripe_publishable_key
     locale: 'auto'
     name: "EnergyX Fitness"
@@ -108,15 +124,15 @@
     $(this).prop 'disabled', true
     if $('#SoloRadio').is(':checked')
       $('#TeamNameHolder').hide()
-      amount = 5000
+      amount = 4000
     else
       $('#TeamNameHolder').show()
       amount = 8000
     e.preventDefault()
     # Needs to be an integer!
-    handler.open
+    stripe_handler.open
       amount: Math.round(amount)
       email: $('input#registration_email').val()
 
   window.addEventListener 'popstate', ->
-    handler.close()
+    stripe_handler.close()

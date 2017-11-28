@@ -17,7 +17,7 @@ class Registration < ApplicationRecord
 
     charge = Stripe::Charge.create(
       :customer    => customer.id,
-      :amount      => self.subtype == 'team' ? 8000 : 5000,
+      :amount      => self.subtype == 'team' ? 8000 : 4000,
       :description => "ENERGYX #{self.event.name} Registration",
       :currency    => 'usd'
     )

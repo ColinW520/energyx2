@@ -6,8 +6,15 @@
         .row
           .col-sm-12.col-md-6.col-lg-6
             .text-center
-              %hr
+              - if @event.promo_image.present?
+                %img.img-fluid{src: @event.promo_image.url}
+                %br
+                %br
               %h1= @event.name
+              %p.lead.badge.badge-primary.mb-1= local_time @event.starts_at
+              %p= @event.description
+              %hr
+              %h4 Registration Instructions
               %p= @event.registration_instructions
           .col-sm-12.col-md-6.col-lg-6
             .card
