@@ -1,0 +1,17 @@
+%tr.item{id: "coach_#{coach.id}", "data-item-id"=> "#{coach.id}", "data-item-path"=>"coaches"}
+  %td
+    %i.fa.fa-arrows-v
+  %td
+    %img.img-fluid.img-thumbnail{src: coach.profile_image.url(:thumb)}
+  %td= coach.name
+  %td= coach.bio.truncate(100)
+  %td= local_time coach.updated_at, format: "%m/%d/%Y"
+  %td= coach.studio_sessions.count
+  %td.actions
+    .btn-group.pull-right
+      = link_to edit_coach_path(coach), remote: true, class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-edit
+        Edit
+      = link_to coach_path(coach), remote: true, method: :delete, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash
+        Destroy
