@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   friendly_id :name, use: :slugged
 
   has_attached_file :promo_image,
+    s3_protocol: :https,
     styles: {
       thumb: '250x200#',
     },

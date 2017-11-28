@@ -27,6 +27,7 @@ module Energyx2
     config.active_job.queue_adapter = :sidekiq
 
     config.paperclip_defaults = {
+      s3_protocol: :https,
       storage: :s3,
       s3_region: ENV['AWS_REGION'],
       s3_credentials: {
