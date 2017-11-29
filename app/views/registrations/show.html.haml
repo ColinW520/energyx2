@@ -1,5 +1,9 @@
 - provide(:title, "#{@event.name} Registration Confirmation")
 %section#Confirmation
+  %br
+  .text-center
+    %img.img-fluid{src: asset_url("energyx_fitness_san_antonio.png"), style: "max-width: 500px;"}
+  %br
   %hr
   .container
     .section-header
@@ -8,11 +12,15 @@
           .col-sm-12.col-md-8.col-lg-6.col-centered
             .unobtrusive-flash-container{style: "z-index: 100000"}
             .text-center
-              %img.img-fluid{src: "http://g.recordit.co/gDusHx99Ei.gif"}
-              %br
               %br
               %h1.text-success SUCCESS
-              %p.lead= "Your registration for #{@event.name} is complete! The details you submitted are below. If you need to make any changes, click the 'EDIT' button!"
+              %h4
+                Your registration for
+                %strong= @event.name
+                is complete!
+              %p
+                The details you submitted are below. Please save this page as it serves as your confirmation.
+                You can edit your contact info, or People any time.
 
   .section-content
     .container
@@ -20,7 +28,14 @@
         .col-sm-10.col-md-8.col-lg-4.col-centered
           .card
             .card-block
-              %h4 Details
+              .row
+                .col-sm-4
+                  %h4 Details
+                .col-sm-8
+                  .pull-right
+                    = link_to edit_event_registration_path(@event, @registration), class: 'btn btn-sm btn-info' do
+                      %i.fa.fa-edit
+                      Edit
             %table.table.table-bordered
               %thead
               %tbody
@@ -34,6 +49,16 @@
                     %strong Team Name
                   %td
                     = @registration.try :name
+                %tr
+                  %td
+                    %strong Phone
+                  %td
+                    = @registration.phone
+                %tr
+                  %td
+                    %strong Email
+                  %td
+                    = @registration.email
                 %tr
                   %td
                     %strong Paid?
