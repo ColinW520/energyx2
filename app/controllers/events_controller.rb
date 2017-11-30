@@ -4,14 +4,18 @@ class EventsController < ApplicationController
   layout :resolve_layout
 
   def index
-    events_scope = Event.upcoming
+    if current_user.present?
+      events_scope = Event.upcoming
 
-    respond_to do |format|
-      format.html {
-        smart_listing_create :events, events_scope, partial: 'events/listing', default_sort: { starts_at: :asc }
-      }
-      format.js { smart_listing_create :events, events_scope, partial: 'events/listing', default_sort: { starts_at: :asc } }
-      format.csv { send_data events_scope.to_csv, filename: "events_as_of-#{Time.now}.csv" }
+      respond_to do |format|
+        format.html {
+          smart_listing_create :events, events_scope, partial: 'events/listing', default_sort: { starts_at: :asc }
+        }
+        format.js { smart_listing_create :events, events_scope, partial: 'events/listing', default_sort: { starts_at: :asc } }
+        format.csv { send_data events_scope.to_csv, filename: "events_as_of-#{Time.now}.csv" }
+      end
+    else
+      redirect_to new_event_registration_path(Event.upcoming.first)
     end
   end
 
