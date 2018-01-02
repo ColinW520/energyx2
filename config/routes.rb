@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   match '/terms' => "static_pages#terms", via: [:get]
   match '/instagram' => "static_pages#instagram", via: [:get]
   match '/join' => "static_pages#join", via: [:get]
+  match '/blog' => "articles#list", via: [:get], as: 'blog'
   post '/contact', to: 'static_pages#contact', as: 'contact'
 
   # The User-facing App

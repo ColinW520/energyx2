@@ -1,0 +1,23 @@
+%section
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-8.col-lg-6.col-centered
+            .text-center
+              %h1 BLOG
+              %hr
+              %br
+              %em.lead Something catchy here.
+    .section-content
+      .row
+        - @articles.each do |article|
+          .col-sm-12.col-md-4.col-lg-3
+            .card.mb-3
+              %img.card-img-top.img-fluid{alt: article.title, src: article.hero_image.url}
+              .card-block{style: "background-color: #fff;"}
+                %h4.card-title= article.title
+                %span.badge.badge-primary.mb-1= local_time article.available_at
+                %p.card-text= article.preview_text
+              .card-footer
+                %a.btn.btn-success.btn-sm.text-info{href: article_path(article)} Read

@@ -1,0 +1,22 @@
+.row
+  .col-sm-12
+    .card.card-outline-primary.table-card
+      .table-responsive
+        %table.table.table-hover#sortable
+          %thead.thead-inverse
+            %th Hero Image
+            %th= smart_listing.sortable 'Title', :title
+            %th Preview Text
+            %th= smart_listing.sortable 'Available', :available_at
+            %th= smart_listing.sortable 'Updated', :updated_at
+            %th
+          %tbody#articles
+            - smart_listing.collection.each do |article|
+              = render article
+        %br
+%br
+.row
+  .col-sm-12
+    .pull-right
+      = smart_listing.paginate
+      = smart_listing.pagination_per_page_links

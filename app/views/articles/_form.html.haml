@@ -1,0 +1,17 @@
+= simple_form_for [@article], authenticity_token: true, html: { id: 'EventForm', multipart: true } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  .form-group
+    = f.input :title, autofocus: true, required: true
+  .form-group
+    = f.input :available_at, as: :datetime, required: true
+  .form-group
+    = f.input :preview_text, as: :text
+  .form-group
+    = f.input :hero_image, label: 'Hero Image', as: :file
+  .form-group
+    = f.input :body, as: :text, input_html: { class: 'code_editor' }, required: true
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-md btn-success'

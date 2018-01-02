@@ -1,0 +1,18 @@
+%tr.item{id: "article_#{article.id}", "data-item-id"=> "#{article.id}", "data-item-path"=>"articles"}
+  %td
+    %img.img-fluid.img-thumbnail{src: article.hero_image.url(:thumb)}
+  %td= article.title
+  %td= article.preview_text.truncate(100)
+  %td= local_time article.created_at, format: "%m/%d/%Y"
+  %td= local_time article.available_at, format: "%m/%d/%Y"
+  %td.actions
+    .btn-group.pull-right
+      = link_to article_path(article), class: 'btn btn-sm btn-info' do
+        %i.fa.fa-eye
+        Show
+      = link_to edit_article_path(article), class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-edit
+        Edit
+      = link_to article_path(article), remote: true, method: :delete, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash
+        Destroy
