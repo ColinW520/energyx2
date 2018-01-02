@@ -1,9 +1,10 @@
 class ApplicationController < ActionController::Base
+  include AmazonSignature
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
   protect_from_forgery with: :exception, prepend: true
 
-  before_action :authenticate_user!, :set_xhr_flag, :gon_setup, :set_subnav
+  before_action :authenticate_user!, :set_xhr_flag, :send_env_js, :set_subnav
   after_action :prepare_unobtrusive_flash
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
@@ -24,12 +25,18 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def set_xhr_flag
-    @xhr = request.xhr?
+  def send_env_js
+    gon.user_id = current_user.try(:id) if current_user.present?
+    gon.rails_environment = Rails.env
+    gon.froala_key = ENV['FROALA_KEY']
+    gon.aws_bucket = ENV['S3_BUCKET_NAME']
+    gon.aws_region = ENV['S3_REGION']
+    gon.aws_hash = AmazonSignature::data_hash
+    gon.stripe_publishable_key = ENV['STRIPE_PUBLISHABLE_KEY']
   end
 
-  def gon_setup
-    gon.stripe_publishable_key = ENV['STRIPE_PUBLISHABLE_KEY']
+  def set_xhr_flag
+    @xhr = request.xhr?
   end
 
   def set_subnav

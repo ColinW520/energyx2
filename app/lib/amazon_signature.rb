@@ -35,7 +35,8 @@ module AmazonSignature
       :bucket =>ENV['S3_BUCKET_NAME'],
       :acl => 'public-read',
       :key_start => 'uploads/',
-      :access_key => ENV['AWS_ACCESS_KEY_ID']
+      :access_key => ENV['AWS_ACCESS_KEY_ID'],
+      :region => ENV['S3_REGION']
     }
   end
 end

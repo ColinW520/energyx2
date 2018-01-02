@@ -9,6 +9,11 @@
             %i.fa.fa-dashboard.fa-lg
             Dashboard
 
+        %a{href: articles_path}
+          %li{class: @subnav == 'articles' ? 'active' : nil}
+            %i.fa.fa-newspaper-o
+            Articles
+
         %a{href: events_path}
           %li{class: @subnav == 'events' ? 'active' : nil}
             %i.fa.fa-glass

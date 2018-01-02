@@ -55,6 +55,10 @@ Rails.application.routes.draw do
     get :list, on: :collection
   end
 
+  resources :articles do
+    get :list, on: :collection
+  end
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
@@ -65,7 +69,6 @@ Rails.application.routes.draw do
   namespace :twilio do
     resources :submissions, only: [:create]
   end
-
 
   # Admin Space
   require 'sidekiq/web'

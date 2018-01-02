@@ -8,6 +8,36 @@ $ ->
     e.preventDefault()
     $('#wrapper').toggleClass 'toggled'
 
+  $('.code_editor').each ->
+    console.log 'seeing code editor'
+    $(this).froalaEditor
+      key: gon.froala_key
+      inlineMode: false
+      fileUploadToS3:
+        bucket: gon.aws_bucket
+        region: gon.aws_region
+        keyStart: 'uploads/'
+        callback: (url, key) ->
+          console.log url
+          console.log key
+        params:
+          region: gon.aws_region
+          acl: 'public-read'
+          AWSAccessKeyId: gon.aws_hash['access_key']
+          policy: gon.aws_hash['policy']
+          signature: gon.aws_hash['signature']
+      imageUploadToS3:
+        bucket: gon.aws_bucket
+        region: gon.aws_region
+        keyStart: 'uploads/'
+        callback: (url, key) ->
+        params:
+          region: gon.aws_region
+          acl: 'public-read'
+          AWSAccessKeyId: gon.aws_hash['access_key']
+          policy: gon.aws_hash['policy']
+          signature: gon.aws_hash['signature']
+
 $(document).on 'ajax:error', 'form', (evt, xhr, status) ->
   $('div#error_holder').html '<ul id="errors"></ul>'
   errors = jQuery.parseJSON(xhr.responseText)
