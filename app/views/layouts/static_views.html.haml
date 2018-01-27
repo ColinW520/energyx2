@@ -12,6 +12,10 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag "//www.google.com/jsapi", "chartkick"
     = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/Readmore.js/2.2.0/readmore.min.js"
+    %script#mcjs
+      :cdata
+        \!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/9823f8b8e9205a6520b46b0ca/3619db7a7de2e85174aa3c7d0.js");
+
     %title
       = full_title('EnergyX', yield(:title))
     / Start of Async Drift Code
