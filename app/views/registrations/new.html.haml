@@ -21,9 +21,12 @@
               .card-header Registration Form
               .card-block
                 .unobtrusive-flash-container{style: "z-index: 100000"}
-                = render 'form'
-            %br
-            %p.text-muted.text-center
-              %i.fa.fa-info-circle
-              All transactions are securely processed through STRIPE. More information can be found here:
-              %a{href: 'https://stripe.com/docs/security/stripe'} Secure Transactions with Stripe
+                  - if @event.is_free?
+                    = render 'free_form'
+                  - else
+                    = render 'form'
+            -# %br
+            -# %p.text-muted.text-center
+            -#   %i.fa.fa-info-circle
+            -#   All transactions are securely processed through STRIPE. More information can be found here:
+            -#   %a{href: 'https://stripe.com/docs/security/stripe'} Secure Transactions with Stripe

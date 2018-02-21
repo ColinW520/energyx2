@@ -1,14 +1,27 @@
 %tr.item{id: "registration_#{registration.id}", "data-item-id"=> "#{registration.id}"}
   %td= registration.subtype.upcase
-  %td= registration.name
-  %td= mail_to registration.email
-  %td= number_to_phone registration.phone.phony_formatted(normalize: :US, format: :international, spaces: ' ')
+  %td
+    - if registration.subtype == 'solo'
+      = registration.members.first.full_name
+    - else
+      = registration.name
+  %td
+    - if registration.subtype == 'solo'
+      = mail_to registration.members.first.email
+    - else
+      = registration.email
+  %td
+    - if registration.subtype == 'solo'
+      = mail_to registration.members.first.phone
+    - else
+      = registration.phone
   %td= local_time registration.created_at, format: "%m/%d/%Y"
   %td= registration.stripe_charge_id
   %td
-    %ul
-      - registration.members.each do |member|
-        %li= member.name + " - " + member.shirt_size
+    - unless registration.event.is_free?
+      %ul
+        - registration.members.each do |member|
+          %li= member.name + " - " + member.shirt_size
   %td.actions
     .btn-group.pull-right
       = link_to edit_event_registration_path(@event, registration), class: 'btn btn-sm btn-warning' do

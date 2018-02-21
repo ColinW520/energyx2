@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102173847) do
+ActiveRecord::Schema.define(version: 20180221183743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 20180102173847) do
     t.datetime "registration_ends_at"
     t.string   "slug"
     t.text     "registration_instructions"
+    t.boolean  "is_free",                   default: true
   end
 
   create_table "messages", force: :cascade do |t|
@@ -223,6 +224,8 @@ ActiveRecord::Schema.define(version: 20180102173847) do
     t.string   "shirt_size"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "first_name"
+    t.string   "last_name"
     t.index ["registration_id"], name: "index_registration_members_on_registration_id", using: :btree
   end
 

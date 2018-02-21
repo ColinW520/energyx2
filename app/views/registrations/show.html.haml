@@ -18,81 +18,121 @@
                 Your registration for
                 %strong= @event.name
                 is complete!
-              %p
-                The details you submitted are below. Please save this page as it serves as your confirmation.
-                You can edit your contact info, or People any time.
+              %p The details you submitted are below!
+  - if @event.is_free?
+    .section-content
+      .container
+        .row
+          .col-sm-10.col-md-8.col-lg-4.col-centered
+            .card
+              .card-block
+                .row
+                  .col-sm-4
+                    %h4 Details
+                  .col-sm-8
+                    .pull-right
+                      = link_to edit_event_registration_path(@event, @registration), class: 'btn btn-sm btn-info' do
+                        %i.fa.fa-edit
+                        Edit
+              %table.table.table-bordered
+                %thead
+                %tbody
+                  %tr
+                    %td
+                      %strong Event Name
+                    %td= @event.name.titleize
+                  %tr
+                    %td
+                      %strong Event Starts At
+                    %td= local_time @event.starts_at
+                  %tr
+                    %td
+                      %strong First Name
+                    %td= @the_member.first_name
+                  %tr
+                    %td
+                      %strong Last Name
+                    %td= @the_member.last_name
+                  %tr
+                    %td
+                      %strong Phone
+                    %td= @the_member.phone
+                  %tr
+                    %td
+                      %strong Email
+                    %td= @the_member.email
+  - else
+    .section-content
+      .container
+        .row
+          .col-sm-10.col-md-8.col-lg-4.col-centered
+            .card
+              .card-block
+                .row
+                  .col-sm-4
+                    %h4 Details
+                  .col-sm-8
+                    .pull-right
+                      = link_to edit_event_registration_path(@event, @registration), class: 'btn btn-sm btn-info' do
+                        %i.fa.fa-edit
+                        Edit
+              %table.table.table-bordered
+                %thead
+                %tbody
+                  %tr
+                    %td
+                      %strong Type
+                    %td
+                      = @registration.subtype.upcase
+                  %tr
+                    %td
+                      %strong Team Name
+                    %td
+                      = @registration.try :name
+                  %tr
+                    %td
+                      %strong Phone
+                    %td
+                      = @registration.phone
+                  %tr
+                    %td
+                      %strong Email
+                    %td
+                      = @registration.email
+                  %tr
+                    %td
+                      %strong Paid?
+                    %td
+                      - if @registration.is_paid?
+                        %i.fa.fa-check.text-success
+                        = number_to_currency @charge.amount / 100
+                        with
+                        -case @charge.source.brand
+                          -when 'Visa'
+                            %i.fa.fa-cc-visa
+                          -when 'American Express'
+                            %i.fa.fa-cc-amex
+                          -when 'MasterCard'
+                            %i.fa.fa-cc-mastercard
+                          -when 'Discover'
+                            %i.fa.fa-cc-discover
+                          -else
+                            %i.fa.fa-cc-alt
+                        = @charge.source.last4
+                      - else
+                        %i.fa.fa-alert-circle.text-danger
+                        = mail_to 'contact@energyxfitness.com'
 
-  .section-content
-    .container
-      .row
-        .col-sm-10.col-md-8.col-lg-4.col-centered
-          .card
-            .card-block
-              .row
-                .col-sm-4
-                  %h4 Details
-                .col-sm-8
-                  .pull-right
-                    = link_to edit_event_registration_path(@event, @registration), class: 'btn btn-sm btn-info' do
-                      %i.fa.fa-edit
-                      Edit
-            %table.table.table-bordered
-              %thead
-              %tbody
-                %tr
-                  %td
-                    %strong Type
-                  %td
-                    = @registration.subtype.upcase
-                %tr
-                  %td
-                    %strong Team Name
-                  %td
-                    = @registration.try :name
-                %tr
-                  %td
-                    %strong Phone
-                  %td
-                    = @registration.phone
-                %tr
-                  %td
-                    %strong Email
-                  %td
-                    = @registration.email
-                %tr
-                  %td
-                    %strong Paid?
-                  %td
-                    - if @registration.is_paid?
-                      %i.fa.fa-check.text-success
-                      = number_to_currency @charge.amount / 100
-                      with
-                      -case @charge.source.brand
-                        -when 'Visa'
-                          %i.fa.fa-cc-visa
-                        -when 'American Express'
-                          %i.fa.fa-cc-amex
-                        -when 'MasterCard'
-                          %i.fa.fa-cc-mastercard
-                        -when 'Discover'
-                          %i.fa.fa-cc-discover
-                        -else
-                          %i.fa.fa-cc-alt
-                      = @charge.source.last4
-                    - else
-                      %i.fa.fa-alert-circle.text-danger
-                      = mail_to 'contact@energyxfitness.com'
-
-                %tr
-                  %td
-                    %strong Charged On
-                  %td= local_time @registration.created_at, format: "%m/%d/%y"
-                %tr
-                  %td
-                    %strong Members
-                  %td
-                    %ul
-                      - @registration.members.each do |m|
-                        %li= m.name + " - " + m.shirt_size
+                  %tr
+                    %td
+                      %strong Charged On
+                    %td= local_time @registration.created_at, format: "%m/%d/%y"
+                  %tr
+                    %td
+                      %strong Members
+                    %td
+                      %ul
+                        - @registration.members.each do |m|
+                          %li= m.name + " - " + m.shirt_size
 
 %section{style: "height: 300px;"}

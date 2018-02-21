@@ -19,6 +19,8 @@
   .form-group
     = f.input :registerable, as: :boolean, label: 'Accept Registrations?'
   .form-group
+    = f.input :is_free, as: :boolean, label: 'Use Free Form?'
+  .form-group
     = f.input :registration_ends_at, as: :datetime
   .form-group
     = f.input :registration_instructions

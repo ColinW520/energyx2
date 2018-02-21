@@ -1,0 +1,31 @@
+= simple_form_for [@event, @registration], authenticity_token: true, html: { id: 'RegistrationForm' } do |f|
+  - if @registration.errors.any?
+    .row
+      .col-sm-12
+        #error_explanation
+          %h2.text-danger
+            = pluralize(@registration.errors.count, "error")
+            prohibited this registration from being saved:
+          %ul
+            - @registration.errors.full_messages.each do |message|
+              %li= message
+  .row
+    .col-sm-12
+      .fieldset
+        = f.fields_for :registration_members do |member|
+          = render 'free_registration_member_fields', f: member
+  %br
+  .row
+    .col-sm-12
+      .form-group
+        .actions
+          .pull-right
+            = f.hidden_field :event_id, value: @event.id
+            = f.hidden_field :subtype, value: 'solo'
+            - if @registration.persisted?
+              = f.button :submit, 'Update', class: 'btn btn-md btn-outline-success text-info'
+            - else
+              = f.button :submit, 'Register For Free', class: 'btn btn-success btn-md text-info'
+          = link_to event_path(@event), class: 'btn btn-sm btn-warning' do
+            %i.fa.fa-arrow-left
+            Go Back

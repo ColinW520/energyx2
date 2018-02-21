@@ -19,7 +19,11 @@ class RegistrationsController < ApplicationController
   def new
     @event = Event.friendly.find params[:event_id]
     @registration = Registration.new(event_id: @event.id)
-    2.times { @registration.registration_members.build }
+    if @event.is_free?
+      1.times { @registration.registration_members.build }
+    else
+      2.times { @registration.registration_members.build }
+    end
     gon.stripe_description = "Registration for #{@event.name}"
   end
 
@@ -29,7 +33,7 @@ class RegistrationsController < ApplicationController
 
     respond_to do |format|
       if @registration.save
-        @registration.create_charge(params)
+        @registration.create_charge(params) unless @event.is_free?
         format.html {
           flash[:danger] = 'Registration has been created.'
           redirect_to event_registration_path(@event, @registration)
@@ -46,7 +50,11 @@ class RegistrationsController < ApplicationController
   end
 
   def show
-    @charge = Stripe::Charge.retrieve(@registration.stripe_charge_id)
+    if @event.is_free?
+      @the_member = @registration.members.first
+    else
+      @charge = Stripe::Charge.retrieve(@registration.stripe_charge_id)
+    end
   end
 
   def edit
