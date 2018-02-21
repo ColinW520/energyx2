@@ -34,7 +34,7 @@ class RegistrationsController < ApplicationController
     respond_to do |format|
       if @registration.save
         @registration.create_charge(params) unless @event.is_free?
-        ConfirmationMailer.confirmation_event_registration(@registration.id).deliver_later
+        ConfirmationMailer.event_registration(@registration.id).deliver_later
         format.html {
           flash[:danger] = 'Your Registration has been created.'
           redirect_to event_registration_path(@event, @registration)
