@@ -6,6 +6,13 @@ class Registration < ApplicationRecord
 
   validate :require_members
 
+  def contact_email
+    if self.subtype == 'solo' && self.event.is_free?
+      self.members.first.email
+    else
+      self.email
+    end
+  end
 
   def create_charge(params)
     raise 'Not Allowed -- Card has already been charged for this registration.' if self.is_paid?
