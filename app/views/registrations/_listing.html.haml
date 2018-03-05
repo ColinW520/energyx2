@@ -2,7 +2,7 @@
   .col-sm-12
     .card.card-outline-primary.table-card
       .table-responsive
-        %table.table.table-condensed
+        %table.table
           %thead.thead-inverse
             %th= smart_listing.sortable 'Type', :subtype
             %th= smart_listing.sortable 'Name', :name
@@ -13,8 +13,8 @@
             %th Members
             %th
           %tbody#registrations
-            - smart_listing.collection.each do |registration|
-              = render registration
+            - smart_listing.collection.each do |r|
+              = render r
         %br
 %br
 .row

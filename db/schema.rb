@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221183743) do
+ActiveRecord::Schema.define(version: 20180305174544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20180221183743) do
     t.string   "slug"
     t.text     "registration_instructions"
     t.boolean  "is_free",                   default: true
+    t.integer  "cap_size"
   end
 
   create_table "messages", force: :cascade do |t|

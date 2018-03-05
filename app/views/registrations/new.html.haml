@@ -17,14 +17,19 @@
               %h4 Registration Instructions
               %p= @event.registration_instructions
           .col-sm-12.col-md-6.col-lg-6
-            .card
-              .card-header Registration Form
-              .card-block
-                .unobtrusive-flash-container{style: "z-index: 100000"}
-                  - if @event.is_free?
-                    = render 'free_form'
-                  - else
-                    = render 'form'
+            - if @event.open_for_registration?
+              .card
+                .card-header Registration Form
+                .card-block
+                  .unobtrusive-flash-container{style: "z-index: 100000"}
+                    - if @event.is_free?
+                      = render 'free_form'
+                    - else
+                      = render 'form'
+            - else
+              %div.alert.alert-danger
+                %h2 We're all booked up!
+                %p All of the available spots for this event have been claimed. Please check back later in case we open up more! Thanks!
             -# %br
             -# %p.text-muted.text-center
             -#   %i.fa.fa-info-circle

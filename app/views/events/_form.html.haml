@@ -7,6 +7,8 @@
   .form-group
     = f.input :starts_at, as: :datetime, required: true
   .form-group
+    = f.input :cap_size, as: :integer, hint: "The maximum number of registrations allowed.", required: true,  input_html: {value: f.object.cap_size || 50}
+  .form-group
     = f.input :link, as: :url
   .form-group
     = f.input :description, as: :text, required: true
@@ -16,6 +18,7 @@
     = f.input :address, label: 'Where is it?', as: :text
   .form-group
     = f.input :button_text, label: 'Call to Action', input_html: {value: f.object.button_text || 'SIGN UP'}
+
   .form-group
     = f.input :registerable, as: :boolean, label: 'Accept Registrations?'
   .form-group
