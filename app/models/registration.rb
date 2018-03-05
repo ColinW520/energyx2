@@ -37,6 +37,20 @@ class Registration < ApplicationRecord
     self.save!
   end
 
+  def self.to_csv
+    header = ['Event Name', 'First Name', 'Last Name', 'Phone']
+    attributes = []
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |t|
+        csv << attributes.map { |attr| attr == 'tags' ? t.tags.pluck(:name).split(',').join('|') : t.send(attr) }
+      end
+    end
+  end
+
+
   private
     def require_members
       errors.add(:base, "You must have at least one person on your registration.") if self.subtype == 'solo' && members.size < 1
