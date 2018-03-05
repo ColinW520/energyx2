@@ -8,7 +8,7 @@ class RegistrationsController < ApplicationController
     registrations_scope = @event.registrations
 
     respond_to do |format|
-      format.html { smart_listing_create :registrations, registrations_scope, partial: 'registrations/listing', default_sort: { created_at: :desc }, page_sizes: [2, 200, 300] }
+      format.html { smart_listing_create :registrations, registrations_scope, partial: 'registrations/listing', default_sort: { created_at: :desc }, page_sizes: [100, 200, 300] }
       format.js { smart_listing_create :registrations, registrations_scope, partial: 'registrations/listing', default_sort: { created_at: :desc } }
       # format.csv { send_data registrations_scope.to_csv, filename: "registrations_as_of-#{Time.now}.csv" }
     end
