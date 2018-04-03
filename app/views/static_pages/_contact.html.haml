@@ -9,23 +9,26 @@
   .section-content
     .row
       .col-xs-10.col-sm-10.col-md-8.col-lg-6.col-centered
-        .card.card-outline-success{style: "margin: 0% 10% 0% 10%"}
+        .card.card-success{style: "margin: 0% 10% 0% 10%"}
           .card-block
             = form_tag contact_path, method: 'post', html: { role: "form" } do
               .row
                 .col-sm-12.col-md-6
                   .form-group
-                    %label.control-label Name
-                    = text_field_tag :name, @name, placeholder: "Enter your name...", class: "form-control"
+                    %label.control-label.text-white
+                      %strong Name
+                    = text_field_tag :name, @name, placeholder: "Enter your name...", class: "form-control text-white"
                 .col-sm-12.col-md-6
                   .form-group
-                    %label.control-label Email
-                    = text_field_tag :email, @email, placeholder: "Enter your email...", class: "form-control"
+                    %label.control-label.text-white
+                      %strong Email
+                    = text_field_tag :email, @email, placeholder: "Enter your email...", class: "form-control text-white"
                 .col-sm-12
                   .form-group
-                    %label.control-label Message
-                    = text_area_tag :message, @message, placeholder: "Enter your message...", rows: 2, class: "form-control", style: "min-height: 100px;"
+                    %label.control-label.text-white
+                      %strong Message
+                    = text_area_tag :message, @message, placeholder: "Enter your message...", rows: 2, class: "form-control text-white", style: "min-height: 100px;"
               .form-group
                 = hidden_field_tag 'spam_check', 'gotcha.'
               .text-center
-                = submit_tag 'Submit', class: 'btn btn-block btn-success btn-md', style: "color: #000"
+                = submit_tag 'Submit', class: 'btn btn-block btn-info text-white btn-md', style: "color: #000"

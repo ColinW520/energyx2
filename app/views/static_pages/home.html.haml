@@ -19,6 +19,55 @@
         %span.text-white
           *Your first class is free!
 
+%section#Trust{style: "background-color: #3c3c3c"}
+  %hr
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-8.col-lg-6.col-centered
+            .text-center
+              %h2.text-white Success
+              .lead.text-white No matter how you define success, we've seen it here. Maybe for you, success means losing that weight, or competing in that event, or simply the joy of being at your best. Here are just a few success stories from some friends of ours. We can't wait for you to join their ranks!
+    .section-content
+      .row
+        .col-sm-1.col-md-3
+          .card.mb-2
+            .card.card-outline-success
+              .card-block
+                %img.figure-img.img-fluid.rounded-square{alt: 'michele-mcmurry', src: "https://farm2.staticflickr.com/1464/26216621965_45548dd391_o.png"}
+                %figcaption.figure-caption
+                  %h4.lead Michele McMurry
+                  %hr
+                  %p I have been attending classes at EnergyX Fitness since its opening. What attracted me initially was the convenience of walking to the studio that is very near my home. What has kept me coming back is a team of experienced, professional instructors that work to ensure each client achieves his or her fitness goals. Alison, for example, through private physical training, helped me recover from an unrelated back injury, and she continues to encourage and push me to new levels. I appreciate the variety of class offerings that incorporate rowing, strength training and even yoga for a customized, comprehensive workout.
+        .col-sm-1.col-md-3
+          .card.mb-2
+            .card.card-outline-success
+              .card-block
+                %img.figure-img.img-fluid.rounded-square{alt: 'vanessa-ramirez', src: "https://farm2.staticflickr.com/1451/25613961693_10610aeea2_o.jpg"}
+                %figcaption.figure-caption
+                  %h4.lead Vanessa Ramirez
+                  %hr
+                  %p EnergyX is an amazing full body workout. I love the combination of rowers and TRX. I am seeing great results all over my body, and it's perfect cross training for my running. Not to mention the classes are a blast! 
+        .col-sm-1.col-md-3
+          .card.mb-2
+            .card.card-outline-success
+              .card-block
+                %img.figure-img.img-fluid.rounded-square{alt: 'megg-alvizo', src: "https://farm2.staticflickr.com/1503/25943750740_511512903c_o.jpg"}
+                %figcaption.figure-caption
+                  %h4.lead Megg Alvizo
+                  %hr
+                  %p EnergyX may be the only Rowing studio in San Antonio but that's not why I go there. Personal touch; when I look for a gym, a box, or a studio I need to feel comfortable and most importantly wanted. The way these trainers truly care and take the time to get to know you is like no other. What they are doing in this studio is magical and getting to feel like a part of that makes you feel powerful. This studio isn't worth checking out, it's worth becoming a part of.
+        .col-sm-1.col-md-3
+          .card.mb-2
+            .card.card-outline-success
+              .card-block
+                %img.figure-img.img-fluid.rounded-square{alt: 'colin', src: "https://scontent-dfw5-1.xx.fbcdn.net/v/t31.0-8/15016386_2635007433161_2872230187799279575_o.jpg?_nc_cat=0&oh=da86d58ac005a51774f898974d8f38d3&oe=5B6B2D0D"}
+                %figcaption.figure-caption
+                  %h4.lead Colin Hagan
+                  %hr
+                  %p As a competitive trail runner racing distances from 10k to 50 miles, no workout has been better for keeping me fit and healthy throughout my training blocks. Running alone isn't enough. The crew at EnergyX mixes up the core, cardio, balance, strenght, and neuro training <b>perfectly</b> for me to be at my best, no matter how far I'm running.
+%section#BgDiv5
 
 %section#Leaderboard
   %hr
@@ -28,7 +77,7 @@
         .row
           .col-sm-12.col-md-8.col-lg-6.col-centered
             .text-center
-              %h1 #XCrew Challenges
+              %h2 #XCrew Challenges
               %p.lead The more you row, the higher you go! Join the challenge!
               = link_to join_path, class: 'btn btn-success btn-md', style: "color: #000" do
                 %i.fa.fa-trophy
@@ -49,7 +98,7 @@
         .row
           .col-sm-12.col-md-8.col-lg-6.col-centered
             .text-center
-              %h1 SCHEDULE
+              %h2 SCHEDULE
               %p
                 This is our general, weekly schedule. For the the most up-to-date info, check out our
                 %a{href: 'https://clients.mindbodyonline.com/classic/home?studioid=226360'} direct booking site.
@@ -69,7 +118,7 @@
         .row
           .col-sm-12.col-md-8.col-lg-6.col-centered
             .text-center
-              %h1 EVENTS
+              %h2 EVENTS
               %p You don't always have to work out to hang out, sometimes we also go out! Check out what we've got planned.
     .section-content
       #events_placeholder
