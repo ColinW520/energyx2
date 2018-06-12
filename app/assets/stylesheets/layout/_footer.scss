@@ -7,7 +7,7 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 300px;
   overflow-x: hidden !important;
 }
 
@@ -16,7 +16,7 @@ body {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 60px;
+  height: 300px;
   line-height: 60px; /* Vertically center the text there */
-  background-color: $gray-lighter;
+  background-color: $gray;
 }

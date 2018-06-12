@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
 
   def instagram
     client = Instagram.client(access_token: ENV['INSTAGRAM_TOKEN'])
-    @posts = client.user_recent_media.first(4)
+    @posts = client.user_recent_media.first(2)
   end
 
   def contact

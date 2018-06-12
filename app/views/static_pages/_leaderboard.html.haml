@@ -1,78 +1,19 @@
-.row
-  .col-sm-12.col-md-6.col-lg-4.col-centered
-    .leaderboard
-      .leaderboard-title
-        .text-center
-          %h3 RowBoard
-          %p The more you row, the higher you'll go!
-      %ul.list-group.leaderboard-list
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 50,000
-          Andy
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 49,000
-          Wes
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 48,000
-          Meg
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 46,000
-          Colin
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 42,000
-          Carly
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 41,000
-          Brian
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 39,500
-          James
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 32,500
-          Bill
-  .col-sm-12.col-md-6.col-lg-4.col-centered
-    .leaderboard
-      .leaderboard-title
-        .text-center
-          %h3 ShowBoard
-          %p Move up the ranks just by showing up to class!
-      %ul.list-group.leaderboard-list
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 14
-          Paul
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 11
-          Katrina
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 10
-          Katie
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 9
-          Sarah
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 9
-          Allie
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 9
-          Rose
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 9
-          Carlos
-        %li.list-group-item
-          %span.tag.tag-pill.float-xs-right 7
-          Mike
-.row
-  .col-sm-8.col-centered
-    .card.card-outline-primary
-      .card-block
-        %h3.text-center Get Your Stats
-        %p.text-center Want to see your current leaderboard position?
-        %form.form-inline
-          %label{:for => "inlineFormInput", style: 'padding-right: 5px;'} Last Name:
-          %input#inlineFormInput.form-control.mb-2.mr-sm-2.mb-sm-0{:placeholder => "Jane Doe", :type => "text"}/
-          %label{:for => "inlineFormInputGroup"} Phone Number:
-          .input-group.mb-2.mr-sm-2.mb-sm-0
-            .input-group-addon +1
-            %input#inlineFormInputGroup.form-control{:placeholder => "2106875309", :type => "text"}/
-          %a.btn.btn-md.btn-success
-            .text-white Search
+%section#Leaderboard
+  %hr
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-8.col-lg-6.col-centered
+            .text-center
+              %h2 #XCrew Challenges
+              %p.lead The more you row, the higher you go! Join the challenge!
+              = link_to join_path, class: 'btn btn-success btn-md', style: "color: #000" do
+                %i.fa.fa-trophy
+                JOIN
+  .section-content
+    .row
+      .col-sm-12
+        #leaderboard_placeholder.text-center
+          %p.lead
+            %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw

@@ -409,6 +409,7 @@ DEPENDENCIES
   gon
   groupdate
   haml-rails
+  hashie (>= 3.5.2)
   html2haml
   httparty
   instagram!

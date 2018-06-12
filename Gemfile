@@ -53,6 +53,7 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'phony_rails' # keeps phone numbers consistent.
 gem 'ranked-model'
 gem 'cocoon'
+gem 'hashie', '>= 3.5.2'
 
 # Third Party Stuff
 gem 'twilio-ruby'
