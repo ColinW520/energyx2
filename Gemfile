@@ -39,6 +39,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'select2-rails'
 gem 'meta-tags'
 gem 'httparty'
+gem 'fullcalendar-rails'
 
 # Database Stuff
 gem 'pg', '~> 0.18'
@@ -53,12 +54,13 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'phony_rails' # keeps phone numbers consistent.
 gem 'ranked-model'
 gem 'cocoon'
-gem 'hashie', '>= 3.5.2'
 
 # Third Party Stuff
 gem 'twilio-ruby'
 gem 'instagram',  :git => 'git://github.com/facebookarchive/instagram-ruby-gem.git'
+gem 'hashie', '>= 3.5.2'
 gem 'stripe'
+gem 'mindbody-api', :git => 'git://github.com/wingrunr21/mindbody-api.git'
 
 
 group :development, :test do

@@ -22,11 +22,11 @@
           %a.nav-link{href: action_name == 'home' ? "#Coaches" : "https://energyxfitness.com/#Coaches"}
             %i.fa.fa-street-view
             Coaches
-        - if Challenge.active.count > 0
-          %li.nav-item.text-center
-            %a.nav-link{href: action_name == 'home' ? "#Leaderboard" : "https://energyxfitness.com/#Leaderboard"}
-              %i.fa.fa-trophy
-              Leaderboard
+        -# - if Challenge.active.count > 0
+        -#   %li.nav-item.text-center
+        -#     %a.nav-link{href: action_name == 'home' ? "#Leaderboard" : "https://energyxfitness.com/#Leaderboard"}
+        -#       %i.fa.fa-trophy
+        -#       Leaderboard
         %li.nav-item.text-center
           %a.nav-link{href: "tel:+12106084241"}
             %i.fa.fa-phone

@@ -13,6 +13,9 @@ class StaticPagesController < ApplicationController
     @posts = client.user_recent_media.first(2)
   end
 
+  def nutrition
+  end
+
   def contact
     @name = params[:name]
     @email = params[:email]
