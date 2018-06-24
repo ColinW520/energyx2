@@ -25,32 +25,3 @@
           %tr
             %td= p.name
             %td= p.mobile_phone
-
-%hr
-.row
-  .col-sm-12.col-md-6
-    %h2 Page Views
-    = column_chart Ahoy::Event.not_user.group_by_day(:time, time_zone: Time.zone).count, library: { position:  'bottom'}
-    %table.table
-      %thead.thead-inverse
-        %th Page
-        %th Views
-      %tbody
-        - @page_data.each do |page|
-          %tr
-            %td= page[0]
-            %td= page[1]
-
-
-  .col-sm-12.col-md-6
-    %h2 Visits
-    = column_chart Visit.not_user.group_by_day(:started_at, time_zone: Time.zone).count, library: { position:  'bottom'}
-    %table.table
-      %thead.thead-inverse
-        %th City
-        %th Visits
-      %tbody
-        - @city_data.each do |city|
-          %tr
-            %td= city[0]
-            %td= city[1]

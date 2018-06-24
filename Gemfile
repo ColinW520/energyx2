@@ -62,7 +62,6 @@ gem 'hashie', '>= 3.5.2'
 gem 'stripe'
 gem 'mindbody-api', :git => 'git://github.com/wingrunr21/mindbody-api.git'
 
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
