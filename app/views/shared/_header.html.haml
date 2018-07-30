@@ -18,15 +18,11 @@
           %a.nav-link{href: action_name == 'home' ? "#Classes" : "https://energyxfitness.com/#Classes"}
             %i.fa.fa-bolt
             Classes
-        %li.nav-item.text-center
-          %a.nav-link{href: action_name == 'home' ? "#Coaches" : "https://energyxfitness.com/#Coaches"}
-            %i.fa.fa-street-view
-            Coaches
-        -# - if Challenge.active.count > 0
-        -#   %li.nav-item.text-center
-        -#     %a.nav-link{href: action_name == 'home' ? "#Leaderboard" : "https://energyxfitness.com/#Leaderboard"}
-        -#       %i.fa.fa-trophy
-        -#       Leaderboard
+        - if @articles_available
+          %li.nav-item.text-center
+            %a.nav-link{href: blog_path, class: @subnav == 'blog' ? 'active' : ''}
+              %i.fa.fa-rss
+              Blog
         %li.nav-item.text-center
           %a.nav-link{href: "tel:+12106084241"}
             %i.fa.fa-phone
@@ -34,11 +30,11 @@
         %li.nav-item.text-center
           %a.nav-link{href: "tel:+12106084241"}
             %i.fa.fa-mobile-phone
-            Text
+            Text Us
         %li.nav-item.text-center
           %a.nav-link{href: "https://www.google.com/maps/place/EnergyX+Fitness/@29.47474,-98.4647583,17z/data=!4m7!1m4!3m3!1s0x865cf57535c2e3ad:0x51ff463e06dd0672!2s5162+Broadway+St,+Alamo+Heights,+TX+78209!3b1!3m1!1s0x865cf57535c6460d:0x664a0a07536afd98", target: "_blank"}
             %i.fa.fa-map
-            Nav
+            Get Here
         %li.nav-item.text-center
           = link_to "https://clients.mindbodyonline.com/classic/home?studioid=226360", target: "_blank", class: "btn btn-sm btn-success", style: "margin-top: 10px; color: #000" do
             Book Now

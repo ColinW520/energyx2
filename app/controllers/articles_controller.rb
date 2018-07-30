@@ -15,7 +15,8 @@ class ArticlesController < ApplicationController
   end
 
   def list
-    @articles = Article.available
+    @subnav = 'blog'
+    @articles = Article.available.order(available_at: :desc)
   end
 
   def new

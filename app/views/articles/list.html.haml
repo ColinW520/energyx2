@@ -1,14 +1,17 @@
+/ Blog Page
 %section
   .container
     .section-header
       .section-title
         .row
-          .col-sm-12.col-md-8.col-lg-6.col-centered
+          .col-sm-12.col-md-8.col-lg-8.col-centered
             .text-center
               %h1 BLOG
               %hr
               %br
-              %em.lead Something catchy here.
+              %em.lead "Take care of your body. It’s the only place you have to live.”
+              %br
+              %small.text-muted Jim Rohn
     .section-content
       .row
         - @articles.each do |article|
