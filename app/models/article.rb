@@ -14,6 +14,6 @@ class Article < ApplicationRecord
   validates_attachment :hero_image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
 
   def author_name
-    User.find(author).full_name
+    User.find(author).try(:full_name)
   end
 end
