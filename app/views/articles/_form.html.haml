@@ -14,4 +14,5 @@
     = f.input :body, as: :text, input_html: { class: 'code_editor' }, required: true
   .form-actions
     .text-center
+      = f.input :author, as: :hidden, input_html: { value: current_user.id }
       = f.button :submit, class: 'btn btn-md btn-success'

@@ -7,6 +7,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          invite_key: { email: Devise.email_regexp, first_name: :present?.to_proc, last_name: :present?.to_proc, mobile_phone: :present?.to_proc,}
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def soft_delete!
     update_attribute(:deleted_at, Time.current)
   end

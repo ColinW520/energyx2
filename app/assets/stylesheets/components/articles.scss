@@ -1,0 +1,20 @@
+article {
+  background-color: #fff;
+  color: $black;
+  font-family: "Spectral";
+  font-weight: 200;
+  font-size: $font-size-lg;
+
+  .article-header {
+    margin: 5vh auto 5vh auto;
+
+    .article-title {
+      font-size: $display3-size;
+      color: #000;
+    }
+  }
+
+  .article-body {
+    margin: 5vh;
+  }
+}

@@ -1,15 +1,16 @@
-%section
-  .container
-    .section-header
-      .section-title
-        .row
-          .col-sm-12.col-md-8.col-lg-6.col-centered
-            .text-center
-              %h1= @article.title
-              %hr
-              %br
-              %em.lead= @article.preview_text
-    .section-content
-      .row
-        .col-sm-12
-          =@article.body.html_safe
+%article
+  - if @article.hero_image.present?
+    .row
+      .col-sm-7.col-centered
+        = image_tag @article.hero_image.url, class: 'img img-fluid'
+  .row.article-header
+    .col-sm-7.col-centered
+      .text-center
+        %h1.article-title= @article.title
+        - if @article.author_name.present?
+          %strong.text-muted= "By #{@article.author_name}"
+      %hr
+      %em.lead.article-preview= @article.preview_text
+  .row.article-body
+    .col-sm-12
+      = @article.body.html_safe
