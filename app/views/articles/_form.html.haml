@@ -5,7 +5,7 @@
   .form-group
     = f.input :title, autofocus: true, required: true
   .form-group
-    = f.input :author, as: :select, collection: User.order(first_name: :asc), include_blank: false
+    = f.input :author, as: :select, collection: User.order(first_name: :asc), label_method: :full_name, value_method: :id, include_blank: false
   .form-group
     = f.input :available_at, as: :datetime, required: true
   .form-group
