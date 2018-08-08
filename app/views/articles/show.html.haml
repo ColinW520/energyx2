@@ -7,8 +7,8 @@
     .col-sm-7.col-centered
       .text-center
         %h1.article-title= @article.title
-        - if @article.author_name.present?
-          %strong.text-muted= "By #{@article.author_name}"
+        - if @article.author.present?
+          %strong.text-muted= "By #{@article.author}"
       %hr
       %em.lead.article-preview= @article.preview_text
   .row.article-body
