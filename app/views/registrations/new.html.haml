@@ -9,24 +9,22 @@
               - if @event.promo_image.present?
                 %img.img-fluid.mb-4{src: @event.promo_image.url}
               %h1= @event.name
-              %p.lead.badge.badge-primary.mb-1= local_time @event.starts_at
+              %div.alert.alert-info.m-2
+                = local_time @event.starts_at
               %p= @event.description
-              %hr
-              %h4 Registration Instructions
-              %p= @event.registration_instructions
+              %br
           .col-sm-12.col-md-6.col-lg-6
             - if @event.open_for_registration?
               .card
-                .card-header Registration Form
+                .card-header
+                  %legend Registration Form
                 .card-block
+                  %h6.text-info Instructions
+                  %p= @event.registration_instructions
+                  %br
                   .unobtrusive-flash-container{style: "z-index: 100000"}
                     = render 'form'
             - else
               %div.alert.alert-danger
                 %h2 We're all booked up!
                 %p All of the available spots for this event have been claimed. Please check back later in case we open up more! Thanks!
-            -# %br
-            -# %p.text-muted.text-center
-            -#   %i.fa.fa-info-circle
-            -#   All transactions are securely processed through STRIPE. More information can be found here:
-            -#   %a{href: 'https://stripe.com/docs/security/stripe'} Secure Transactions with Stripe

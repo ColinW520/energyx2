@@ -29,10 +29,10 @@ class RegistrationsController < ApplicationController
         @registration.increment!(:registrations_count)
         @registration.create_charge(params) unless @event.is_free?
         ConfirmationMailer.event_registration(@registration.id).deliver
-        format.html {
-          flash[:danger] = 'Your Registration has been created.'
+        format.html do
+          flash[:danger] = 'Your Registration has been created!'
           redirect_to event_registration_path(@event, @registration, email_check: @registration.email)
-        }
+        end
       else
         format.json { render json: @registration.errors.full_messages, status: :unprocessable_entity }
         format.html {

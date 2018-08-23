@@ -14,9 +14,6 @@
   .row
     .col-sm-12
       .fieldset
-        %legend
-          Basics
-          %span.text-danger{style: "font-size: 10px;"}
         .row
           .col-sm-12.col-md-6
             = f.input :name, label: "Competitor's Name", required: true
@@ -34,21 +31,25 @@
           -# - if @event.teams.any?
           -#   .col-sm-12.col-md-6
           -#     = f.association :event_team, collection: @event.teams, label: 'On a Team?'
-  .row
-    .col-sm-12
-      .fieldset
-        %legend
-          Payment Details
-        - if @registration.persisted?
-          = render 'payment_details', charge: @registration.retrieve_stripe_charge
-        - else
-          .card.card-outline-success
-            .card-block
-              .form-group
-                %label{:for => "card-element"}
-                  Input Your Card Details
-                #card-element
-                #card-errors
+
+  - unless @event.is_free?
+    .row
+      .col-sm-12
+        .fieldset
+          - if @registration.persisted?
+            = render 'payment_details', charge: @registration.retrieve_stripe_charge
+          - else
+            .card.card-outline-success
+              .card-block
+                %h5.text-info
+                  %strong Price:
+                  = number_to_currency @event.price_in_cents / 100
+                %br
+                .form-group
+                  %label{:for => "card-element"}
+                    Input Your Card Details
+                  #card-element
+                  #card-errors
   %br
   %br
   .row
