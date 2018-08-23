@@ -24,8 +24,8 @@
                 %tr{:style => "text-align:center;"}
                   %br
                   %td.content-block
-                    %a.btn.btn-primary{:href => "https://energyxfitness.com/events/#{@event.slug}/registrations/new"}
-                      Event Details
+                    %a.btn.btn-primary{:href => "https://energyxfitness.com/events/#{@event.slug}/registrations/#{@registration.id}?email_check=#{@registration.email}"}
+                      Details
                 %tr
                   %td.content-block{:style => "text-align:center;"}
                     %h2 Have Fun!
