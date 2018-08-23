@@ -4,9 +4,8 @@
       .table-responsive
         %table.table.table-hover#sortable
           %thead.thead-inverse
-            %th Promo Image
             %th= smart_listing.sortable 'Name', :name
-            %th Description
+            %th Registerable
             %th= smart_listing.sortable 'Starts', :starts_at
             %th= smart_listing.sortable 'Updated', :updated_at
             %th

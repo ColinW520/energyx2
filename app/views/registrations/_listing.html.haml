@@ -4,17 +4,21 @@
       .table-responsive
         %table.table
           %thead.thead-inverse
-            %th= smart_listing.sortable 'Type', :subtype
             %th= smart_listing.sortable 'Name', :name
             %th= smart_listing.sortable 'Email', :email
             %th= smart_listing.sortable 'Phone', :phone
             %th= smart_listing.sortable 'Created', :created_at
-            %th Charge ID
-            %th Members
+            %th= smart_listing.sortable 'Shirt Size', :primary_shirt_size
+            - if @event.waves.any?
+              %th= smart_listing.sortable 'Wave', :event_stage_id
+            - if @event.teams.any?
+              %th= smart_listing.sortable 'Team', :event_team_id
+            - unless @event.is_free?
+              %th Charge ID
             %th
           %tbody#registrations
-            - smart_listing.collection.each do |r|
-              = render r
+            - smart_listing.collection.each do |registration|
+              = render registration
         %br
 %br
 .row

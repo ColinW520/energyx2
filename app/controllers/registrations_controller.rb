@@ -10,19 +10,14 @@ class RegistrationsController < ApplicationController
     respond_to do |format|
       format.html { smart_listing_create :registrations, registrations_scope, partial: 'registrations/listing', default_sort: { created_at: :desc }, page_sizes: [100, 200, 300] }
       format.js { smart_listing_create :registrations, registrations_scope, partial: 'registrations/listing', default_sort: { created_at: :desc } }
-      # format.csv { send_data registrations_scope.to_csv, filename: "registrations_as_of-#{Time.now}.csv" }
+      format.csv { send_data registrations_scope.to_csv, filename: "registrations_as_of-#{Time.now}.csv" }
     end
   end
 
   def new
     @event = Event.friendly.find params[:event_id]
     @registration = Registration.new(event_id: @event.id)
-    if @event.is_free?
-      1.times { @registration.registration_members.build }
-    else
-      2.times { @registration.registration_members.build }
-    end
-    gon.stripe_description = "Registration for #{@event.name}"
+    gon.stripe_description = "ENERGYX #{@event.name}"
   end
 
   def create
@@ -31,11 +26,12 @@ class RegistrationsController < ApplicationController
 
     respond_to do |format|
       if @registration.save
+        @registration.increment!(:registrations_count)
         @registration.create_charge(params) unless @event.is_free?
         ConfirmationMailer.event_registration(@registration.id).deliver
         format.html {
           flash[:danger] = 'Your Registration has been created.'
-          redirect_to event_registration_path(@event, @registration)
+          redirect_to event_registration_path(@event, @registration, email_check: @registration.email)
         }
       else
         format.json { render json: @registration.errors.full_messages, status: :unprocessable_entity }
@@ -49,11 +45,6 @@ class RegistrationsController < ApplicationController
   end
 
   def show
-    if @event.is_free?
-      @the_member = @registration.members.first
-    else
-      @charge = Stripe::Charge.retrieve(@registration.stripe_charge_id)
-    end
   end
 
   def edit
@@ -78,6 +69,9 @@ class RegistrationsController < ApplicationController
 
   def destroy
     @registration.destroy
+    if @registation.event_stage.present?
+      @registration.event_stage.registrations_count.decrement!
+    end
     respond_to do |format|
       format.js { flash[:success] = 'Registration removed.' }
       format.html { redirect_to events_registrations_path, notice: 'Registration removed.' }
@@ -88,8 +82,11 @@ class RegistrationsController < ApplicationController
   private
 
   def resolve_layout
-    if action_name == "list"
+    case action_name
+    when "list"
       nil
+    when 'new', 'show', 'edit'
+      'static_views'
     else
       "application"
     end

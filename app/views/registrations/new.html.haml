@@ -7,9 +7,7 @@
           .col-sm-12.col-md-6.col-lg-6
             .text-center
               - if @event.promo_image.present?
-                %img.img-fluid{src: @event.promo_image.url}
-                %br
-                %br
+                %img.img-fluid.mb-4{src: @event.promo_image.url}
               %h1= @event.name
               %p.lead.badge.badge-primary.mb-1= local_time @event.starts_at
               %p= @event.description
@@ -22,10 +20,7 @@
                 .card-header Registration Form
                 .card-block
                   .unobtrusive-flash-container{style: "z-index: 100000"}
-                    - if @event.is_free?
-                      = render 'free_form'
-                    - else
-                      = render 'form'
+                    = render 'form'
             - else
               %div.alert.alert-danger
                 %h2 We're all booked up!

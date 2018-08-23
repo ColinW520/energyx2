@@ -1,28 +1,12 @@
-- provide(:title, "Editing Registration")
+- provide(:title, "Editing Registration for #{@registration.name}")
 %section
   .container
     .section-header
       .section-title
         .row
           .col-sm-12.col-md-6.col-lg-6
-            .text-center
-              - if @event.promo_image.present?
-                %img.img-fluid{src: @event.promo_image.url}
-                %br
-                %br
-              %h1= @event.name
-              %p.lead.badge.badge-primary.mb-1= local_time @event.starts_at
-              %p= @event.description
-              %hr
-              %h4 Registration Instructions
-              %p= @event.registration_instructions
-          .col-sm-12.col-md-6.col-lg-6
             .card
               .card-header Registration Form
               .card-block
                 .unobtrusive-flash-container{style: "z-index: 100000"}
                 = render 'form'
-            %br
-            %p.text-muted.text-center
-              %i.fa.fa-info-circle
-              YOUR CARD WILL NOT BE CHARGED AGAIN!

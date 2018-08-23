@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305174544) do
+ActiveRecord::Schema.define(version: 20180823020317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,26 +24,6 @@ ActiveRecord::Schema.define(version: 20180305174544) do
     t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time", using: :btree
     t.index ["user_id", "name"], name: "index_ahoy_events_on_user_id_and_name", using: :btree
     t.index ["visit_id", "name"], name: "index_ahoy_events_on_visit_id_and_name", using: :btree
-  end
-
-  create_table "ahoy_messages", force: :cascade do |t|
-    t.string   "token"
-    t.text     "to"
-    t.integer  "user_id"
-    t.string   "user_type"
-    t.string   "mailer"
-    t.text     "subject"
-    t.text     "content"
-    t.string   "utm_source"
-    t.string   "utm_medium"
-    t.string   "utm_term"
-    t.string   "utm_content"
-    t.string   "utm_campaign"
-    t.datetime "sent_at"
-    t.datetime "opened_at"
-    t.datetime "clicked_at"
-    t.index ["token"], name: "index_ahoy_messages_on_token", using: :btree
-    t.index ["user_id", "user_type"], name: "index_ahoy_messages_on_user_id_and_user_type", using: :btree
   end
 
   create_table "articles", force: :cascade do |t|
@@ -98,25 +78,39 @@ ActiveRecord::Schema.define(version: 20180305174544) do
     t.string   "first_name"
   end
 
-  create_table "contacts", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "mobile_phone"
-    t.string   "title"
-    t.string   "preferred_language"
-    t.datetime "birthday"
-    t.string   "address_line"
-    t.string   "address_city"
-    t.string   "address_state"
-    t.string   "address_zip"
-    t.datetime "started_at"
-    t.datetime "ended_at"
-    t.datetime "last_messaged_at"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.boolean  "phone_is_valid_for_sms"
-    t.boolean  "is_active",              default: true
+  create_table "event_discount_codes", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "discount_code",         default: 0
+    t.string   "word"
+    t.boolean  "is_available",          default: true
+    t.integer  "usage_cap",             default: 10
+    t.integer  "times_used",            default: 0
+    t.integer  "percentage_as_integer", default: 10
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["event_id"], name: "index_event_discount_codes_on_event_id", using: :btree
+  end
+
+  create_table "event_stages", force: :cascade do |t|
+    t.integer  "event_id"
+    t.string   "name"
+    t.integer  "cap_size"
+    t.datetime "starting_time"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "registrations_count", default: 0
+    t.index ["event_id"], name: "index_event_stages_on_event_id", using: :btree
+  end
+
+  create_table "event_teams", force: :cascade do |t|
+    t.integer  "event_id"
+    t.string   "name"
+    t.text     "allowed_emails"
+    t.boolean  "charge_members"
+    t.string   "created_by"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["event_id"], name: "index_event_teams_on_event_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
@@ -138,56 +132,10 @@ ActiveRecord::Schema.define(version: 20180305174544) do
     t.string   "slug"
     t.text     "registration_instructions"
     t.boolean  "is_free",                   default: true
-    t.integer  "cap_size"
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.string   "twilio_sid"
-    t.string   "status"
-    t.string   "direction"
-    t.datetime "sent_at"
-    t.string   "to"
-    t.string   "from"
-    t.string   "body"
-    t.string   "error_message"
-    t.decimal  "price_in_cents",  precision: 8, scale: 5
-    t.string   "account_sid"
-    t.string   "organization_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.string   "in_response_to"
-    t.integer  "contact_id"
-    t.string   "from_zip"
-    t.string   "from_city"
-    t.string   "from_country"
-    t.string   "from_state"
-    t.integer  "num_segments"
-    t.integer  "num_media"
-    t.string   "sms_sid"
-    t.datetime "received_at"
-    t.string   "forwarded_to"
-    t.index ["contact_id"], name: "index_messages_on_contact_id", using: :btree
-  end
-
-  create_table "organizations", force: :cascade do |t|
-    t.string   "name"
-    t.string   "phone"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "email_domain"
-    t.datetime "removed_at"
-    t.integer  "removed_by"
-    t.integer  "created_by"
-    t.string   "slug"
-    t.integer  "updated_by"
-    t.string   "stripe_token_id"
-    t.string   "stripe_customer_id"
-    t.string   "twilio_auth_id"
-    t.string   "preferred_area_code"
-    t.index ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
+    t.integer  "cap_size",                  default: 50
+    t.integer  "price_in_cents"
+    t.boolean  "is_team_registration"
+    t.boolean  "is_offering_shirt",         default: true
   end
 
   create_table "participants", force: :cascade do |t|
@@ -241,7 +189,13 @@ ActiveRecord::Schema.define(version: 20180305174544) do
     t.string   "stripe_charge_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "event_stage_id"
+    t.string   "primary_shirt_size"
+    t.integer  "event_team_id"
+    t.string   "discount_code"
     t.index ["event_id"], name: "index_registrations_on_event_id", using: :btree
+    t.index ["event_stage_id"], name: "index_registrations_on_event_stage_id", using: :btree
+    t.index ["event_team_id"], name: "index_registrations_on_event_team_id", using: :btree
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -290,10 +244,10 @@ ActiveRecord::Schema.define(version: 20180305174544) do
     t.string   "message_body"
     t.integer  "parsed_meters"
     t.string   "parsed_name"
-    t.boolean  "is_valid"
-    t.boolean  "is_rejected"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.boolean  "is_valid",         default: true
+    t.boolean  "is_rejected",      default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "twilio_sid"
     t.string   "response_text"
     t.string   "rejection_reason"
@@ -340,7 +294,6 @@ ActiveRecord::Schema.define(version: 20180305174544) do
     t.datetime "updated_at",                                                    null: false
     t.boolean  "admin_role",             default: false
     t.boolean  "supervisor_role",        default: false
-    t.integer  "organization_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "invitation_token"
@@ -352,12 +305,9 @@ ActiveRecord::Schema.define(version: 20180305174544) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.datetime "deleted_at"
-    t.string   "mobile_phone"
     t.string   "timezone",               default: "Pacific Time (US & Canada)"
-    t.boolean  "mobile_phone_validated"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
-    t.index ["organization_id"], name: "index_users_on_organization_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
@@ -392,11 +342,14 @@ ActiveRecord::Schema.define(version: 20180305174544) do
     t.index ["visit_token"], name: "index_visits_on_visit_token", unique: true, using: :btree
   end
 
-  add_foreign_key "messages", "contacts"
+  add_foreign_key "event_discount_codes", "events"
+  add_foreign_key "event_stages", "events"
+  add_foreign_key "event_teams", "events"
   add_foreign_key "registration_members", "registrations"
+  add_foreign_key "registrations", "event_stages"
+  add_foreign_key "registrations", "event_teams"
   add_foreign_key "registrations", "events"
   add_foreign_key "studio_sessions", "coaches"
   add_foreign_key "studio_sessions", "studio_session_types"
   add_foreign_key "submissions", "participants"
-  add_foreign_key "users", "organizations"
 end

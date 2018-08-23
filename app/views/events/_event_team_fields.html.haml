@@ -1,0 +1,15 @@
+%tr.nested-fields
+  %td
+    = f.hidden_field :event_id, value: @event.id
+    - unless f.object.persisted?
+      = f.hidden_field :created_by, value: current_user.id
+    = f.input :name, label: false
+  %td= f.input :allowed_emails, as: :string, label: false, hint: 'Separate with Commas'
+  %td
+    - if f.object.registrations.any?
+      .text-info
+        Registrations:
+        = f.object.registrations.count
+    - else
+      = link_to_remove_association f, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-times

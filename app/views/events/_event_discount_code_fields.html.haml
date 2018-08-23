@@ -1,0 +1,16 @@
+%tr.nested-fields
+  %td
+    = f.hidden_field :event_id, value: @event.id
+    = f.input :word, label: false, hint: 'Case SenSitIve', required: true
+  %td= f.input :percentage_as_integer, label: false, required: true, input_html: { min: '10', max: '100', step: '10' }, hint: 'Please use intervals of 10. NO MORE THAN 100'
+  %td= f.input :is_available, label: false
+  %td= f.input :usage_cap, label: false, required: true
+  %td
+    - if f.object.persisted?
+      = f.object.usage_count
+    - else
+      0
+  %td
+    - unless f.object.persisted? && f.object.usage_count > 0
+      = link_to_remove_association f, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-times
