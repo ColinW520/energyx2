@@ -26,7 +26,7 @@ class RegistrationsController < ApplicationController
 
     respond_to do |format|
       if @registration.save
-        @registration.increment!(:registrations_count)
+        @registration.event_stage.increment!(:registrations_count) if @registration.event_stage.present?
         @registration.create_charge(params) unless @event.is_free?
         ConfirmationMailer.event_registration(@registration.id).deliver
         format.html do
