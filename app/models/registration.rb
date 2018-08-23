@@ -3,8 +3,6 @@ class Registration < ApplicationRecord
   belongs_to :event_stage
   belongs_to :event_team
 
-  validate :allowed_on_team?
-
   def retrieve_stripe_charge
     Stripe::Charge.retrieve(self.stripe_charge_id)
   end
@@ -48,8 +46,4 @@ class Registration < ApplicationRecord
   end
 
   private
-
-  def allowed_on_team?
-    errors.add()
-  end
 end
