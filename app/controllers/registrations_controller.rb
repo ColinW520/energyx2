@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
   before_filter :find_registration, except: [:index, :new, :create, :list]
-  skip_before_action :authenticate_user!, :only => [:list, :show, :new, :create, :edit, :update]
+  skip_before_action :authenticate_user!, :only => [:show, :new, :create, :edit, :update]
   layout :resolve_layout
 
   def index
