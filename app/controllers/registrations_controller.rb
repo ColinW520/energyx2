@@ -4,12 +4,23 @@ class RegistrationsController < ApplicationController
   layout :resolve_layout
 
   def index
-    redirect_to root_path unless current_user.present?
+    unless current_user.present?
+      flash[:warning] = 'Hmmm, this page cannot be accessed at this time.'
+      redirect_to root_path
+    end
     @event = Event.friendly.find params[:event_id]
     registrations_scope = @event.registrations
 
     respond_to do |format|
-      format.html { smart_listing_create :registrations, registrations_scope, partial: 'registrations/listing', default_sort: { created_at: :desc }, page_sizes: [100, 200, 300] }
+      format.html do
+        smart_listing_create(
+          :registrations,
+          registrations_scope,
+          partial: 'registrations/listing',
+          default_sort: { created_at: :desc },
+          page_sizes: [50, 100, 150]
+        )
+      end
       format.js { smart_listing_create :registrations, registrations_scope, partial: 'registrations/listing', default_sort: { created_at: :desc } }
       format.csv { send_data registrations_scope.to_csv, filename: "registrations_as_of-#{Time.now}.csv" }
     end

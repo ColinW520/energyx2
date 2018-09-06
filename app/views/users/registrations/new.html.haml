@@ -5,20 +5,20 @@
         .row
           .col-sm-12
             %h2 Sign Up
-            %p.text-primary Signing up is free & easy! Simply enter your information below and we will send you a confirmation email.
-        .row
-          .col-sm-12
-            = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-              = f.error_notification
-              .form-inputs
-                .form-group
-                  = f.input :email, required: true, autofocus: true
-                .form-group
-                  = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum, please." if @minimum_password_length)
-                / we do not require password confirmation at this time.
-                -# .form-group
-                -#   = f.input :password_confirmation, required: true
-              .form-actions
-                = f.button :submit, "Sign up", class: 'btn btn-success btn-block'
-    %br
-    = render "users/shared/links"
+            %p.text-primary If you're seeing this page while trying to register for an event, please contact us @ contact@energyxfitness.com
+        -# .row
+        -#   .col-sm-12
+        -#     = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        -#       = f.error_notification
+        -#       .form-inputs
+        -#         .form-group
+        -#           = f.input :email, required: true, autofocus: true
+        -#         .form-group
+        -#           = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum, please." if @minimum_password_length)
+        -#         / we do not require password confirmation at this time.
+        -#         -# .form-group
+        -#         -#   = f.input :password_confirmation, required: true
+        -#       .form-actions
+        -#         = f.button :submit, "Sign up", class: 'btn btn-success btn-block'
+    -# %br
+    -# = render "users/shared/links"
