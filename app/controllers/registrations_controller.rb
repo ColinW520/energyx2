@@ -21,8 +21,20 @@ class RegistrationsController < ApplicationController
           page_sizes: [50, 100, 150]
         )
       end
-      format.js { smart_listing_create :registrations, registrations_scope, partial: 'registrations/listing', default_sort: { created_at: :desc } }
-      format.csv { send_data registrations_scope.to_csv, filename: "registrations_as_of-#{Time.now}.csv" }
+      format.js do
+        smart_listing_create(
+          :registrations,
+          registrations_scope,
+          partial: 'registrations/listing',
+          default_sort: { created_at: :desc }
+        )
+      end
+      format.csv do
+        send_data(
+          registrations_scope.to_csv,
+          filename: "registrations_as_of-#{Time.now}.csv"
+        )
+      end
     end
   end
 
@@ -38,17 +50,27 @@ class RegistrationsController < ApplicationController
 
     respond_to do |format|
       if @registration.save
-        @registration.event_stage.increment!(:registrations_count) if @registration.event_stage.present?
+        if @registration.event_stage.present?
+          @registration.event_stage.increment!(:registrations_count)
+        end
         @registration.create_charge(params) unless @event.is_free?
         ConfirmationMailer.event_registration(@registration.id).deliver
         format.html do
           flash[:danger] = 'Your Registration has been created!'
-          redirect_to event_registration_path(@event, @registration, email_check: @registration.email)
+          redirect_to event_registration_path(
+            @event,
+            @registration,
+            email_check: @registration.email
+          )
         end
       else
-        format.json { render json: @registration.errors.full_messages, status: :unprocessable_entity }
+        format.json do
+          render json: @registration.errors.full_messages,
+          status: :unprocessable_entity
+        end
         format.html {
-          flash[:notice] = "There were errors in your submission. Your card has NOT been charged."
+          flash[:notice] = "There were errors in your submission." +
+          "Your card has NOT been charged."
           render :new
         }
       end
@@ -73,8 +95,12 @@ class RegistrationsController < ApplicationController
         format.json { head :no_content }
         format.js { flash[:success] = 'Registration has been updated.' }
       else
-        format.json { render json: @registration.errors.full_messages, status: :unprocessable_entity }
-        format.js { render json: @registration.errors.full_messages, status: :unprocessable_entity }
+        format.json do
+          render json: @registration.errors.full_messages, status: :unprocessable_entity
+        end
+        format.js do
+          render json: @registration.errors.full_messages, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -86,7 +112,9 @@ class RegistrationsController < ApplicationController
     end
     respond_to do |format|
       format.js { flash[:success] = 'Registration removed.' }
-      format.html { redirect_to events_registrations_path, notice: 'Registration removed.' }
+      format.html do
+        redirect_to events_registrations_path, notice: 'Registration removed.'
+      end
       format.json { head :no_content }
     end
   end
