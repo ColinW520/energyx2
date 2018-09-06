@@ -4,6 +4,7 @@ class RegistrationsController < ApplicationController
   layout :resolve_layout
 
   def index
+    redirect_to root_path unless current_user.present?
     @event = Event.friendly.find params[:event_id]
     registrations_scope = @event.registrations
 
