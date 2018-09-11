@@ -18,7 +18,6 @@ doc/
 .rspec
 .powrc
 .powenv
-public/
 vendor/bundle
 # Ignore application configuration
 /config/application.yml
