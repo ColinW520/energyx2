@@ -5,7 +5,7 @@ class EventsController < ApplicationController
 
   def index
     if current_user.present?
-      events_scope = Event.upcoming
+      events_scope = Event.order(starts_at: :desc) # most future = most top
 
       respond_to do |format|
         format.html {
@@ -20,7 +20,7 @@ class EventsController < ApplicationController
   end
 
   def list
-    @events = Event.upcoming
+    @events = Event.upcoming # only the upcoming events go here!
   end
 
   def new
