@@ -9,8 +9,8 @@
     - else
       %i.fa.fa-times.text-warning
     until
-    = local_time event.registration_ends_at
-  %td= local_time event.starts_at
+    = local_time event.registration_ends_at rescue "not set"
+  %td= local_time event.starts_at rescue "not set"
   %td= local_time event.updated_at
   %td.actions
     .btn-group.pull-right
