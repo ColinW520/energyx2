@@ -133,7 +133,7 @@ GEM
     builder (3.2.3)
     byebug (9.0.6)
     chartkick (2.2.3)
-    climate_control (0.1.0)
+    climate_control (0.2.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     cocoon (1.2.11)
@@ -281,7 +281,7 @@ GEM
       mini_portile2 (~> 2.3.0)
     nori (2.6.0)
     orm_adapter (0.5.0)
-    paperclip (5.0.0)
+    paperclip (5.2.1)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
@@ -473,7 +473,7 @@ DEPENDENCIES
   meta-tags
   mindbody-api!
   momentjs-rails (>= 2.9.0)
-  paperclip (~> 5.0.0)
+  paperclip (~> 5.2.0)
   pg (~> 0.18)
   phony_rails
   puma (~> 3.0)
