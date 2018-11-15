@@ -1,11 +1,7 @@
 !!!
 %html{:lang => "en"}
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:charset => "utf-8"}/
-    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
-    %meta{:content => "", :name => "description"}
-    %meta{:content => "", :name => "author"}
+    = render "shared/meta"
     %link{href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel: "stylesheet", integrity: "sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin: "anonymous"}
     %link{:href => "#{image_path("favicon.ico")}", :rel => "shortcut icon"}
     = csrf_meta_tags
