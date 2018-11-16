@@ -20,7 +20,11 @@ class Event < ApplicationRecord
   end
 
   def open_for_registration?
-    has_room? && registerable?
+    has_room? && !closed?
+  end
+
+  def closed?
+    registerable? && self.registration_ends_at > Time.now
   end
 
   def has_room?
