@@ -1,4 +1,5 @@
 $ ->
+  $("input[type='tel']").mask('(000) 000-0000');
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
 

@@ -1,0 +1,31 @@
+= simple_form_for [@event, @event_team], authenticity_token: true, html: { id: 'EventTeamForm' } do |f|
+  - if @event_team.errors.any?
+    .row
+      .col-sm-12
+        #error_explanation
+          %h2.text-danger
+            = pluralize(@event_team.errors.count, "error")
+            prohibited this registration from being saved:
+          %ul
+            - @event_team.errors.full_messages.each do |message|
+              %li= message
+          - unless @event_team.persisted?
+            %strong Your card has NOT been charged.
+  %br
+  .row
+    .col-sm-12
+      .fieldset
+        = render "team_fields", f: f
+        = render "add_members_section", f: f
+  %br
+  %br
+  .row
+    .col-sm-12
+      .form-group
+        .actions
+          .pull-right
+            = f.hidden_field :event_id, value: @event.id
+            - if @event_team.persisted?
+              = f.button :submit, 'Update', class: 'btn btn-md btn-success text-info'
+            - else
+              = f.button :submit, 'Register', class: 'btn btn-success btn-md text-info'

@@ -7,8 +7,15 @@ Rails.application.routes.draw do
   match '/instagram' => "static_pages#instagram", via: [:get]
   match '/join' => "static_pages#join", via: [:get]
   match '/nutrition' => "static_pages#nutrition", via: [:get]
+  match '/resolve' => "static_pages#resolve", via: [:get]
+  match '/resolve-to-row' => "static_pages#resolve", via: [:get]
   match '/blog' => "articles#list", via: [:get], as: 'blog'
   post '/contact', to: 'static_pages#contact', as: 'contact'
+
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+    get '/admin' => 'devise/sessions#new'
+  end
 
   # The User-facing App
   resource :dashboard, controller: 'dashboard' do
@@ -51,6 +58,7 @@ Rails.application.routes.draw do
     get :list, on: :collection
     post :update_row_order, on: :collection
     resources :registrations
+    resources :event_teams
   end
 
   resources :challenges do

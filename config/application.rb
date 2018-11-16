@@ -15,7 +15,7 @@ module Energyx2
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.autoload_paths << Rails.root.join('lib', 'inputs')
+    config.autoload_paths << Rails.root.join('lib', 'inputs', 'services')
 
     config.time_zone = 'Central Time (US & Canada)'
     config.active_record.default_timezone = :utc

@@ -54,7 +54,7 @@ class RegistrationsController < ApplicationController
           @registration.event_stage.increment!(:registrations_count)
         end
         @registration.create_charge(params) unless @event.is_free?
-        ConfirmationMailer.event_registration(@registration.id).deliver
+        ConfirmationMailer.event_solo_registration(@registration.id).deliver
         format.html do
           flash[:danger] = 'Your Registration has been created!'
           redirect_to event_registration_path(

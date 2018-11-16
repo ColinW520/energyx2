@@ -1,0 +1,7 @@
+- if event.promo_image.present?
+  %img.img-fluid.mb-4{src: event.promo_image.url}
+%h1= event.name
+%div.alert.alert-info.m-2
+  = local_time event.starts_at
+%p= event.description
+%br

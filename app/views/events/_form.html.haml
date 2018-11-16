@@ -72,6 +72,29 @@
           = f.input :is_free, as: :boolean, label: 'Do not collect payments.', hint: 'Check this box to <i>DISABLE</i> payment collection.'.html_safe
         .col-sm-12.col-md-6.form-group
           = f.input :price_in_cents, required: true, hint: "$1 = 100¢. Will be shown in $", default: @event.persisted? ? @event.price_in_cents : 1000
+
+  %hr
+  .row.jumbotron
+    .col-sm-12.col-md-2
+      %legend Team Settings
+      %p
+        These settings control whether or not teams can be created for this event.
+        Unless the event is free, the individual creating the team will be forced
+        to pay the registration fee to complete the registration.
+      %br
+      %i Teams cannot belong to waves. Please plan & communicate accordingly.
+    .col-sm-12.col-md-10
+      .row
+        .col-sm-12.col-md-3.form-group
+          = f.input :allows_teams, as: :boolean, label: 'Allow Team Registration?', hint: 'Check this box to <i>ALLOW</i> people to create teams.'.html_safe
+        .col-sm-12.col-md-3.form-group
+          = f.input :allows_solo, as: :boolean, label: 'Allow Solo Registration?', hint: 'Check this box to <i>ALLOW</i> people to register solo.'.html_safe
+        .col-sm-12.col-md-3.form-group
+          = f.input :team_price_in_cents, required: true, hint: "$1 = 100¢. Will be shown in $", default: @event.persisted? ? @event.price_in_cents : 1000
+        .col-sm-12.col-md-6.form-group
+          = f.input :team_instructions, hint: 'This is a good place to specify anything special about team registration.'
+
+
   %hr
   .row.jumbotron
     .col-sm-12.col-md-2
@@ -81,6 +104,9 @@
         more manageable groups. Waves can have start times independent of the
         event itself. If waves are specified, their individual caps will override
         the event's caps size.
+      %i Teams cannot belong to waves. Please plan & communicate accordingly.
+      %br
+      %br
       = link_to_add_association '+ add', f, :event_stages, "data-association-insertion-node" => "tbody#waves", :"data-association-insertion-method" => "append", class: 'btn btn-sm btn-success text-info'
     .col-sm-12.col-md-10
       .row
@@ -93,48 +119,7 @@
               %th
             %tbody#waves
               = f.fields_for :event_stages do |wave|
-                = render 'event_stage_fields', f: wave\
-  -# %hr
-  -# .row.jumbotron
-  -#   .col-sm-12.col-md-2
-  -#     %legend Teams
-  -#     %p
-  -#       Teams give participants the ability to compete together as a group, and
-  -#       organizers the ability to group participants by association.
-  -#     = link_to_add_association '+ add', f, :event_teams, "data-association-insertion-node" => "tbody#teams", :"data-association-insertion-method" => "append", class: 'btn btn-sm btn-success text-info'
-  -#   .col-sm-12.col-md-10
-  -#     .row
-  -#       .col-sm-12
-  -#         %table.table.table-bordered
-  -#           %thead
-  -#             %th Name
-  -#             %th Allowed Emails
-  -#             %th
-  -#           %tbody#teams
-  -#             = f.fields_for :event_teams do |team|
-  -#               = render 'event_team_fields', f: team
-  -# %hr
-  -# .row.jumbotron
-  -#   .col-sm-12.col-md-2
-  -#     %legend Discount Codes
-  -#     %p
-  -#       Discount Codes give organizers the ability to offer discounts for registration.
-  -#       If the user enters the discount code, their registration fee will be discounted by the amount specified
-  -#     = link_to_add_association '+ add', f, :event_discount_codes, "data-association-insertion-node" => "tbody#codes", :"data-association-insertion-method" => "append", class: 'btn btn-sm btn-success text-info'
-  -#   .col-sm-12.col-md-10
-  -#     .row
-  -#       .col-sm-12
-  -#         %table.table.table-bordered
-  -#           %thead
-  -#             %th Word
-  -#             %th % Off
-  -#             %th Available?
-  -#             %th Limit
-  -#             %th Used
-  -#             %th
-  -#           %tbody#codes
-  -#             = f.fields_for :event_discount_codes do |code|
-  -#               = render 'event_discount_code_fields', f: code
+                = render 'event_stage_fields', f: wave
   %hr
   .form-actions
     .text-center

@@ -12,7 +12,7 @@ class StudioSessionType < ApplicationRecord
       display: '480x640#'
     },
     dependent: :destroy,
-    default_url: "http://joappdeals.com/in/wp-content/themes/joapp/images/happyuser/default_user.png"
+    default_url: "https://farm1.staticflickr.com/891/40935569930_45b4315e48_t.jpg"
   validates_attachment_content_type :promo_image, content_type: /\Aimage\/.*\Z/
   validates_attachment :promo_image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
 

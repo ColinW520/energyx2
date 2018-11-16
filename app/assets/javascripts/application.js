@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery.turbolinks
+//= require jquery.mask
 //= require turbolinks
 //= require turbolinks_helper
 //= require tether

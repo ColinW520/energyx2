@@ -11,8 +11,7 @@
             %th= smart_listing.sortable 'Shirt Size', :primary_shirt_size
             - if @event.waves.any?
               %th= smart_listing.sortable 'Wave', :event_stage_id
-            - if @event.teams.any?
-              %th= smart_listing.sortable 'Team', :event_team_id
+            %th Team
             - unless @event.is_free?
               %th Charge ID
             %th

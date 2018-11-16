@@ -1,0 +1,24 @@
+!!!
+%html{:lang => "en"}
+  %head
+    = render "shared/meta"
+    %link{href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel: "stylesheet", integrity: "sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin: "anonymous"}
+    %link{:href => "#{image_path("favicon.ico")}", :rel => "shortcut icon"}
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-76055700-1"}
+    %title
+      = full_title('EnergyX', yield(:title))
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-76055700-1');
+
+  %body{id: "#{controller_name}_#{action_name}", class: "#{controller_name}"}
+    = include_gon(:init => true)
+    = render 'shared/header'
+    .container-fluid{style: "margin-top: 5%"}
+      = yield
+    = render 'shared/footer'

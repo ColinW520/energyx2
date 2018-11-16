@@ -1,0 +1,17 @@
+.row
+  .col-sm-12.col-md-6
+    = f.input :name,
+      label: "Team Name",
+      required: true
+  .col-sm-12.col-md-6
+    = f.input :division,
+      label: "Select Group",
+      as: :select,
+      collection: ['Women', 'Men', 'Co-Ed'],
+      include_blank: false
+.row
+  .col-sm-12
+    = f.input :receipt_email,
+      label: "Receipt Email",
+      required: true,
+      hint: "The email address you want your receipt sent to."

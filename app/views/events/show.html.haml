@@ -1,1 +1,30 @@
-
+- provide(:title, @event.name)
+%section
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-6.col-lg-6
+            .text-center
+              = render "events/promo_details", event: @event
+          .col-sm-12.col-md-6.col-lg-6
+            %p= @event.registration_instructions
+            // Begin logic to determin registration button(s) to present. Refactor with a decorator.
+            - if @event.link.present?
+              %a.btn.btn-info.btn-block{href: @event.link, target: "_blank"}
+                = @event.button_text
+                %i.fa.fa-external-link
+            - else
+              - if @event.open_for_registration?
+                - if @event.allows_teams?
+                  = link_to new_event_event_team_path(@event), class: "btn btn-block btn-primary" do
+                    %i.fa.fa-group
+                    Register a Team
+                  %br
+                - if @event.allows_solo?
+                  = link_to new_event_registration_path(@event), class: "btn btn-block btn-warning" do
+                    %i.fa.fa-user
+                    Register Solo
+              - else
+                %div.alert.alert-danger
+                  %h2 Registration is no longer available.

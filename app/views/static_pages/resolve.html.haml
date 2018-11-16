@@ -1,0 +1,18 @@
+.container
+  .row.m-2
+    .col-sm-12.col-md-8.col-lg-6.col-centered
+      .text-center
+        = render "events/promo_details", event: @event
+
+  .row.mb-5.pb-5
+    .col-sm-6
+      .text-center
+        = link_to new_event_event_team_path(@event), class: "btn btn-large btn-primary" do
+          %i.fa.fa-group
+          Register a Team
+
+    .col-sm-6
+      .text-center
+        = link_to new_event_registration_path(@event), class: "btn btn-large btn-warning" do
+          %i.fa.fa-user
+          Register Solo

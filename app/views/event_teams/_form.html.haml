@@ -1,43 +1,34 @@
-= simple_form_for [@event, @registration], authenticity_token: true, html: { id: 'RegistrationForm' } do |f|
-  - if @registration.errors.any?
+= simple_form_for [@event, @event_team], authenticity_token: true, html: { id: 'EventTeamForm' } do |f|
+  - if @event_team.errors.any?
     .row
       .col-sm-12
         #error_explanation
           %h2.text-danger
-            = pluralize(@registration.errors.count, "error")
+            = pluralize(@event_team.errors.count, "error")
             prohibited this registration from being saved:
           %ul
-            - @registration.errors.full_messages.each do |message|
+            - @event_team.errors.full_messages.each do |message|
               %li= message
-          %strong If you are seeing this message, your card has NOT been charged yet.
+          - unless @event_team.persisted?
+            %strong Your card has NOT been charged.
   %br
   .row
     .col-sm-12
       .fieldset
-        .row
-          .col-sm-12.col-md-6
-            = f.input :name, label: "Competitor's Name", required: true
-          .col-sm-12.col-md-6
-            = f.input :email, as: :email, required: true
-          .col-sm-12.col-md-6
-            = f.input :phone, as: :tel, label: 'Mobile Phone', required: true
-          - if @event.is_offering_shirt?
-            .col-sm-12.col-md-6
-              = f.input :primary_shirt_size, label: 'Shirt Size', as: :select, collection: ['x-small', 'small', 'medium', 'large', 'xl', 'xxl', 'xxxl'], include_blank: false
-          - if @event.waves.any?
-            .col-sm-12.col-md-6
-              = f.association :event_stage, collection: @event.waves.available, label: 'Select a Starting Wave', include_blank: false
-  .row
+        = render "team_fields", f: f
+        = render "add_members_section", f: f
+
+  .row{style: "margin-top: 10%"}
     .col-sm-12
       .fieldset
-        - if @registration.persisted?
-          = render 'payment_details', charge: @registration.retrieve_stripe_charge
+        - if @event_team.persisted?
+          = render 'payment_details', charge: @event_team.retrieve_stripe_charge
         - else
           .card.card-outline-success
             .card-block
               %h5.text-info
                 %strong Price:
-                = number_to_currency @event.price_in_cents / 100
+                = number_to_currency @event.team_price_in_cents / 100
               %br
               .form-group
                 %label{:for => "card-element"}
@@ -49,7 +40,7 @@
   .row
     .col-sm-12
       .form-group
-        - if @registration.persisted?
+        - if @event_team.has_paid?
           .text-center
             %p.text-warning
               Don't worry, your card will
@@ -58,16 +49,16 @@
         .actions
           .pull-right
             = f.hidden_field :event_id, value: @event.id
-            - if @registration.persisted?
+            - if @event_team.persisted?
               = f.button :submit, 'Update', class: 'btn btn-md btn-success text-info'
             - else
-              = f.button :submit, 'Register & Pay', id: 'stripe_button', class: 'btn btn-success btn-md text-info'
+              = f.button :submit, "Register & Pay #{number_to_currency(@event.team_price_in_cents / 100)}", id: 'stripe_button', class: 'btn btn-success btn-md text-info'
 
 %script{:src => "https://js.stripe.com/v3/"}
 :coffeescript
   stripeTokenHandler = (token) ->
     # Insert the token ID into the form so it gets submitted to the server
-    form = document.getElementById('RegistrationForm')
+    form = document.getElementById('EventTeamForm')
     tokenHiddenInput = document.createElement('input')
     tokenHiddenInput.setAttribute 'type', 'hidden'
     tokenHiddenInput.setAttribute 'name', 'stripe_token'
@@ -106,7 +97,7 @@
       displayError.textContent = ''
     return
   # Handle form submission
-  form = document.getElementById('RegistrationForm')
+  form = document.getElementById('EventTeamForm')
   form.addEventListener 'submit', (event) ->
     event.preventDefault()
     # PREVENT DOUBLE CLICKING

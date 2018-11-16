@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180823020317) do
+ActiveRecord::Schema.define(version: 20181116222306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 20180823020317) do
     t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time", using: :btree
     t.index ["user_id", "name"], name: "index_ahoy_events_on_user_id_and_name", using: :btree
     t.index ["visit_id", "name"], name: "index_ahoy_events_on_visit_id_and_name", using: :btree
+  end
+
+  create_table "ahoy_messages", force: :cascade do |t|
+    t.string   "token"
+    t.text     "to"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "mailer"
+    t.text     "subject"
+    t.datetime "sent_at"
+    t.datetime "opened_at"
+    t.datetime "clicked_at"
+    t.index ["token"], name: "index_ahoy_messages_on_token", using: :btree
+    t.index ["user_id", "user_type"], name: "index_ahoy_messages_on_user_id_and_user_type", using: :btree
   end
 
   create_table "articles", force: :cascade do |t|
@@ -102,14 +116,33 @@ ActiveRecord::Schema.define(version: 20180823020317) do
     t.index ["event_id"], name: "index_event_stages_on_event_id", using: :btree
   end
 
+  create_table "event_team_members", force: :cascade do |t|
+    t.integer  "event_team_id"
+    t.boolean  "is_captain",    default: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "shirt_size"
+    t.string   "gender"
+    t.integer  "age"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["event_team_id"], name: "index_event_team_members_on_event_team_id", using: :btree
+  end
+
   create_table "event_teams", force: :cascade do |t|
     t.integer  "event_id"
     t.string   "name"
     t.text     "allowed_emails"
     t.boolean  "charge_members"
     t.string   "created_by"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "stripe_customer_id"
+    t.string   "stripe_charge_id"
+    t.string   "division"
+    t.string   "receipt_email"
     t.index ["event_id"], name: "index_event_teams_on_event_id", using: :btree
   end
 
@@ -136,6 +169,10 @@ ActiveRecord::Schema.define(version: 20180823020317) do
     t.integer  "price_in_cents"
     t.boolean  "is_team_registration"
     t.boolean  "is_offering_shirt",         default: true
+    t.integer  "team_price_in_cents"
+    t.boolean  "allows_teams",              default: false
+    t.string   "team_instructions"
+    t.boolean  "allows_solo",               default: true
   end
 
   create_table "participants", force: :cascade do |t|
@@ -165,19 +202,6 @@ ActiveRecord::Schema.define(version: 20180823020317) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "registration_members", force: :cascade do |t|
-    t.integer  "registration_id"
-    t.string   "name"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "shirt_size"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.index ["registration_id"], name: "index_registration_members_on_registration_id", using: :btree
-  end
-
   create_table "registrations", force: :cascade do |t|
     t.integer  "event_id"
     t.string   "name"
@@ -193,6 +217,7 @@ ActiveRecord::Schema.define(version: 20180823020317) do
     t.string   "primary_shirt_size"
     t.integer  "event_team_id"
     t.string   "discount_code"
+    t.string   "chosen_gender"
     t.index ["event_id"], name: "index_registrations_on_event_id", using: :btree
     t.index ["event_stage_id"], name: "index_registrations_on_event_stage_id", using: :btree
     t.index ["event_team_id"], name: "index_registrations_on_event_team_id", using: :btree
@@ -344,8 +369,8 @@ ActiveRecord::Schema.define(version: 20180823020317) do
 
   add_foreign_key "event_discount_codes", "events"
   add_foreign_key "event_stages", "events"
+  add_foreign_key "event_team_members", "event_teams"
   add_foreign_key "event_teams", "events"
-  add_foreign_key "registration_members", "registrations"
   add_foreign_key "registrations", "event_stages"
   add_foreign_key "registrations", "event_teams"
   add_foreign_key "registrations", "events"

@@ -1,0 +1,11 @@
+%tr.nested-fields
+  %td
+    = f.hidden_field :event_id, value: @event.id
+    = f.hidden_field :event_team_id, value: @event_team.try(:id)
+    = f.input :name, label: false, placeholder: 'first last'
+  %td= f.input :email, label: false, placeholder: 'name@domain.com'
+  - if @event.is_offering_shirt?
+    %td= f.input :primary_shirt_size, label: false, as: :select, collection: ['x-small', 'small', 'medium', 'large', 'xl', 'xxl', 'xxxl'], include_blank: false
+  %td
+    = link_to_remove_association f, class: 'btn btn-sm btn-danger' do
+      %i.fa.fa-times

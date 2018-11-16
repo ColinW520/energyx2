@@ -3,8 +3,20 @@ class Registration < ApplicationRecord
   belongs_to :event_stage
   belongs_to :event_team
 
+  def stripe_charge_id
+    if event_team.present?
+      event_team.stripe_charge_id
+    else
+      stripe_charge_id
+    end
+  end
+
   def retrieve_stripe_charge
-    Stripe::Charge.retrieve(self.stripe_charge_id)
+    if event_team.present?
+      event_team.retrieve_stripe_charge
+    else
+      Stripe::Charge.retrieve(self.stripe_charge_id)
+    end
   end
 
   def create_charge(params)
@@ -44,6 +56,4 @@ class Registration < ApplicationRecord
       end
     end
   end
-
-  private
 end

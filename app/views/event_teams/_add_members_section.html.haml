@@ -1,0 +1,21 @@
+.row.mt-3
+  .col-sm-9
+    %h6.text-info Members
+    %p
+      Who all will be on this team? Be sure to include yourself if you are participating.
+  .col-sm-3
+    = link_to_add_association '+ add', f, :registrations, "data-association-insertion-node" => "tbody#registrations", :"data-association-insertion-method" => "append", class: 'btn btn-sm btn-success text-info'
+.row.mt-3
+  .col-sm-12
+    .row
+      .col-sm-12
+        %table.table.table-bordered
+          %thead
+            %th Name
+            %th Email
+            - if @event.is_offering_shirt?
+              %th T-Shirt
+            %th
+          %tbody#registrations
+            = f.fields_for :registrations do |registration|
+              = render 'registration_fields', f: registration

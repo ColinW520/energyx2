@@ -1,0 +1,28 @@
+- unless charge.nil?
+  .card.card-outline-success
+    .card-block
+      %i.fa.fa-check.text-success
+      Successfully Paid
+      = number_to_currency charge.amount / 100
+      with
+      -case charge.source.brand
+        -when 'Visa'
+          %i.fa.fa-cc-visa
+        -when 'American Express'
+          %i.fa.fa-cc-amex
+        -when 'MasterCard'
+          %i.fa.fa-cc-mastercard
+        -when 'Discover'
+          %i.fa.fa-cc-discover
+        -else
+          %i.fa.fa-cc-alt
+      card ending with
+      %code
+        = charge.source.last4
+      on
+      = local_time(Time.at(charge.created))
+      %hr
+      .text-center
+        %small.text-muted
+          Questions?
+          = mail_to 'contact@energyxfitness.com'

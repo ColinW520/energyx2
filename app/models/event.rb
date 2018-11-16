@@ -9,12 +9,15 @@ class Event < ApplicationRecord
   alias waves event_stages
 
   has_many :event_teams, dependent: :destroy
-  accepts_nested_attributes_for :event_teams, allow_destroy: true
   alias teams event_teams
 
   has_many :event_discount_codes, dependent: :destroy
   accepts_nested_attributes_for :event_discount_codes, allow_destroy: true
   alias discount_codes event_discount_codes
+
+  def is_paid?
+    !is_free?
+  end
 
   def open_for_registration?
     has_room? && registerable?

@@ -1,4 +1,4 @@
-- provide(:title, "#{@event.name} Registration")
+- provide(:title, "#{@event.name} TEAM Registration")
 %section
   .container
     .section-header
@@ -13,8 +13,8 @@
                 .card-header
                   %legend Registration Form
                 .card-block
-                  %h6.text-info Instructions
-                  %p= @event.registration_instructions
+                  %h6.text-info Team Instructions
+                  %p= @event.team_instructions
                   %br
                   .unobtrusive-flash-container{style: "z-index: 100000"}
                     - if @event.is_paid?
@@ -24,6 +24,4 @@
             - else
               %div.alert.alert-danger
                 %h2 We're all booked up!
-                %p
-                  All of the available spots for this event have been claimed.
-                  Please check back later in case we open up more! Thanks!
+                %p All of the available spots for this event have been claimed. Please check back later in case we open up more! Thanks!

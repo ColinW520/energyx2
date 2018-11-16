@@ -50,10 +50,17 @@ class StaticPagesController < ApplicationController
   def terms
   end
 
+  def resolve
+    @event = Event.where("name ILIKE ?", "Resolve to Row").last
+  end
+
   private
 
   def resolve_layout
-    if action_name == "instagram"
+    case action_name
+    when "resolve"
+      "bare"
+    when "instagram"
       nil
     else
       "static_views"
