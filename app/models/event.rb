@@ -24,7 +24,7 @@ class Event < ApplicationRecord
   end
 
   def closed?
-    registerable? && self.registration_ends_at > Time.now
+    registerable? && registration_ends_at < Time.now
   end
 
   def has_room?
