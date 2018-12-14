@@ -15,7 +15,6 @@ class ProcessChargeForTeam < BaseService
         success: true,
         object: event_team,
         message: "Team Registration successful!",
-        path: :show
       )
     end
   rescue => error
@@ -23,7 +22,6 @@ class ProcessChargeForTeam < BaseService
       success: false,
       object: event_team,
       message: error.message,
-      path: :edit
     )
   end
 
@@ -39,7 +37,6 @@ class ProcessChargeForTeam < BaseService
       success: true,
       object: event_team,
       message: "Your team registration is completed and paid. Thank you!",
-      path: :show
     )
   rescue Stripe::CardError => error
     body = error.json_body
@@ -48,7 +45,6 @@ class ProcessChargeForTeam < BaseService
       success: false,
       object: event_team,
       message: "There was an issue with your card: #{card_error[:message]}",
-      path: :edit
     )
   end
 
