@@ -10,8 +10,14 @@
       collection: ['Women', 'Men', 'Co-Ed'],
       include_blank: false
 .row
-  .col-sm-12
+  .col-sm-12.col-md-6
     = f.input :receipt_email,
       label: "Receipt Email",
       required: true,
       hint: "The email address you want your receipt sent to."
+  .col-sm-12.col-md-6
+    = f.input :contact_phone,
+      as: :tel,
+      label: "Phone Number",
+      hint: "For important updates about this event.",
+      required: true

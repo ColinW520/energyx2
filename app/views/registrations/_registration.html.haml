@@ -1,7 +1,11 @@
 %tr.item{id: "registration_#{registration.id}", "data-item-id"=> "#{registration.id}"}
   %td= registration.name
   %td= mail_to registration.email
-  %td= registration.phone
+  %td
+    - if registration.event_team.present?
+      %td= registration.try(:contact_phone)
+    - else
+      %td= registration.phone
   %td= local_time registration.created_at, format: "%m/%d/%Y"
   %td= registration.try(:primary_shirt_size)
   - if @event.waves.any?
@@ -10,7 +14,7 @@
     %td= registration.event_team.try(:name)
   - unless @event.is_free?
     - if registration.event_team.present?
-      %td= registration.try(:event_team).try(:stripe_charge_id)
+      %td= registration.event_team.try(:stripe_charge_id)
     - else
       %td= registration.try(:stripe_charge_id)
   %td.actions

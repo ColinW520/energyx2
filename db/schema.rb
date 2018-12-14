@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181116222306) do
+ActiveRecord::Schema.define(version: 20181214162852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,21 +116,6 @@ ActiveRecord::Schema.define(version: 20181116222306) do
     t.index ["event_id"], name: "index_event_stages_on_event_id", using: :btree
   end
 
-  create_table "event_team_members", force: :cascade do |t|
-    t.integer  "event_team_id"
-    t.boolean  "is_captain",    default: false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "phone_number"
-    t.string   "shirt_size"
-    t.string   "gender"
-    t.integer  "age"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.index ["event_team_id"], name: "index_event_team_members_on_event_team_id", using: :btree
-  end
-
   create_table "event_teams", force: :cascade do |t|
     t.integer  "event_id"
     t.string   "name"
@@ -143,6 +128,7 @@ ActiveRecord::Schema.define(version: 20181116222306) do
     t.string   "stripe_charge_id"
     t.string   "division"
     t.string   "receipt_email"
+    t.string   "contact_phone"
     t.index ["event_id"], name: "index_event_teams_on_event_id", using: :btree
   end
 
@@ -369,7 +355,6 @@ ActiveRecord::Schema.define(version: 20181116222306) do
 
   add_foreign_key "event_discount_codes", "events"
   add_foreign_key "event_stages", "events"
-  add_foreign_key "event_team_members", "event_teams"
   add_foreign_key "event_teams", "events"
   add_foreign_key "registrations", "event_stages"
   add_foreign_key "registrations", "event_teams"
