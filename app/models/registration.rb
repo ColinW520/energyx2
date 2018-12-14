@@ -5,7 +5,7 @@ class Registration < ApplicationRecord
 
   def stripe_charge_id
     if event_team.present?
-      event_team.stripe_charge_id
+      event_team.try(:stripe_charge_id)
     else
       stripe_charge_id
     end
