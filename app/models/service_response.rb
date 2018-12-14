@@ -7,6 +7,10 @@ class ServiceResponse
     @success = success
   end
 
+  def success?
+    success
+  end
+
   def flash_status
     if success
       :success

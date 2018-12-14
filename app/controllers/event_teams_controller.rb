@@ -8,7 +8,6 @@ class EventTeamsController < ApplicationController
   end
 
   def edit
-    # for errors
   end
 
   def show
@@ -21,13 +20,8 @@ class EventTeamsController < ApplicationController
     respond_to do |format|
       format.html do
         if @event_team.update_attributes(event_team_params)
-          service_response = ProcessChargeForTeam.new(
-            event_team: @event_team,
-            stripe_token: params[:stripe_token]
-          ).perform
-
-          flash[service_response.flash_status] = service_response.flash_message
-          redirect_to service_response.object
+          flash[:notice] = "Successfully updated this team registration."
+          redirect_to event_registrations_path(@event)
         else
           flash[:notice] = "We could not complete this registration. See errors."
           render :edit
@@ -38,26 +32,32 @@ class EventTeamsController < ApplicationController
 
   def new
     @event_team = @event.event_teams.new
-    2.times { |i| @event_team.registrations.build(event_id: @event.id) }
+
+    if @event_team.registrations.nil?
+      2.times { |i| @event_team.registrations.build(event_id: @event.id) }
+    end
+
     gon.stripe_description = "#{@event.name} Team"
   end
 
   def create
-    @event_team = EventTeam.new(event_team_params)
+     service_response = CreateTeamForEvent.new(
+       event: @event,
+       team: EventTeam.new(event_team_params),
+       token: params.fetch(:stripe_token, nil)
+     ).perform
+
+    @event_team = service_response.object
 
     respond_to do |format|
       format.html do
-        if @event_team.save
-          response = ProcessChargeForTeam.new(
-            event_team: @event_team,
-            stripe_token: params[:stripe_token]
-          ).perform
-
-          flash[response.flash_status] = response.flash_message
-          render response.view_to_render
+        if service_response.success?
+          ConfirmationMailer.event_team_registration(@event_team.id).deliver if Rails.env.production?
+          flash[:notice] = service_response.message
+          redirect_to(event_event_team_path(@event, @event_team))
         else
-          flash[:danger] = "We could not complete this registration. See errors."
-          render :new
+          flash[:notice] = service_response.message
+          redirect_to new_event_event_team_path(@event, params)
         end
       end
     end

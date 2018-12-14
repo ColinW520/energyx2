@@ -14,8 +14,8 @@ class CreateChargeForTeam < BaseService
     ServiceResponse.new(
       success: true,
       object: charge,
-      message: "Successfully charged #{source.brand} ending in #{source.last4} "
-        "the registration fee of #{number_to_currency(charge.amount / 100, precision: 2)}."
+      message: "Successfully charged #{source.brand} ending in " +
+        "#{source.last4} the event registration fee."
     )
 
   rescue Stripe::CardError => error

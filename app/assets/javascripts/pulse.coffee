@@ -3,7 +3,7 @@ $ ->
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
 
-  UnobtrusiveFlash.flashOptions['timeout'] = 5000
+  UnobtrusiveFlash.flashOptions['timeout'] = 15000
 
   $('#menu-toggle').click (e) ->
     e.preventDefault()

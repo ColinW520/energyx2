@@ -1,45 +1,24 @@
-- provide(:title, "#{@event.name} Team Registration Confirmation")
-%section#Confirmation
-  %br
-  .text-center
-    %img.img-fluid{src: @event.promo_image.url, style: "max-width: 500px;"}
-  %br
-  %hr
+- provide(:title, "#{@event.name} Confirmation")
+%section
   .container
     .section-header
       .section-title
         .row
-          .col-sm-12.col-md-8.col-lg-6.col-centered
-            .unobtrusive-flash-container{style: "z-index: 100000"}
+          .col-sm-12.col-md-6.col-lg-6
             .text-center
-              %br
-              %h1.text-success Success!
-              %br
-              %h4
-                Your registration for
-                %strong= @event.name
-                is complete!
-              %p.lead The details you submitted are below!
-      .section-content
-        .card
-          .card-block
-            .row
-              .col-sm-12.col-md-3.col-centered
-                %div.m-3
-                  %strong Name:
-                  .text-info= @event_team.name
-                %div.m-3
-                  %strong Division:
-                  .text-info= @event_team.division
-                %div.m-3
-                  %strong Members:
-                  %ul
-                    - @event_team.registrations.each do |member|
-                      %li
-                        = member.name
-                        = "(#{member.primary_shirt_size})" if member.primary_shirt_size.present?
-            - if @event_team.has_paid?
-              %br
-              .row
-                .col-sm-12.col-md-4.col-centered
-                  = render 'payment_details', charge: @event_team.retrieve_stripe_charge
+              = render "events/promo_details", event: @event
+          .col-sm-12.col-md-6.col-lg-6
+            .unobtrusive-flash-container{style: "z-index: 100000"}
+            .card
+              .card-block
+                .text-center
+                  %br
+                  %h1.text-info Success!
+                  %hr
+                  %h4
+                    Your team,
+                    %strong= @event_team.name
+                    is now registered for
+                    %strong= @event.name
+                    !
+                  %p Please contact us to change any of your registration details!
