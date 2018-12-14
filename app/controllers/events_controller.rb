@@ -84,7 +84,7 @@ class EventsController < ApplicationController
       nil
     when 'show'
       'static_views'
-    else
+    when 'index', 'edit', 'update', 'destroy'
       "application"
     end
   end
