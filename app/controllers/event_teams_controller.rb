@@ -33,9 +33,7 @@ class EventTeamsController < ApplicationController
   def new
     @event_team = @event.event_teams.new
 
-    if @event_team.registrations.nil?
-      2.times { |i| @event_team.registrations.build(event_id: @event.id) }
-    end
+    2.times { |i| @event_team.registrations.build(event_id: @event.id) }
 
     gon.stripe_description = "#{@event.name} Team"
   end
@@ -57,7 +55,7 @@ class EventTeamsController < ApplicationController
           redirect_to(event_event_team_path(@event, @event_team))
         else
           flash[:notice] = service_response.message
-          redirect_to new_event_event_team_path(@event, params)
+          render :new
         end
       end
     end

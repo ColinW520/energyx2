@@ -8,6 +8,7 @@
             .text-center
               = render "events/promo_details", event: @event
           .col-sm-12.col-md-6.col-lg-6
+            .unobtrusive-flash-container{style: "z-index: 100000"}
             - if @event.open_for_registration?
               .card
                 .card-header
@@ -15,12 +16,11 @@
                 .card-block
                   %h6.text-info Team Instructions
                   %p= @event.team_instructions
-                  %br
-                  .unobtrusive-flash-container{style: "z-index: 100000"}
-                    - if @event.is_paid?
-                      = render 'form'
-                    - else
-                      = render 'free_form'
+                  %hr
+                  - if @event.is_paid?
+                    = render 'form'
+                  - else
+                    = render 'free_form'
             - else
               %div.alert.alert-danger
                 %h2 We're all booked up!
