@@ -3,13 +3,13 @@
   %td= mail_to registration.email
   %td= registration.phone
   %td= local_time registration.created_at, format: "%m/%d/%Y"
-  %td= registration.primary_shirt_size
+  %td= registration.try(:primary_shirt_size)
   - if @event.waves.any?
     %td= registration.event_stage.try(:name)
   - if @event.teams.any?
     %td= registration.event_team.try(:name)
   - unless @event.is_free?
-    %td= registration.stripe_charge_id
+    %td= registration.try(:stripe_charge_id)
   %td.actions
     .btn-group.pull-right
       = link_to edit_event_registration_path(@event, registration), class: 'btn btn-sm btn-warning' do

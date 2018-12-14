@@ -10,6 +10,8 @@ class EventTeam < ApplicationRecord
 
   validate :min_registrations
   validate :max_registrations
+  validates_presence_of :stripe_charge_id, if: lambda { |t| t.event.is_paid? }
+  validates_presence_of :stripe_customer_id, if: lambda { |t| t.event.is_paid? }
 
   def can_be_charged?
     !has_paid? && event.is_paid?
