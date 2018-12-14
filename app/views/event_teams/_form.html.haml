@@ -28,7 +28,7 @@
             .card-block
               %h5.text-info
                 %strong Price:
-                = number_to_currency @event.team_price_in_cents / 100
+                = number_to_currency @event.team_price_in_cents / 100, precision: 2
               %br
               .form-group
                 %label{:for => "card-element"}
@@ -52,7 +52,7 @@
             - if @event_team.persisted?
               = f.button :submit, 'Update', class: 'btn btn-md btn-success text-info'
             - else
-              = f.button :submit, "Register & Pay #{number_to_currency(@event.team_price_in_cents / 100)}", id: 'stripe_button', class: 'btn btn-success btn-md text-info'
+              = f.button :submit, "Register & Pay #{number_to_currency(@event.team_price_in_cents / 100, precision: 2)}", id: 'stripe_button', class: 'btn btn-success btn-md text-info'
 
 %script{:src => "https://js.stripe.com/v3/"}
 :coffeescript
@@ -94,7 +94,7 @@
       displayError.textContent = event.error.message
     else
       displayError.textContent = ''
-    return
+
   # Handle form submission
   form = document.getElementById('EventTeamForm')
   form.addEventListener 'submit', (event) ->
@@ -108,5 +108,3 @@
       else
         # Send the token to your server
         stripeTokenHandler result.token
-      return
-    return
