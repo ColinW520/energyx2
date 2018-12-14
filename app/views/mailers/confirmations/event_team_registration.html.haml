@@ -23,7 +23,7 @@
                     %em= @team.division
                 %tr
                   %td.content-block{:style => "text-align:center;"}
-                    %h2= "We charged your #{@card.brand} card ending in #{@card.last4} the registration fee of #{number_to_currency(@charge.amount)}. Thank you for your business!"
+                    %h2= "We charged your #{@card.brand} card ending in #{@card.last4} the registration fee of #{number_to_currency(@charge.amount / 100.to_f)}. Thank you for your business!"
         .footer
           %table{:width => "100%"}
             %tr
