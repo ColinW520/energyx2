@@ -3,8 +3,8 @@ class CreateChargeForTeam < BaseService
 
   def initialize(team:, token:)
     @event = team.event
-    @team = event_team
-    @stripe_token = token
+    @team = team
+    @token = token
   end
 
   def perform
