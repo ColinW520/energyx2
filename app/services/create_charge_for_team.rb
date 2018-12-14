@@ -14,7 +14,8 @@ class CreateChargeForTeam < BaseService
     ServiceResponse.new(
       success: true,
       object: charge,
-      message: "Successfully charged customer's credit card."
+      message: "Successfully charged #{source.brand} ending in #{source.last4} "
+        "the registration fee of #{number_to_currency(charge.amount / 100, precision: 2)}."
     )
 
   rescue Stripe::CardError => error
@@ -42,7 +43,7 @@ class CreateChargeForTeam < BaseService
       customer: customer.id,
       amount: event.team_price_in_cents,
       description: "ENERGYX #{event.name}",
-      currency: 'usd',
+      currency: "usd",
       metadata: {
         event: event.id,
         team: team.name
