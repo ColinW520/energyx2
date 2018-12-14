@@ -8,14 +8,26 @@ class CreateTeamForEvent < BaseService
   end
 
   def perform
+    if team.valid?
+      create_team
+    else
+      ServiceResponse.new(
+        success: false,
+        object: team,
+        message: "Team is invalid. Please review the details you submitted."
+      )
+    end
+  end
+
+  private
+
+  def create_team
     if event.is_free?
       create_free_team
     else
       create_paid_team
     end
   end
-
-  private
 
   def create_free_team
     if team.save
