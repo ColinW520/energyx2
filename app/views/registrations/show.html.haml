@@ -1,70 +1,26 @@
-- provide(:title, "#{@event.name} Registration Confirmation")
-- if params[:email_check] == @registration.email
-  %section#Confirmation
-    %br
-    .text-center
-      %img.img-fluid{src: "http://g.recordit.co/gDusHx99Ei.gif", style: "max-width: 500px;"}
-    %br
-    %hr
-    .container
-      .section-header
-        .section-title
-          .row
-            .col-sm-12.col-md-8.col-lg-6.col-centered
-              .unobtrusive-flash-container{style: "z-index: 100000"}
-              .text-center
-                %br
-                %h1.text-success SUCCESS
-                %br
-                %h4
-                  Your registration for
-                  %strong= @event.name
-                  is complete!
-                %p.lead The details you submitted are below!
-
-        .section-content
-          .card
-            .card-block
-              .row
-                .col-sm-12.col-md-3
-                  %div.m-3
-                    %strong Name:
-                    .text-info= @registration.name
-                .col-sm-12.col-md-3
-                  %div.m-3
-                    %strong Phone:
-                    .text-info= @registration.phone
-                .col-sm-12.col-md-3
-                  %div.m-3
-                    %strong Email:
-                    .text-info= @registration.email
-                - if @event.is_offering_shirt?
-                  .col-sm-12.col-md-3
-                    %div.m-3
-                      %strong Shirt Size:
-                      .text-info= @registration.primary_shirt_size
-                - if @registration.event_stage.present?
-                  .col-sm-12.col-md-3
-                    %div.m-3
-                      %strong Wave
-                      .text-info= @registration.event_stage.name
-                - if @registration.event_team
-                  .col-sm-12.col-md-3
-                    %div.m-3
-                      %strong Team Name
-                      .text-info= @registration.event_team.name
-              - unless @event.is_free?
-                %br
-                .row
-                  .col-sm-12.col-md-4.col-centered
-                    = render 'payment_details', charge: @registration.retrieve_stripe_charge
-- else
-  %section{style: "height: 900px;"}
-    .section-content
-      .row
-        .col-sm-10.col-md-6.col-centered
-          %h4
-            This information has expired for data security. Please contact us if you need to review your confirmation details for
-            = succeed '.' do
-              = @event.name
-            = mail_to 'contact@energyxfitness.com'
+- provide(:title, "#{@event.name} Confirmation")
+%section
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-6.col-lg-6
+            .text-center
+              = render "events/promo_details", event: @event
+          .col-sm-12.col-md-6.col-lg-6
+            .unobtrusive-flash-container{style: "z-index: 100000"}
+            %img.img-fluid{src: "http://g.recordit.co/gDusHx99Ei.gif", style: "max-width: 500px;"}
+            .card
+              .card-block
+                .text-center
+                  %h1.text-success SUCCESS
+                  %br
+                  %h4
+                    Your registration for
+                    %strong= @event.name
+                    is complete!
+                  %br
+                  %p
+                    We charged your card the event registration fee of
+                    = number_to_currency(@event.price_in_cents / 100, precision: 2)
+                    Please contact us to change any of your registration details!

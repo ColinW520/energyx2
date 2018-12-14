@@ -15,10 +15,14 @@
                   %br
                   %h1.text-info Success!
                   %hr
-                  %h4
-                    Your team,
-                    %strong= @event_team.name
+                  %h3
+                    Team
+                    %strong.text-primary= @event_team.name
                     is now registered for
                     %strong= @event.name
                     !
-                  %p Please contact us to change any of your registration details!
+                  %br
+                  %p
+                    We charged your card the event registration fee of
+                    = number_to_currency(@event.team_price_in_cents / 100, precision: 2)
+                    Please contact us to change any of your registration details!
