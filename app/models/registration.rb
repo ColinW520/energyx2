@@ -3,14 +3,6 @@ class Registration < ApplicationRecord
   belongs_to :event_stage
   belongs_to :event_team
 
-  def stripe_charge_id
-    if event_team.present?
-      event_team.try(:stripe_charge_id)
-    else
-      stripe_charge_id
-    end
-  end
-
   def retrieve_stripe_charge
     if event_team.present?
       event_team.retrieve_stripe_charge
