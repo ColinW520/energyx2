@@ -2,9 +2,6 @@ class EventTeam < ApplicationRecord
   belongs_to :event
   has_many :registrations
 
-  has_many :event_team_members
-  alias members event_team_members
-
   has_many :registrations, dependent: :destroy
   accepts_nested_attributes_for :registrations, allow_destroy: true
 
