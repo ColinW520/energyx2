@@ -9,7 +9,10 @@
   - if @event.teams.any?
     %td= registration.event_team.try(:name)
   - unless @event.is_free?
-    %td= registration.try(:stripe_charge_id)
+    - if registration.event_team.present?
+      %td= registration.try(:event_team).try(:stripe_charge_id)
+    - else
+      %td= registration.try(:stripe_charge_id)
   %td.actions
     .btn-group.pull-right
       = link_to edit_event_registration_path(@event, registration), class: 'btn btn-sm btn-warning' do
