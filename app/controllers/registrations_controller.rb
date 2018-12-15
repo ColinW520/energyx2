@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
   before_filter :set_event
-  before_action :authenticate_user!, only: [:index, :edit, :update]
+  before_action :authenticate_user!, only: [:index, :edit, :update, :create]
   layout :resolve_layout
 
   def index
@@ -39,31 +39,25 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    @registration = Registration.new(registration_params)
+     service_response = CreateRegistrationForEvent.new(
+       event: @event,
+       registration: Registration.new(registration_params),
+       token: params.fetch(:stripe_token, nil)
+     ).perform
+
+    @registration = service_response.object
 
     respond_to do |format|
-      if @registration.save
-        if @registration.event_stage.present?
-          @registration.event_stage.increment!(:registrations_count)
-        end
-        @registration.create_charge(params) unless @event.is_free?
-        ConfirmationMailer.event_solo_registration(@registration.id).deliver
-        format.html do
-          flash[:danger] = 'Your Registration has been created!'
-          redirect_to event_registration_path(
-            @event,
-            @registration,
-            email_check: @registration.email
-          )
-        end
-      else
-        format.html do
-          flash[:notice] = "There were errors in your submission." +
-            "Your card has NOT been charged."
+      format.html do
+        if service_response.success?
+          ConfirmationMailer.event_solo_registration(@registration.id).deliver if Rails.env.production?
+          flash[:notice] = service_response.message
+          redirect_to(event_registration_path(@event, @registration))
+        else
+          flash[:notice] = service_response.message
           render :new
         end
       end
-
     end
   end
 
@@ -112,7 +106,7 @@ class RegistrationsController < ApplicationController
     case action_name
     when "list"
       nil
-    when 'new', 'show', 'edit'
+    when 'new', 'show', 'edit', 'create'
       'static_views'
     else
       "application"

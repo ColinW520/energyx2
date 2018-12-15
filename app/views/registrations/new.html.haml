@@ -8,6 +8,7 @@
             .text-center
               = render "events/promo_details", event: @event
           .col-sm-12.col-md-6.col-lg-6
+            .unobtrusive-flash-container{style: "z-index: 100000"}
             - if @event.open_for_registration?
               .card
                 .card-header
