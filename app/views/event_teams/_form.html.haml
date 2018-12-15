@@ -53,8 +53,6 @@
               = f.button :submit, 'Update', class: 'btn btn-md btn-success text-info'
             - else
               = f.button :submit, "Register & Pay #{number_to_currency(@event.team_price_in_cents / 100, precision: 2)}", id: 'stripe_button', class: 'btn btn-success btn-md text-info'
-
-%script{:src => "https://js.stripe.com/v3/"}
 :coffeescript
   stripeTokenHandler = (token) ->
     # Insert the token ID into the form so it gets submitted to the server
