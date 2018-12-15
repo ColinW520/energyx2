@@ -70,6 +70,7 @@ class CreateTeamForEvent < BaseService
     team.stripe_charge_id = charge.id
     team.stripe_customer_id = charge.customer
     team.registrations.each do |registration|
+      registration.is_paid = true
       registration.stripe_charge_id = team.stripe_charge_id
       registration.stripe_customer_id = team.stripe_customer_id
     end
