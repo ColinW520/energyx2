@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
   before_filter :set_event
-  skip_before_action :authenticate_user!, :only => [:show, :new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:index, :edit, :update]
   layout :resolve_layout
 
   def index
