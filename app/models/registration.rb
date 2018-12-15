@@ -4,11 +4,7 @@ class Registration < ApplicationRecord
   belongs_to :event_team
 
   def retrieve_stripe_charge
-    if event_team.present?
-      event_team.retrieve_stripe_charge
-    else
-      Stripe::Charge.retrieve(self.stripe_charge_id)
-    end
+    Stripe::Charge.retrieve(self.stripe_charge_id)
   end
 
   def create_charge(params)
