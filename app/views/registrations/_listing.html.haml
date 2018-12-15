@@ -5,19 +5,17 @@
         %table.table
           %thead.thead-inverse
             %th= smart_listing.sortable 'Name', :name
-            %th= smart_listing.sortable 'Email', :email
-            %th= smart_listing.sortable 'Phone', :phone
-            %th= smart_listing.sortable 'Created', :created_at
-            %th= smart_listing.sortable 'Shirt Size', :primary_shirt_size
-            - if @event.waves.any?
-              %th= smart_listing.sortable 'Wave', :event_stage_id
+            %th Email
+            %th Phone
+            %th Created
+            %th Shirt
+            %th Wave
             %th Team
-            - unless @event.is_free?
-              %th Charge ID
+            %th Charge
             %th
           %tbody#registrations
             - smart_listing.collection.each do |registration|
-              = render registration
+              = render registration.decorate
         %br
 %br
 .row

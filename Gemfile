@@ -41,7 +41,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'select2-rails'
 gem 'meta-tags'
 gem 'httparty'
-gem 'fullcalendar-rails'
+gem 'draper'
 
 # Database Stuff
 gem 'pg', '~> 0.18'
