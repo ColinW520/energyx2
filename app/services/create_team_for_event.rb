@@ -63,13 +63,7 @@ class CreateTeamForEvent < BaseService
   end
 
   def create_charge_for_team
-    result = CreateChargeForTeam.new(team: team, token: token).perform
-
-    if result.success?
-      result
-    else
-      result
-    end
+    CreateChargeForTeam.new(team: team, token: token).perform
   end
 
   def save_with_charge_details!(charge)
