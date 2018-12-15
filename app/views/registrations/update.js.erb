@@ -1,0 +1,3 @@
+$('#registration_dialog').modal('toggle');
+$('#registration_<%= @registration.id %>').replaceWith('<%= j render (@registration.decorate) %>');
+$("#registrations").smart_listing().fadeLoaded();

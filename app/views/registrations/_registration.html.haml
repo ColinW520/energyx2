@@ -1,4 +1,4 @@
-%tr.item{id: "registration_#{registration.id}", "data-item-id"=> "#{registration.id}"}
+%tr.item{id: "registration_#{registration.id}", "data-item-id"=> "#{registration.id}", "data-item-path" => "event/#{registration.event_id}/registrations"}
   %td= registration.name
   %td= mail_to registration.email
   %td= registration.contact_phone
@@ -7,8 +7,8 @@
   %td= registration.stage_name
   %td= registration.team_name
   %td= registration.stripe_charge_id_text
-  -# %td.actions
-  -#   .btn-group.pull-right
-  -#     = link_to edit_event_registration_path(@event, registration), class: 'btn btn-sm btn-warning' do
-  -#       %i.fa.fa-edit
-  -#       Edit
+  %td.actions
+    .btn-group.pull-right
+      = link_to(edit_event_registration_path(registration.event, registration), remote: true, class: 'btn btn-sm btn-warning') do
+        %i.fa.fa-edit
+        Edit

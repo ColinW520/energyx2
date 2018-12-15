@@ -1,0 +1,42 @@
+= simple_form_for [@event, @registration], remote: true, authenticity_token: true, html: { id: 'RemoteRegistrationForm' } do |f|
+  - if @registration.errors.any?
+    .row
+      .col-sm-12
+        #error_explanation
+          %h2.text-danger
+            = pluralize(@registration.errors.count, "error")
+            prohibited this registration from being saved:
+          %ul
+            - @registration.errors.full_messages.each do |message|
+              %li= message
+  %br
+  .row
+    .col-sm-12
+      .fieldset
+        .row
+          .col-sm-12.col-md-6
+            = f.input :name, label: "Competitor's Name", required: true
+          .col-sm-12.col-md-6
+            = f.input :email, as: :email, required: true
+          .col-sm-12.col-md-6
+            = f.input :phone, as: :tel, label: 'Mobile Phone', required: true
+          - if @event.is_offering_shirt?
+            .col-sm-12.col-md-6
+              = f.input :primary_shirt_size, label: 'Shirt Size', as: :select, collection: ['x-small', 'small', 'medium', 'large', 'xl', 'xxl', 'xxxl'], include_blank: false
+          - if @event.waves.any?
+            .col-sm-12.col-md-6
+              = f.association :event_stage, collection: @event.waves.available, label: 'Select a Starting Wave', include_blank: false
+  .row
+    .col-sm-12
+      .fieldset
+        - if @registration.persisted?
+          = render 'payment_details', charge: @registration.retrieve_stripe_charge
+
+  %br
+  %br
+  .row
+    .col-sm-12
+      .form-group
+        .actions
+          .pull-right
+            = f.button :submit, 'Update', class: 'btn btn-md btn-success text-info'

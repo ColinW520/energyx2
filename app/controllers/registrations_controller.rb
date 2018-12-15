@@ -1,14 +1,9 @@
 class RegistrationsController < ApplicationController
-  before_filter :find_registration, except: [:index, :new, :create, :list]
+  before_filter :set_event
   skip_before_action :authenticate_user!, :only => [:show, :new, :create, :edit, :update]
   layout :resolve_layout
 
   def index
-    unless current_user.present?
-      flash[:warning] = 'Hmmm, this page cannot be accessed at this time.'
-      redirect_to root_path
-    end
-    @event = Event.friendly.find params[:event_id]
     registrations_scope = @event.registrations
 
     respond_to do |format|
@@ -39,13 +34,11 @@ class RegistrationsController < ApplicationController
   end
 
   def new
-    @event = Event.friendly.find params[:event_id]
     @registration = Registration.new(event_id: @event.id)
     gon.stripe_description = "ENERGYX #{@event.name}"
   end
 
   def create
-    @event = Event.friendly.find params[:event_id]
     @registration = Registration.new(registration_params)
 
     respond_to do |format|
@@ -64,15 +57,11 @@ class RegistrationsController < ApplicationController
           )
         end
       else
-        format.json do
-          render json: @registration.errors.full_messages,
-          status: :unprocessable_entity
-        end
-        format.html {
+        format.html do
           flash[:notice] = "There were errors in your submission." +
-          "Your card has NOT been charged."
+            "Your card has NOT been charged."
           render :new
-        }
+        end
       end
 
     end
@@ -82,25 +71,23 @@ class RegistrationsController < ApplicationController
   end
 
   def edit
+    find_registration
   end
 
   def update
-    @event = Event.friendly.find params[:event_id]
+    find_registration
+
     respond_to do |format|
       if @registration.update(registration_params)
         format.html {
           flash[:sucess] = 'Registration has been updated!'
-          redirect_to event_registration_path(@event, @registration)
+          redirect_to event_registrations_path
         }
         format.json { head :no_content }
         format.js { flash[:success] = 'Registration has been updated.' }
       else
-        format.json do
-          render json: @registration.errors.full_messages, status: :unprocessable_entity
-        end
-        format.js do
-          render json: @registration.errors.full_messages, status: :unprocessable_entity
-        end
+        format.json { render json: @registration.errors.full_messages, status: :unprocessable_entity }
+        format.js { render json: @registration.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -132,8 +119,11 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  def find_registration
+  def set_event
     @event = Event.friendly.find params[:event_id]
+  end
+
+  def find_registration
     @registration = @event.registrations.find params[:id]
   end
 

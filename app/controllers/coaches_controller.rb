@@ -30,7 +30,7 @@ class CoachesController < ApplicationController
         format.json { head :no_content }
         format.js { flash[:success] = 'Coach has been created.' }
         format.html {
-          flash[:success] = 'Clas has been created.'
+          flash[:success] = 'Coach has been created.'
           redirect_to coaches_path
         }
       else
