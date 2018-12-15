@@ -6,9 +6,10 @@
   %td= registration.primary_shirt_size
   %td= registration.stage_name
   %td= registration.team_name
-  %td= registration.stripe_charge_id_text
+  %td
+    = link_to("https://dashboard.stripe.com/payments/#{registration.stripe_charge_id}", target: "_blank") do
+      %i.fa.fa-external-link
   %td.actions
     .btn-group.pull-right
       = link_to(edit_event_registration_path(registration.event, registration), remote: true, class: 'btn btn-sm btn-warning') do
         %i.fa.fa-edit
-        Edit
