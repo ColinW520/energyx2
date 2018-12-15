@@ -75,15 +75,10 @@ class CreateTeamForEvent < BaseService
   def save_with_charge_details!(charge)
     team.stripe_charge_id = charge.id
     team.stripe_customer_id = charge.customer
+    team.registrations.each do |registration|
+      registration.stripe_charge_id = team.stripe_charge_id
+      registration.stripe_customer_id = team.stripe_customer_id
+    end
     team.save!
-    update_members!
-  end
-
-  def update_members!
-    team.registrations.update_all(
-      is_paid: true,
-      stripe_charge_id: team.stripe_charge_id,
-      stripe_customer_id: team.stripe_customer_id
-    )
   end
 end
