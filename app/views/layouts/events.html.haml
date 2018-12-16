@@ -6,12 +6,8 @@
     %link{:href => "#{image_path("favicon.ico")}", :rel => "shortcut icon"}
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag "//www.google.com/jsapi", "chartkick"
-    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/Readmore.js/2.2.0/readmore.min.js"
-    / Global site tag (gtag.js) - Google Analytics
-
-    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-76055700-1"}
+    = javascript_include_tag 'application', "https://js.stripe.com/v3/", 'data-turbolinks-track': 'reload'
+    %script{async: "", src: "https://www.googletagmanager.com/gtag/js?id=UA-76055700-1"}
     %title
       = full_title('EnergyX', yield(:title))
     :javascript

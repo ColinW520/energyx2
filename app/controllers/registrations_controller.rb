@@ -106,8 +106,8 @@ class RegistrationsController < ApplicationController
     case action_name
     when "list"
       nil
-    when 'new', 'show', 'edit', 'create'
-      'static_views'
+    when "new", "create", "show"
+      "events"
     else
       "application"
     end

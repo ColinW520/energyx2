@@ -67,8 +67,8 @@ class EventTeamsController < ApplicationController
     case action_name
     when "list"
       nil
-    when 'new', 'show', 'edit', 'create', 'update'
-      'static_views'
+    when "new", "create", "show"
+      "events"
     else
       "application"
     end
