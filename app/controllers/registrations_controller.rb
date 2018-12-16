@@ -107,7 +107,7 @@ class RegistrationsController < ApplicationController
     when "list"
       nil
     when "new", "create", "show"
-      "events"
+      "stripe_enabled"
     else
       "application"
     end
