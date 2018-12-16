@@ -13,7 +13,8 @@
       = full_title('EnergyX', yield(:title))
   %body{id: "#{controller_name}_#{action_name}", class: "energyx-body #{controller_name}", style: "background-color: #F3F3F3;"}
     = include_gon(:init => true)
-    = render 'shared/sidebar'
+    - if current_user
+      = render 'shared/sidebar'
     #main.container
       .unobtrusive-flash-container{style: 'z-index:9999999;'}
       = yield
