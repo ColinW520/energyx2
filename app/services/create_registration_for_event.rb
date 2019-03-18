@@ -52,6 +52,7 @@ class CreateRegistrationForEvent < BaseService
 
     if charge_result.success?
       save_with_charge_details!(charge_result.object)
+      increment_stage
 
       ServiceResponse.new(
         success: true,
