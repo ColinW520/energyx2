@@ -51,28 +51,3 @@ class CreateChargeForRegistration < BaseService
     )
   end
 end
-
-
-# respond_to do |format|
-#   if @registration.save
-#     if @registration.event_stage.present?
-#       @registration.event_stage.increment!(:registrations_count)
-#     end
-#     @registration.create_charge(params) unless @event.is_free?
-#     ConfirmationMailer.event_solo_registration(@registration.id).deliver
-#     format.html do
-#       flash[:danger] = 'Your Registration has been created!'
-#       redirect_to event_registration_path(
-#         @event,
-#         @registration,
-#         email_check: @registration.email
-#       )
-#     end
-#   else
-#     format.html do
-#       flash[:notice] = "There were errors in your submission." +
-#         "Your card has NOT been charged."
-#       render :new
-#     end
-#   end
-# end
