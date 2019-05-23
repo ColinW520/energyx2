@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181214174907) do
+ActiveRecord::Schema.define(version: 20190523134316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,21 +230,6 @@ ActiveRecord::Schema.define(version: 20181214174907) do
     t.string   "link"
   end
 
-  create_table "studio_sessions", force: :cascade do |t|
-    t.integer  "display_order"
-    t.integer  "coach_id"
-    t.integer  "studio_session_type_id"
-    t.string   "day_of_week"
-    t.string   "start_time"
-    t.string   "length"
-    t.string   "link"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.boolean  "is_cancelled",           default: false
-    t.index ["coach_id"], name: "index_studio_sessions_on_coach_id", using: :btree
-    t.index ["studio_session_type_id"], name: "index_studio_sessions_on_studio_session_type_id", using: :btree
-  end
-
   create_table "submissions", force: :cascade do |t|
     t.integer  "participant_id"
     t.string   "from_number"
@@ -355,7 +340,5 @@ ActiveRecord::Schema.define(version: 20181214174907) do
   add_foreign_key "registrations", "event_stages"
   add_foreign_key "registrations", "event_teams"
   add_foreign_key "registrations", "events"
-  add_foreign_key "studio_sessions", "coaches"
-  add_foreign_key "studio_sessions", "studio_session_types"
   add_foreign_key "submissions", "participants"
 end
