@@ -19,8 +19,8 @@
           %h2
             %strong Group Fitness Classes
           %br
-          %p.lead Get your sweat on in one of a variety of classes to choose from. Weather your goal is cardio, strength, HIIT, or yoga, we've got a class for you!
-          %p.lead Check out the class descriptions for more details.
+          %p Get your sweat on in one of a variety of classes to choose from. Weather your goal is cardio, strength, HIIT, or yoga, we've got a class for you!
+          %p Check out the class descriptions for more details.
     .row.row-equal
       .col-xs-12.col-sm-12.col-md-12.col-lg-6
         %img.img-fluid.hidden-md-up{src: 'https://farm2.staticflickr.com/1812/41135771250_d3b4d1f675_h.jpg'}
@@ -29,7 +29,7 @@
           %h2
             %strong Personal Training
           %br
-          %p.lead If you're looking for more private attention, personal training is what you need. Our highly qualifies trainers will created you a custom workout plan using equipment including WaterRowers, TRX Suspension Trainer, Kettlebells, BOSU Balance Trainer, and more!
+          %p If you're looking for more private attention, personal training is what you need. Our highly qualifies trainers will created you a custom workout plan using equipment including WaterRowers, TRX Suspension Trainer, Kettlebells, BOSU Balance Trainer, and more!
       .col-xs-12.col-sm-12.col-md-12.col-lg-6#PersonalTrainingImage
     .row.row-equal
       .col-xs-12.col-sm-12.col-md-12.col-lg-6#NutritionImage
@@ -40,10 +40,14 @@
           %h2
             %strong Nutrition Counseling
           %br
-          %p.lead Our Board Certified Dietitian, Gloria Guerra, is here to make nutrition easy and healthy eating taste good. Book a session to accelerate your health and fitness goals!
-          %p.lead
+          %p Our Board Certified Dietitian, Gloria Guerra, is here to make nutrition easy and healthy eating taste good. Book a session to accelerate your health and fitness goals!
+          %p
             Services include:
             %ul
-              %li.lead Custom Meal Planning
-              %li.lead Guided Grocery Shopping
-              %li.lead At-Home Meal Prep Workshops
+              %li Custom Meal Planning
+              %li Guided Grocery Shopping
+              %li At-Home Meal Prep Workshops
+          %p
+            Sessions can be booked to work with your schedule!
+            = mail_to 'nutrition@energyxfitness.com', "Email us", subject: "Website booking for Nutrition Counseling"
+            to schedule your appointment.
