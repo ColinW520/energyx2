@@ -4,7 +4,6 @@
   %td= studio_session_type.name
   %td= studio_session_type.description.truncate(100)
   %td= local_time studio_session_type.updated_at, format: "%m/%d/%Y"
-  %td= studio_session_type.studio_sessions.count
   %td.text-center
     - if studio_session_type.link.present?
       = link_to studio_session_type.link do

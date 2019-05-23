@@ -9,7 +9,6 @@
             %th= smart_listing.sortable 'Name', :name
             %th Bio
             %th= smart_listing.sortable 'Updated', :updated_at
-            %th Sessions
             %th
           %tbody#coaches
             - smart_listing.collection.each do |coach|

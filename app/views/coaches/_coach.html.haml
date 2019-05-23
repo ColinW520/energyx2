@@ -6,7 +6,6 @@
   %td= coach.name
   %td= coach.bio.truncate(100)
   %td= local_time coach.updated_at, format: "%m/%d/%Y"
-  %td= coach.studio_sessions.count
   %td.actions
     .btn-group.pull-right
       = link_to edit_coach_path(coach), remote: true, class: 'btn btn-sm btn-warning' do
