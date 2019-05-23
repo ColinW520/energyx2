@@ -2,8 +2,6 @@ class Coach < ApplicationRecord
   acts_as_taggable_on :tags
   validates :name, presence: true
 
-  has_many :studio_sessions
-
   has_attached_file :profile_image,
     styles: {
       thumb: '200x250#',

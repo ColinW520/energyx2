@@ -1,6 +1,4 @@
 class StudioSessionType < ApplicationRecord
-  has_many :studio_sessions, dependent: :destroy
-
   include RankedModel
   ranks :display_order
 
