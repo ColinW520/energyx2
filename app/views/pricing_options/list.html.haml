@@ -9,6 +9,10 @@
             %tr
               %td= option.name
               %td= number_to_currency option.amount_in_cents / 100, precision: 0
+              %td.pull-right.text-black
+                - if option.purchase_link.present?
+                  = link_to option, class: 'btn btn-success btn-sm text-info' do
+                    Purchase
   .col-sm-12.col-md-4.col-centered
     .card.card-info
       .card-header
