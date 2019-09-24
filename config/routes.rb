@@ -61,6 +61,10 @@ Rails.application.routes.draw do
     resources :event_teams
   end
 
+  resources :studios do
+    get :list, on: :collection
+  end
+
   resources :challenges do
     get :list, on: :collection
   end

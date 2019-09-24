@@ -1,0 +1,15 @@
+%tr.item{id: "studio_#{studio.id}", "data-item-id"=> "#{studio.id}", "data-item-path"=>"studios"}
+  %td= studio.name
+  %td= studio.description.truncate(100)
+  %td= local_time studio.updated_at, format: "%m/%d/%Y"
+  %td.actions
+    .btn-group.pull-right
+      = link_to studio_path(studio), class: 'btn btn-sm btn-info', data: { turbolinks: false } do
+        %i.fa.fa-eye
+        Show
+      = link_to edit_studio_path(studio), remote: true, class: 'btn btn-sm btn-warning' do
+        %i.fa.fa-edit
+        Edit
+      = link_to studio_path(studio), remote: true, method: :delete, data: { confirm: 'Are you sure? Dont do this if you dont know what you are doing.' }, class: 'btn btn-sm btn-danger' do
+        %i.fa.fa-trash
+        Destroy

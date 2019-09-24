@@ -1,0 +1,21 @@
+= simple_form_for [@studio], remote: true, authenticity_token: true, html: { id: 'StudioForm', multipart: true } do |f|
+  #error_holder
+    %ul#errors
+  = f.error_notification
+  .form-group
+    = f.input :name, autofocus: true, required: true
+  .form-group
+    = f.input :description, required: true
+  .form-group
+    = f.input :address, required: true
+  .form-group
+    = f.input :map_embed_code
+  .form-group
+    = f.input :mindbody_link
+  .form-group
+    = f.input :schedule_widget_id, label: "Schedule Widget ID", hint: 'If you dont know this, dont change it! Without it, no MB schedule!'
+  .form-group
+    = f.input :banner_image, as: :file
+  .form-actions
+    .text-center
+      = f.button :submit, class: 'btn btn-md btn-success'

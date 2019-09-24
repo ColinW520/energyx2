@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190924152934) do
+ActiveRecord::Schema.define(version: 20190924165243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,24 @@ ActiveRecord::Schema.define(version: 20190924152934) do
     t.integer  "promo_image_file_size"
     t.datetime "promo_image_updated_at"
     t.string   "link"
+  end
+
+  create_table "studios", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "address"
+    t.text     "map_embed_code"
+    t.text     "schedule_embed_code"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "slug"
+    t.string   "banner_image_file_name"
+    t.string   "banner_image_content_type"
+    t.integer  "banner_image_file_size"
+    t.datetime "banner_image_updated_at"
+    t.string   "mindbody_link"
+    t.string   "schedule_widget_id"
+    t.index ["slug"], name: "index_studios_on_slug", unique: true, using: :btree
   end
 
   create_table "submissions", force: :cascade do |t|

@@ -7,9 +7,8 @@
           .col-sm-12.col-md-8.col-lg-6.col-centered
             .text-center
               %h2 SCHEDULE
-              %p
-                This is our general, weekly schedule. For the the most up-to-date info, check out our
-                %a{href: 'https://clients.mindbodyonline.com/classic/home?studioid=226360'} direct booking site.
-                Powered by MindBody™.
+              %p Our schedules vary by location. Be sure to check where you sign up!
     .section-content
-      %healcode-widget{"data-type" => "schedules", "data-widget-id" => "83716332bb6", "data-widget-partner" => "object", "data-widget-version" => "1"}
+      #studios_placeholder.text-center
+        %p.lead
+          %i.fa.fa-spinner.fa-spin.fa-5x.fa-fw

@@ -1,0 +1,17 @@
+%section#Schedule
+  %hr
+  .container
+    .section-header
+      .section-title
+        .row
+          .col-sm-12.col-md-8.col-lg-6.col-centered
+            .text-center
+              %h1= @studio.name
+              %h4= @studio.address
+              %p= @studio.description
+    .section-content
+      %p
+        This is our general, weekly schedule. For the the most up-to-date info, check out our
+        %a{href: "#{@studio.mindbody_link}"} direct booking site.
+        Powered by MindBody™.
+      %healcode-widget{"data-type" => "schedules", "data-widget-id" => "#{@studio.schedule_widget_id}", "data-widget-partner" => "object", "data-widget-version" => "2"}
