@@ -6,6 +6,7 @@
         .card-block
           %h4.card-title= studio.name
           %p.card-text= studio.description
+          %p.card-text= studio.address
         .card-footer
           %small.pull-right
             = link_to studio_path(studio), data: { turbolinks: false }, class: 'btn btn-sm btn-success text-info' do
