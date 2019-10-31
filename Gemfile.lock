@@ -113,7 +113,7 @@ GEM
       gyoku (>= 0.4.0)
       nokogiri
     arel (7.1.4)
-    autoprefixer-rails (6.7.7.1)
+    autoprefixer-rails (9.7.0)
       execjs
     aws-sdk (2.9.9)
       aws-sdk-resources (= 2.9.9)
@@ -128,9 +128,10 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.11)
-    bootstrap (4.0.0.alpha6)
+    bootstrap (4.1.3)
       autoprefixer-rails (>= 6.0.3)
-      sass (>= 3.4.19)
+      popper_js (>= 1.12.9, < 2)
+      sass (>= 3.5.2)
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
     browser (2.5.0)
@@ -299,6 +300,7 @@ GEM
     phony_rails (0.14.6)
       activesupport (>= 3.0)
       phony (> 2.15)
+    popper_js (1.14.5)
     public_suffix (2.0.5)
     puma (3.8.2)
     rack (2.0.6)
@@ -346,7 +348,11 @@ GEM
       sexp_processor (~> 4.1)
     safely_block (0.2.0)
       errbase
-    sass (3.4.23)
+    sass (3.7.4)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
@@ -450,7 +456,7 @@ DEPENDENCIES
   ahoy_email
   ahoy_matey
   aws-sdk
-  bootstrap (~> 4.0.0.alpha6)
+  bootstrap (~> 4.1.3)
   bootstrap3-datetimepicker-rails (~> 4.17.42)
   byebug
   chartkick
