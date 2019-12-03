@@ -8,7 +8,12 @@ class PricingOptionsController < ApplicationController
 
     respond_to do |format|
       format.html {
-        smart_listing_create :pricing_options, pricing_options_scope, partial: 'pricing_options/listing', default_sort: { display_order: :asc }
+        smart_listing_create(
+          :pricing_options,
+          pricing_options_scope,
+          partial: 'pricing_options/listing',
+          default_sort: { display_order: :asc }
+        )
       }
       format.js { smart_listing_create :pricing_options, pricing_options_scope, partial: 'pricing_options/listing', default_sort: { display_order: :asc } }
     end
