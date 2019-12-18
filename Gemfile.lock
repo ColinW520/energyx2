@@ -301,7 +301,7 @@ GEM
       phony (> 2.15)
     public_suffix (2.0.5)
     puma (3.8.2)
-    rack (2.0.6)
+    rack (2.0.8)
     rack-attack (5.0.1)
       rack
     rack-protection (1.5.3)
