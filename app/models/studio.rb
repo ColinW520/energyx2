@@ -10,4 +10,9 @@ class Studio < ApplicationRecord
     :banner_image,
     content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
   )
+
+
+  def self.virtual
+    self.where(name: 'Virtual').last
+  end
 end
