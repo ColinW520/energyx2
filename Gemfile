@@ -5,7 +5,7 @@ ruby '2.3.2'
 gem 'rails', '~> 5.0.2'
 gem 'devise'
 gem 'devise_invitable'
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 4.3'
 gem 'sidekiq'
 gem 'figaro'
 

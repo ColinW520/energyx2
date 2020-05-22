@@ -300,7 +300,8 @@ GEM
       activesupport (>= 3.0)
       phony (> 2.15)
     public_suffix (2.0.5)
-    puma (3.8.2)
+    puma (4.3.5)
+      nio4r (~> 2.0)
     rack (2.0.6)
     rack-attack (5.0.1)
       rack
@@ -484,7 +485,7 @@ DEPENDENCIES
   paperclip (~> 5.2.0)
   pg (~> 0.18)
   phony_rails
-  puma (~> 3.0)
+  puma (~> 4.3)
   rails (~> 5.0.2)
   ranked-model
   sass-rails (~> 5.0)
