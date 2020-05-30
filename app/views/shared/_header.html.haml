@@ -11,24 +11,24 @@
             %i.fa.fa-tv
             ONDEMAND
         %li.nav-item.text-center
-          %a.nav-link.text-success{href: action_name == 'home' ? "#Schedule" : "https://energyxfitness.com/#Schedule"}
+          %a.nav-link.text-white{href: action_name == 'home' ? "#Schedule" : "https://energyxfitness.com/#Schedule"}
             %i.fa.fa-calendar
-            LIVE Schedule
+            Schedule
         %li.nav-item.text-center
-          %a.nav-link{href: action_name == 'home' ? "#Events" : "https://energyxfitness.com/#Events"}
+          %a.nav-link.text-white{href: action_name == 'home' ? "#Events" : "https://energyxfitness.com/#Events"}
             %i.fa.fa-glass
             Events
         %li.nav-item.text-center
-          %a.nav-link{href: action_name == 'home' ? "#Classes" : "https://energyxfitness.com/#Classes"}
+          %a.nav-link.text-white{href: action_name == 'home' ? "#Classes" : "https://energyxfitness.com/#Classes"}
             %i.fa.fa-bolt
             Classes
         - if @articles_available
           %li.nav-item.text-center
-            %a.nav-link{href: blog_path, class: @subnav == 'blog' ? 'active' : ''}
+            %a.nav-link.text-white{href: blog_path, class: @subnav == 'blog' ? 'active' : ''}
               %i.fa.fa-rss
               Blog
         %li.nav-item.text-center
-          %a.nav-link{hredf: "tel:+12106084241"}
+          %a.nav-link.text-white{hredf: "tel:+12106084241"}
             %i.fa.fa-phone
             Call
         %li.nav-item.text-center
@@ -36,13 +36,10 @@
             %i.fa.fa-gift
             Gift Cards
         %li.nav-item.text-center
-          = link_to "https://clients.mindbodyonline.com/classic/ws?studioid=226360&stype=-7&sTG=22&sView=week&sLoc=1", class: "btn btn-sm btn-success", style: "margin-top: 10px; color: #000" do
-            Book a Live Class
+          = link_to "https://energyxfitness.com/#Schedule", class: "btn btn-sm btn-success", style: "margin-top: 10px; color: #000" do
+            Book Now
 %div
   .row.row-fluid.bg-success#CovidBanner
     .col-12
       %h6.text-center.text-dark
-        Join us LIVE and ONDEMAND on our
-        %a.text-primary{href: 'https://vimeo.com/ondemand/EnergyXFitness'}
-          Vimeo Channel
-          %i.fa.fa-external-link
+        We are now open for classes at <b>BOTH</b> locations!
