@@ -436,7 +436,7 @@ GEM
       railties (>= 5.0)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.2)
+    websocket-extensions (0.1.5)
     wysiwyg-rails (2.5.1)
       font-awesome-sass (~> 4.4, >= 4.4.0)
       railties (>= 3.2, < 6.0)
