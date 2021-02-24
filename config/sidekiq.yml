@@ -1,11 +1,13 @@
 ---
 :concurrency: 1
 :queues:
+  - mailers
   - twilio
   - imports
   - default
   - single_file
 :limits:
+  mailers: 1
   twilio: 1
   imports: 1
   default: 1
