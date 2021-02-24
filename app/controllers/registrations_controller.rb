@@ -50,7 +50,9 @@ class RegistrationsController < ApplicationController
     respond_to do |format|
       format.html do
         if service_response.success?
-          ConfirmationMailer.event_solo_registration(@registration.id).deliver if Rails.env.production?
+          ConfirmationMailer.event_solo_registration(
+            @registration.id
+          ).deliver_later
           flash[:notice] = service_response.message
           redirect_to(event_registration_path(@event, @registration))
         else
