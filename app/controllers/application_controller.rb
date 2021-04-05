@@ -8,15 +8,8 @@ class ApplicationController < ActionController::Base
   after_action :prepare_unobtrusive_flash
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
-  after_action :track_action
-
-  def track_action
-    # track anything that isn't purely asynchronous
-    ahoy.track "Viewed #{controller_name}##{action_name}" unless @xhr
-  end
-
   def after_sign_in_path_for(resource)
-    dashboard_path
+    events_path
   end
 
   def after_sign_out_path_for(resource_or_scope)

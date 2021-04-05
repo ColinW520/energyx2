@@ -17,10 +17,6 @@ Rails.application.routes.draw do
     get '/admin' => 'devise/sessions#new'
   end
 
-  # The User-facing App
-  resource :dashboard, controller: 'dashboard' do
-  end
-
   resources :participants do
     get :list, on: :collection
   end
