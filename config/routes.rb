@@ -80,10 +80,6 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
   }
 
-  namespace :twilio do
-    resources :submissions, only: [:create]
-  end
-
   # Admin Space
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
