@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # Core Stuff
-ruby '2.3.2'
-gem 'rails', '~> 5.0.2'
+ruby '2.5.5'
+gem 'rails', '~> 5.2.5'
 gem 'devise'
 gem 'devise_invitable'
 gem 'puma', '~> 3.0'
@@ -45,10 +45,11 @@ gem 'draper'
 
 # Database Stuff
 gem 'pg', '~> 0.18'
-gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+gem 'activerecord-session_store'
 gem 'friendly_id'
 gem 'ahoy_email'
 gem 'ahoy_matey'
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 gem "paperclip", "~> 5.2.0" # stores images & files to AWS
 gem 'aws-sdk'
 gem 'groupdate'
