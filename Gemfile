@@ -51,14 +51,14 @@ gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dab
 gem "paperclip", "~> 5.2.0" # stores images & files to AWS
 gem 'aws-sdk'
 gem 'groupdate'
-gem 'acts-as-taggable-on', '~> 4.0'
+gem 'acts-as-taggable-on'
 gem 'phony_rails' # keeps phone numbers consistent.
 gem 'ranked-model'
 gem 'cocoon'
 
 # Third Party Stuff
 gem 'twilio-ruby'
-gem 'instagram',  :git => 'git://github.com/facebookarchive/instagram-ruby-gem.git'
+#gem 'instagram',  :git => 'git://github.com/facebookarchive/instagram-ruby-gem.git'
 gem 'hashie', '>= 3.5.2'
 gem 'stripe'
 gem 'mindbody-api', :git => 'git://github.com/wingrunr21/mindbody-api.git'
