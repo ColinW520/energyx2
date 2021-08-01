@@ -27,7 +27,6 @@
 //= require unobtrusive_flash_bootstrap
 //= require moment
 //= require bootstrap-datetimepicker
-//= require chartkick
 //= require cocoon
 //= require_tree .
 
