@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :find_event, except: [:index, :new, :create, :list]
+  before_action :find_event, except: [:index, :new, :create, :list]
   skip_before_action :authenticate_user!, :only => [:list, :show]
   layout :resolve_layout
 

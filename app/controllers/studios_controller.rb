@@ -1,5 +1,5 @@
 class StudiosController < ApplicationController
-  before_filter :find_studio, except: [:index, :new, :create, :list]
+  before_action :find_studio, except: [:index, :new, :create, :list]
   skip_before_action :authenticate_user!, only: [:list, :show]
   layout :resolve_layout
 

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :find_user, except: [:index, :new, :create]
+  before_action :find_user, except: [:index, :new, :create]
 
   def index
     users_scope = User.all

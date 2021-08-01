@@ -1,5 +1,5 @@
 class SubmissionsController < ApplicationController
-  before_filter :find_submission, except: [:index, :new, :create, :list]
+  before_action :find_submission, except: [:index, :new, :create, :list]
   layout :resolve_layout
 
   def index
