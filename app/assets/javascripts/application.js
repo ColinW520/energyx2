@@ -21,7 +21,7 @@
 //= require jquery-ui
 //= require jquery-ui/sortable
 //= require jquery-ui/effect-highlight
-//= require local_time
+//= require local-time
 //= require smart_listing
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
