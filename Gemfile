@@ -16,7 +16,7 @@ end
 
 # Font End Stuff
 gem "sprockets", ">= 3.7.2" # addresses security vulnerability
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap', '~> 5.0.1'
 gem 'tether-rails'
 gem 'font-awesome-rails', github: 'bokmann/font-awesome-rails'
 gem 'turbolinks', '~> 5'
